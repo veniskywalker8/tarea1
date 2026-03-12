@@ -15,7 +15,7 @@ TFecha crearTFecha(nat dia, nat mes, nat anio) {
 	nuevaFecha = new rep_fecha;
 	nuevaFecha->dia = dia;
 	nuevaFecha->mes = mes;
-	nuevaFecha->anio = anio;
+	nuevaFecha->anio = anyo;
 
     /****** Fin de parte Parte 3.1 *****/
     return nuevaFecha;
