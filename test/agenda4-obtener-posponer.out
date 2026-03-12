@@ -1,0 +1,24 @@
+1>2>#  creo cuatro eventos para ingresarlos a la agenda.
+3>4>5>6>7>8>9>10>11>12>13>14>15>Evento 1:  Entrega de la Tarea 1
+Fecha: 18/3/2026
+Evento 2:  Entrega de la Tarea 2
+Fecha: 22/4/2026
+Evento 3:  Entrega de la Tarea 3
+Fecha: 27/5/2026
+Evento 4:  Entrega de la Tarea 4
+Fecha: 24/6/2026
+16>#  posponer evento 1 tres dias.
+17>La nueva fecha del evento 1 pospuesto 3 dias es: 21/3/2026
+18>#  posponer evento 2 diez dias.
+19>La nueva fecha del evento 2 pospuesto 10 dias es: 2/5/2026
+20>#  posponer evento 3 365 dias.
+21>La nueva fecha del evento 4 pospuesto 365 dias es: 24/6/2027
+22>Evento 1:  Entrega de la Tarea 1
+Fecha: 21/3/2026
+Evento 2:  Entrega de la Tarea 2
+Fecha: 2/5/2026
+Evento 3:  Entrega de la Tarea 3
+Fecha: 27/5/2026
+Evento 4:  Entrega de la Tarea 4
+Fecha: 24/6/2027
+23>24>Fin.

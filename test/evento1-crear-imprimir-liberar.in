@@ -1,0 +1,7 @@
+crearFecha 18/3/2026
+crearEvento 1 Esto es una descripcion del Evento 1
+imprimirIdEvento
+imprimirFechaEvento
+imprimirEvento
+liberarEvento
+Fin

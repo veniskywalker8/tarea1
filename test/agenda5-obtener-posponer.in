@@ -1,0 +1,39 @@
+crearAgenda
+
+# creo cuatro eventos para ingresarlos a la agenda
+
+crearFecha 18/3/2026
+crearEvento 1 Entrega de la Tarea 1
+agregarEnAgenda
+
+crearFecha 22/4/2026
+crearEvento 2 Entrega de la Tarea 2
+agregarEnAgenda
+
+crearFecha 27/5/2026
+crearEvento 3 Entrega de la Tarea 3
+agregarEnAgenda
+
+crearFecha 24/6/2026
+crearEvento 4 Entrega de la Tarea 4
+agregarEnAgenda
+
+imprimirAgenda
+
+# posponer evento 2 quince dias
+posponerEnAgenda 2 15
+
+imprimirAgenda
+
+# posponer evento 3 treinta dias
+posponerEnAgenda 3 30
+
+imprimirAgenda
+
+# posponer evento 4 cincuenta dias (y vuelve al orden original)
+posponerEnAgenda 4 50
+
+imprimirAgenda
+
+liberarAgenda
+Fin

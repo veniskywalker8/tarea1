@@ -1,0 +1,25 @@
+crearFecha 18/3/2026
+crearEvento 1 Entrega de la Tarea 1
+imprimirFechaEvento
+posponerEvento 30
+imprimirFechaEvento
+posponerEvento 10
+imprimirEvento
+liberarEvento
+
+# año bisiesto 
+
+crearFecha 01/02/2028
+crearEvento 2 Esto es una descripcion mas larga
+imprimirFechaEvento
+posponerEvento 28
+imprimirFechaEvento
+posponerEvento 1
+imprimirFechaEvento
+posponerEvento 365
+imprimirEvento
+liberarEvento
+
+Fin
+
+

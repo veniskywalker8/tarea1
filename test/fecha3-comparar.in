@@ -1,0 +1,22 @@
+# iguales
+compararFechas 01/3/2026 01/3/2026
+
+# comparo años
+compararFechas 01/2/2022 01/2/2026
+compararFechas 01/2/2026 01/2/2022
+
+# comparo meses
+compararFechas 01/2/2026 01/3/2026
+compararFechas 01/3/2026 01/2/2026
+
+# comparo dias
+compararFechas 01/3/2026 02/3/2026
+compararFechas 02/3/2026 01/3/2026
+
+# combinados
+compararFechas 12/3/1800 02/12/2026
+compararFechas 1/2/2026 31/1/2026
+compararFechas 1/1/1 2/2/2
+compararFechas 31/12/2026 31/12/1005
+
+Fin

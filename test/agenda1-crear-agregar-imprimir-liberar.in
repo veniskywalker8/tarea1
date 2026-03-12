@@ -1,0 +1,10 @@
+crearAgenda
+
+# creo evento para ingresarlo a la agenda
+crearFecha 18/3/2026
+crearEvento 1 Entrega de la Tarea 1
+
+agregarEnAgenda
+imprimirAgenda
+liberarAgenda
+Fin
