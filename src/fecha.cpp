@@ -53,10 +53,10 @@ int compararTFechas(TFecha fecha1, TFecha fecha2) {
     int res = 0;
     /************ Parte 3.10 ************/
     /*Escriba el código a continuación */
-    if fecha1.anio > fecha2.anio || (fecha1.anio == fecha2.anio && fecha1.mes > fecha2.mes) || (fecha1.anio == fecha2.anio && fecha1.mes == fecha2.mes && fecha1.dia > fecha2.dia){
+    if (fecha1.anio > fecha2.anio || (fecha1.anio == fecha2.anio && fecha1.mes > fecha2.mes) || (fecha1.anio == fecha2.anio && fecha1.mes == fecha2.mes && fecha1.dia > fecha2.dia)){
         res = 1;
     }
-    else if fecha1.anio == fecha2.anio && fecha1.mes == fecha2.mes && fecha1.dia == fecha2.dia {
+    else if (fecha1.anio == fecha2.anio && fecha1.mes == fecha2.mes && fecha1.dia == fecha2.dia) {
         res = 0;
     }
     else{
