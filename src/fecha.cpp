@@ -15,7 +15,7 @@ TFecha crearTFecha(nat dia, nat mes, nat anio) {
 	nuevaFecha = new rep_fecha;
 	nuevaFecha->dia = dia;
 	nuevaFecha->mes = mes;
-	nuevaFecha->anio = anyo;
+	nuevaFecha->anio = anio;
 
     /****** Fin de parte Parte 3.1 *****/
     return nuevaFecha;
@@ -31,7 +31,7 @@ void liberarTFecha(TFecha &fecha) {
 void imprimirTFecha(TFecha fecha) {
     /************ Parte 3.5 ************/
     /*Escriba el código a continuación */
-	printf("%d/%d/%d\n", fecha.dia, fecha.mes, fecha.anio);
+	printf("%d/%d/%d\n", fecha->dia, fecha->mes, fecha->anio);
 
     /****** Fin de parte Parte 3.5 *****/
 }
@@ -53,7 +53,15 @@ int compararTFechas(TFecha fecha1, TFecha fecha2) {
     int res = 0;
     /************ Parte 3.10 ************/
     /*Escriba el código a continuación */
-
+    if (fecha1->anio > fecha2->anio || (fecha1->anio == fecha2->anio && fecha1->mes > fecha2->mes) || (fecha1->anio == fecha2->anio && fecha1->mes == fecha2->mes && fecha1->dia > fecha2->dia)){
+        res = 1;
+    }
+    else if (fecha1->anio == fecha2->anio && fecha1->mes == fecha2->mes && fecha1->dia == fecha2->dia) {
+        res = 0;
+    }
+    else{
+        res = -1;
+    }
 
     /****** Fin de parte Parte 3.10 *****/
     return res;

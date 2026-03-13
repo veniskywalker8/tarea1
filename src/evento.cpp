@@ -11,6 +11,9 @@ TEvento crearTEvento(int id, const char descripcion[MAX_DESCRIPCION], TFecha fec
     TEvento nuevoEvento = NULL;
     /************ Parte 4.2 ************/
     /*Escriba el código a continuación */
+    nuevoEvento->id = id;
+    strcpy(nuevoEvento->descripcion, descripcion);
+    nuevoEvento->fecha = fecha;
 
     /****** Fin de parte Parte 4.2 *****/
     return nuevoEvento;
@@ -19,7 +22,8 @@ TEvento crearTEvento(int id, const char descripcion[MAX_DESCRIPCION], TFecha fec
 void imprimirTEvento(TEvento evento) {
     /************ Parte 4.3 ************/
     /*Escriba el código a continuación */
-
+    printf("Evento %d: %s\nFecha:"evento.id, evento->descripcion);
+    imprimirTFecha(evento->fecha);
     /****** Fin de parte Parte 4.3 *****/
 }
 
@@ -43,7 +47,7 @@ TFecha fechaTEvento(TEvento evento) {
     TFecha fecha = NULL;
     /************ Parte 4.4 ************/
     /*Escriba el código a continuación */
-
+    fecha = evento->fecha;
     /****** Fin de parte Parte 4.4 *****/
     return fecha;
 }
