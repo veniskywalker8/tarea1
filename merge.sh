@@ -1,24 +1,33 @@
 #!/bin/bash
-# Script para hacer merge desde otra rama hacia la rama actual
-# Uso: ./hacer_merge.sh <rama_origen> [mensaje_commit]
+# Script para hacer merge entre ramas
+# Uso:
+#   ./hacer_merge.sh -o <origen> <destino> [mensaje_commit]
+#   ./hacer_merge.sh <destino> [mensaje_commit]
 
-# Verifica argumento obligatorio
-if [ -z "$1" ]; then
-  echo "Uso: $0 <rama_origen> [mensaje_commit]"
-  exit 1
-fi
-
-ORIGEN=$1
-DESTINO=$(git rev-parse --abbrev-ref HEAD)
-
-# Si hay segundo argumento, úsalo como mensaje; si no, usa uno por defecto
-if [ -n "$2" ]; then
-  MENSAJE=$2
+if [ "$1" == "-o" ]; then
+  # Caso con -o: origen, destino y mensaje
+  if [ $# -lt 3 ]; then
+    echo "Uso: $0 -o <origen> <destino> [mensaje_commit]"
+    exit 1
+  fi
+  ORIGEN=$2
+  DESTINO=$3
+  MENSAJE=${4:-"Merge branch '$ORIGEN' into $DESTINO"}
 else
-  MENSAJE="Merge branch '$ORIGEN' into $DESTINO"
+  # Caso sin -o: solo destino y mensaje, origen = main
+  if [ $# -lt 1 ]; then
+    echo "Uso: $0 <destino> [mensaje_commit]"
+    exit 1
+  fi
+  DESTINO=$1
+  ORIGEN="main"
+  MENSAJE=${2:-"Merge branch '$ORIGEN' into $DESTINO"}
 fi
 
-echo "Haciendo merge de $ORIGEN en la rama actual ($DESTINO)..."
+echo "Haciendo merge de $ORIGEN en $DESTINO..."
+
+# Cambia a la rama destino
+git checkout $DESTINO || exit 1
 
 # Actualiza la rama destino
 git pull origin $DESTINO
