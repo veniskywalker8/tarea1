@@ -1,4 +1,6 @@
 #include "../include/agenda.h"
+//+AUXILIAR
+TEvento remover_de_lista(TAgenda &agenda, int id);
 
 struct rep_agenda {
     /************ Parte 5.1 ************/
@@ -46,7 +48,7 @@ void liberarTAgenda(TAgenda &agenda) {
     {liberarTEvento(agenda->eventos[i]);}
     
     delete agenda;
-    agenda = NULL;
+    agenda = nullptr;
     /****** Fin de parte Parte 5.2 *****/
 }
 
@@ -73,14 +75,14 @@ bool estaEnAgenda(TAgenda agenda, int id) {
 }
 
 TEvento obtenerDeAgenda(TAgenda agenda, int id) {
-    TEvento res = NULL;
+    TEvento res = nullptr;
     /************ Parte 5.5 ************/
     /*Escriba el código a continuación */
-    for (nat i = 0; i < agenda->tope && res == NULL; i++) {
-        if (idTEvento(agenda->eventos[i]) == id) {
-            res = agenda->eventos[i];
-        }
-    }
+    nat i;
+    nat tope =agenda->tope;
+    for (i = 0; i < tope 
+        && idTEvento(agenda->eventos[i]) != id; i++);
+    res = (i< tope) ? agenda->eventos[i] : nullptr;
     /****** Fin de parte Parte 5.5 *****/
     return res;
 }
@@ -88,7 +90,17 @@ TEvento obtenerDeAgenda(TAgenda agenda, int id) {
 void posponerEnAgenda(TAgenda &agenda, int id, nat n) {
     /************ Parte 5.5 ************/
     /*Escriba el código a continuación */
-    
+    if (agenda == NULL) return;
+    //- Encuentra el evento
+    TEvento evento = obtenerDeAgenda(agenda, id);
+    //- Compuerta de control
+    if (evento == NULL) return;
+    //- Remover
+    remover_de_lista(agenda, id);
+    //- Sumar n
+    posponerTEvento(evento, n);/// usa la función del módulo evento
+    //- Agregar evento+n
+    agregarEnAgenda(agenda, evento);
     /****** Fin de parte Parte 5.5 *****/
 }
 
@@ -104,13 +116,15 @@ void imprimirEventosFecha(TAgenda agenda, TFecha fecha) {
 }
 
 bool hayEventosFecha(TAgenda agenda, TFecha fecha) {
+    if (fecha == nullptr) return false;
     bool res = false;
     /************ Parte 5.7 ************/
     /*Escriba el código a continuación */
-    int izq = 0, der = agenda->tope - 1;
-    while (izq <= der && !res) {
-        int mid = (izq + der) / 2;
-        int cmp = compararTFechas(fechaTEvento(agenda->eventos[mid]), fecha);
+    int izq = 0, der = agenda->tope - 1, mid;
+    do {
+        mid = (izq + der) / 2;
+        TFecha mid_fecha = fechaTEvento(agenda->eventos[mid]);
+        int cmp = compararTFechas(mid_fecha,fecha);
         if (cmp == 0) {
             res = true;
         } else if (cmp < 0) {
@@ -118,7 +132,7 @@ bool hayEventosFecha(TAgenda agenda, TFecha fecha) {
         } else {
             der = mid - 1;
         }
-    }
+    }while (izq <= der && !res);
     /****** Fin de parte Parte 5.7 *****/
     return res;
 }
@@ -126,15 +140,30 @@ bool hayEventosFecha(TAgenda agenda, TFecha fecha) {
 void removerDeAgenda(TAgenda &agenda, int id) {
     /************ Parte 5.8 ************/
     /*Escriba el código a continuación */
-    for (nat i = 0; i < agenda->tope; i++) {
-        if (idTEvento(agenda->eventos[i]) == id) {
-            liberarTEvento(agenda->eventos[i]);
-            for (nat j = i; j < agenda->tope-1; j++) {
-                agenda->eventos[j] = agenda->eventos[j+1];
-            }
-            agenda->tope--;
-            break;
-        }
-    }
+    //- Remover sin eliminar de memoria
+    TEvento evento = remover_de_lista(agenda, id);
+    //- Eliminar de memoria
+    liberarTEvento(evento);
     /****** Fin de parte Parte 5.8 *****/
+}
+//+AUXILIAR
+TEvento remover_de_lista(TAgenda &agenda, int id){
+    nat tope = agenda->tope;
+    nat pos = 0;
+    //- Buscar la posición del evento
+    for (pos = 0; pos < tope &&
+         idTEvento(agenda->eventos[pos]) != id; pos++);
+
+    //- Si lo encontró
+    if (pos > tope-1) return nullptr;
+    //- Guardar return
+    TEvento retorno = agenda->eventos[pos];
+    //- Corrimiento de los elementos siguientes
+    tope--; /// Ajustar el tope
+    for (nat p=pos; p < tope; p++) {
+        agenda->eventos[p] = agenda->eventos[p + 1];
+    }
+    //- Ajustar el tope
+    agenda->tope--;
+    return retorno;
 }
