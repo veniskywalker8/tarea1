@@ -3,7 +3,7 @@
 # Uso:
 #   ./hacer_merge.sh -o <origen> <destino> [mensaje_commit]
 #   ./hacer_merge.sh -d <destino> [mensaje_commit]
-#   ./hacer_merge.sh <destino> [mensaje_commit]
+#   ./hacer_merge.sh <origen> [mensaje_commit]
 
 if [ "$1" == "-o" ]; then
   # Caso con -o: origen, destino y mensaje
@@ -26,7 +26,7 @@ elif [ "$1" == "-d" ]; then
 else
   # Caso sin -o: solo destino y mensaje, origen = main
   if [ $# -lt 1 ]; then
-    echo "Uso: $0 <destino> [mensaje_commit]"
+    echo "Uso: $0 <origen> [mensaje_commit]"
     exit 1
   fi
   DESTINO=$(git rev-parse --abbrev-ref HEAD)
