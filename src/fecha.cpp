@@ -22,12 +22,12 @@ nat convertirFecha(TFecha fecha);
 struct rep_fecha {
     /************ Parte 2.1 ************/
     /*Escriba el código a continuación */
-	nat dia, mes, anio;
-
+    nat dia, mes, anio;
     /****** Fin de parte Parte 2.1 *****/
 };
 
 TFecha crearTFecha(nat dia, nat mes, nat anio) {
+    if (fecha == nullptr) return;
     TFecha nuevaFecha = NULL;
     /************ Parte 3.1 ************/
     /*Escriba el código a continuación */
@@ -41,6 +41,7 @@ TFecha crearTFecha(nat dia, nat mes, nat anio) {
 }
 
 void liberarTFecha(TFecha &fecha) {
+    if (fecha == nullptr) return;
     /************ Parte 3.3 ************/
     /*Escriba el código a continuación */
     delete fecha;
@@ -49,6 +50,7 @@ void liberarTFecha(TFecha &fecha) {
 }
 
 void imprimirTFecha(TFecha fecha) {
+    if (fecha == nullptr) return;
     /************ Parte 3.5 ************/
     /*Escriba el código a continuación */
 	printf("%d/%d/%d\n", fecha->dia, fecha->mes, fecha->anio);
@@ -57,6 +59,7 @@ void imprimirTFecha(TFecha fecha) {
 }
 
 void aumentarTFecha(TFecha &fecha, nat dias) {
+    if (fecha == nullptr) return;
     /************ Parte 3.9 ************/
     /*Escriba el código a continuación */
     /*Recuerde que las funciones auxiliares
@@ -90,6 +93,7 @@ void aumentarTFecha(TFecha &fecha, nat dias) {
 }
 
 int compararTFechas(TFecha fecha1, TFecha fecha2) {
+    if (fecha1 == nullptr || fecha2 == nullptr) return;
     int res = 0;
     /************ Parte 3.10 ************/
     /*Escriba el código a continuación */

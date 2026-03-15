@@ -10,6 +10,7 @@ struct rep_evento {
 };
 
 TEvento crearTEvento(int id, const char descripcion[MAX_DESCRIPCION], TFecha fecha) {
+    if (evento == nullptr) return;
     TEvento nuevoEvento = NULL;
     /************ Parte 4.2 ************/
     /*Escriba el código a continuación */
@@ -26,6 +27,7 @@ TEvento crearTEvento(int id, const char descripcion[MAX_DESCRIPCION], TFecha fec
 }
 
 void imprimirTEvento(TEvento evento) {
+    if (evento == nullptr) return;
     /************ Parte 4.3 ************/
     /*Escriba el código a continuación */
     printf("Evento %d: %s\nFecha: ", evento->id, evento->descripcion);
@@ -34,6 +36,7 @@ void imprimirTEvento(TEvento evento) {
 }
 
 void liberarTEvento(TEvento &evento) {
+    if (evento == nullptr) return;
     /************ Parte 4.4 ************/
     /*Escriba el código a continuación */
     liberarTFecha(evento->fecha);
@@ -43,6 +46,7 @@ void liberarTEvento(TEvento &evento) {
 }
 
 int idTEvento(TEvento evento) {
+    if (evento == nullptr) return;
     /************ Parte 4.4 ************/
     /*Escriba el código a continuación */
     int res = evento->id;
@@ -51,6 +55,7 @@ int idTEvento(TEvento evento) {
 }
 
 TFecha fechaTEvento(TEvento evento) {
+    if (evento == nullptr) return;
     TFecha fecha = NULL;
     /************ Parte 4.4 ************/
     /*Escriba el código a continuación */
@@ -60,6 +65,7 @@ TFecha fechaTEvento(TEvento evento) {
 }
 
 void posponerTEvento(TEvento &evento, int dias) {
+    if (evento == nullptr) return;
     /************ Parte 4.5 ************/
     /*Escriba el código a continuación */
     aumentarTFecha(evento->fecha, dias);
