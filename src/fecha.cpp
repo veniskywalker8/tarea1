@@ -17,6 +17,7 @@ nat largoMes[13] = {
 
 //+AUXILIAR
 bool esBisiesto(int anio);
+nat convertirFecha(TFecha fecha);
 
 struct rep_fecha {
     /************ Parte 2.1 ************/
@@ -92,16 +93,18 @@ int compararTFechas(TFecha fecha1, TFecha fecha2) {
     int res = 0;
     /************ Parte 3.10 ************/
     /*Escriba el código a continuación */
-    if (fecha1->anio > fecha2->anio || (fecha1->anio == fecha2->anio && fecha1->mes > fecha2->mes) || (fecha1->anio == fecha2->anio && fecha1->mes == fecha2->mes && fecha1->dia > fecha2->dia)){
+    nat f1 = convertirFecha(fecha1);
+    nat f2 = convertirFecha(fecha2);
+
+    if (f1 > f2) {
         res = 1;
     }
-    else if (fecha1->anio == fecha2->anio && fecha1->mes == fecha2->mes && fecha1->dia == fecha2->dia) {
+    else if (f1 == f2) {
         res = 0;
     }
-    else{
+    else {
         res = -1;
     }
-
     /****** Fin de parte Parte 3.10 *****/
     return res;
 }
@@ -109,4 +112,7 @@ int compararTFechas(TFecha fecha1, TFecha fecha2) {
 //+AUXILIARES
 bool esBisiesto(int anio) {
     return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
+}
+nat convertirFecha(TFecha fecha) {
+    return fecha->anio * 10000 + fecha->mes * 100 + fecha->dia;
 }
