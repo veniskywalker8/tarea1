@@ -64,12 +64,10 @@ void aumentarTFecha(TFecha &fecha, nat dias) {
     //- sumar días
     fecha->dia+=dias;
     //? - WHILE
-    nat corte = 0; ///bandera con valor de inicio
+    nat corte = (fecha->mes == 2 && esBisiesto(fecha->anio))
+    ? largoMes[fecha->mes] + 1/// febrero bisiesto → 29
+    : largoMes[fecha->mes];   /// resto de los casos
     do {
-        //- elegir CORTE en base al mes [M=2 => 28]
-        corte = largoMes[fecha->mes];
-        //- comprobar bisiestos
-        if (fecha->mes == 2 && esBisiesto(fecha->anio)) corte++;
         //- si días > CORTE => cambio mes
         if (fecha->dia>corte){
             fecha->dia -= corte;
@@ -80,12 +78,15 @@ void aumentarTFecha(TFecha &fecha, nat dias) {
             fecha->mes = 1;
             fecha->anio++;
         }
+        //- elegir CORTE en base al mes [M=2 => 28]
+        corte = largoMes[fecha->mes];
+        //- comprobar bisiestos
+        if (fecha->mes == 2 && esBisiesto(fecha->anio)) 
+            corte++;
     }while(fecha->dia>corte);
     //? END
     /****** Fin de parte Parte 3.9 *****/
 }
-
-
 
 int compararTFechas(TFecha fecha1, TFecha fecha2) {
     int res = 0;
