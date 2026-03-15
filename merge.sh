@@ -2,6 +2,7 @@
 # Script para hacer merge entre ramas
 # Uso:
 #   ./hacer_merge.sh -o <origen> <destino> [mensaje_commit]
+#   ./hacer_merge.sh -d <destino> [mensaje_commit]
 #   ./hacer_merge.sh <destino> [mensaje_commit]
 
 if [ "$1" == "-o" ]; then
@@ -13,14 +14,23 @@ if [ "$1" == "-o" ]; then
   ORIGEN=$2
   DESTINO=$3
   MENSAJE=${4:-"Merge branch '$ORIGEN' into $DESTINO"}
+elif [ "$1" == "-d" ]; then
+  # Caso con -d: destino y mensaje
+  if [ $# -lt 2 ]; then
+    echo "Uso: $0 -d <destino> [mensaje_commit]"
+    exit 1
+  fi
+  ORIGEN=$(git rev-parse --abbrev-ref HEAD)
+  DESTINO=$2
+  MENSAJE=${3:-"Merge branch '$ORIGEN' into $DESTINO"}
 else
   # Caso sin -o: solo destino y mensaje, origen = main
   if [ $# -lt 1 ]; then
     echo "Uso: $0 <destino> [mensaje_commit]"
     exit 1
   fi
-  DESTINO=$1
-  ORIGEN="main"
+  DESTINO=$(git rev-parse --abbrev-ref HEAD)
+  ORIGEN=$1
   MENSAJE=${2:-"Merge branch '$ORIGEN' into $DESTINO"}
 fi
 

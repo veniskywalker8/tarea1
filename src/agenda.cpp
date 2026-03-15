@@ -11,7 +11,7 @@ TAgenda crearTAgenda() {
     TAgenda nuevaAgenda = NULL;
     /************ Parte 5.2 ************/
     /*Escriba el código a continuación */
-
+    
     /****** Fin de parte Parte 5.2 *****/
     return nuevaAgenda;
 }
