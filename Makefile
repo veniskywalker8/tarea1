@@ -221,12 +221,21 @@ $(LIB):	$(ODIR)/utils.o $(ODIR)/$(PRINCIPAL).o
 	ar -qc $@ $^	
 
 #! Regla propia
+#? VARIABLES
+#* Colores ANSI
+ROJO=\033[31m
+VERDE=\033[32m
+AMARILLO=\033[33m
+AZUL=\033[34m
+MAGENTA=\033[35m
+CIAN=\033[36m
+NC=\033[0m   # Reset (No Color)
 #* borra binarios, resultados de ejecución y comparación, y copias de respaldo
 cc:clean_test clean_bin
 	@rm -f $(ARCHIVO_ENTREGA) $(ARCHIVO_CLAVES) *~ $(HDIR)/*~ $(CPPDIR)/*~ $(INDIR)/*~ $(OUTDIR)/*~
 #* Esta regla ejecuta el binario 
 pp: principal
-	./PRINCIPAL
+	@echo "$(VERDE)COMPILADO$(NC)"
 #*TESTING
 #? Esta regla se invoca con `make test-` y el nombre del modulo.
 #TODO: Llama todos los casos de prueba de un módulo.
@@ -258,14 +267,14 @@ test-%:
 			ok=$$((ok + 1)); \
 			RES=$${RES}1; \
 			rm -f "$$diff"; \
-			printf "\033[32m✓ OK: %s\033[0m\n" "$$id"; \
-			PRUEBAS=$${PRUEBAS}"\033[32m✓ OK: $$id\033[0m\n"; \
+			printf "$(VERDE)✓ OK: %s$(NC)\n" "$$id"; \
+			PRUEBAS=$${PRUEBAS}"$(VERDE)✓ OK: $$id$(NC)\n"; \
 		else \
 			fail=$$((fail + 1)); \
 			RES=$${RES}0; \
 			cat "$$diff"; \
-			printf "\033[31m✗ FAIL: %s\033[0m\n" "$$id"; \
-			PRUEBAS=$${PRUEBAS}"\033[31m✗ FAIL: $$id\033[0m\n"; \
+			printf "$(ROJO)✗ FAIL: %s$(NC)\n" "$$id"; \
+			PRUEBAS=$${PRUEBAS}"$(ROJO)✗ FAIL: $$id$(NC)\n"; \
 		fi; \
 		rm -f "$$tmp"; \
 	done; \
