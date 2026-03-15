@@ -3,7 +3,7 @@
 # Uso:
 #   ./hacer_merge.sh -o <origen> <destino> [mensaje_commit]
 #   ./hacer_merge.sh -d <destino> [mensaje_commit]
-#   ./hacer_merge.sh <destino> [mensaje_commit]
+#   ./hacer_merge.sh <origen> [mensaje_commit]
 
 if [ "$1" == "-o" ]; then
   # Caso con -o: origen, destino y mensaje
@@ -13,7 +13,7 @@ if [ "$1" == "-o" ]; then
   fi
   ORIGEN=$2
   DESTINO=$3
-  MENSAJE=${4:-"Merge branch '$ORIGEN' into $DESTINO"}
+  MENSAJE="${@:4}"
 elif [ "$1" == "-d" ]; then
   # Caso con -d: destino y mensaje
   if [ $# -lt 2 ]; then
@@ -22,17 +22,18 @@ elif [ "$1" == "-d" ]; then
   fi
   ORIGEN=$(git rev-parse --abbrev-ref HEAD)
   DESTINO=$2
-  MENSAJE=${3:-"Merge branch '$ORIGEN' into $DESTINO"}
+  MENSAJE="${@:3}"
 else
   # Caso sin -o: solo destino y mensaje, origen = main
   if [ $# -lt 1 ]; then
-    echo "Uso: $0 <destino> [mensaje_commit]"
+    echo "Uso: $0 <origen> [mensaje_commit]"
     exit 1
   fi
   DESTINO=$(git rev-parse --abbrev-ref HEAD)
   ORIGEN=$1
-  MENSAJE=${2:-"Merge branch '$ORIGEN' into $DESTINO"}
+  MENSAJE="${@:2}"
 fi
+[ -z "$MENSAJE" ] && MENSAJE="Merge branch '$ORIGEN' into $DESTINO"
 
 echo "Haciendo merge de $ORIGEN en $DESTINO..."
 
