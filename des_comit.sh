@@ -1,17 +1,22 @@
-#!/bin/bash
-# Script para retroceder commits en local y remoto
-# Uso: ./retroceder.sh [cantidad]
-# Si no se indica cantidad, se retrocede 1 commit por defecto.
-
-# Si no se pasa argumento, asigna 1
 CANTIDAD=${1:-1}
+N=${CANTIDAD#-}   # quita el signo negativo
+TIPO="--hard"
+if [ "$2" = "-s" ]; then
+  TIPO="--soft"
+fi
+if [ "$2" = "-m" ]; then
+  TIPO="--mixed"
+fi
 
-echo "Retrocediendo $CANTIDAD commit(s)..."
+git reset $TIPO HEAD~$N
 
-# Retrocede en local
-git reset --hard HEAD~$CANTIDAD
+if [ $CANTIDAD -lt 0 ]; then
+  # Si es negativo, solo local
+  echo "Retrocediendo $N commit(s) SOLO en local..."
+else
+  # Si es positivo, local + remoto
+  echo "Retrocediendo $CANTIDAD commit(s) en local y remoto..."
+  git push origin HEAD --force
+fi
 
-# Fuerza el push al remoto
-git push origin HEAD --force
-
-echo "Listo: se eliminaron $CANTIDAD commit(s) en local y remoto."
+echo "Listo."
