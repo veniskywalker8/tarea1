@@ -1,4 +1,22 @@
 #include "../include/fecha.h"
+nat largoMes[13] = {
+    0,  /// índice 0 no se usa
+    31, /// 1 - Enero
+    28, /// 2 - Febrero (ajustar si es bisiesto)
+    31, /// 3 - Marzo
+    30, /// 4 - Abril
+    31, /// 5 - Mayo
+    30, /// 6 - Junio
+    31, /// 7 - Julio
+    31, /// 8 - Agosto
+    30, /// 9 - Septiembre
+    31, /// 10 - Octubre
+    30, /// 11 - Noviembre
+    31  /// 12 - Diciembre
+};
+
+//+AUXILIAR
+bool esBisiesto(int anio);
 
 struct rep_fecha {
     /************ Parte 2.1 ************/
@@ -24,10 +42,11 @@ TFecha crearTFecha(nat dia, nat mes, nat anio) {
 void liberarTFecha(TFecha &fecha) {
     /************ Parte 3.3 ************/
     /*Escriba el código a continuación */
-
-
+    delete fecha;
+    fecha = nullptr;
     /****** Fin de parte Parte 3.3 *****/
 }
+
 void imprimirTFecha(TFecha fecha) {
     /************ Parte 3.5 ************/
     /*Escriba el código a continuación */
@@ -41,9 +60,28 @@ void aumentarTFecha(TFecha &fecha, nat dias) {
     /*Escriba el código a continuación */
     /*Recuerde que las funciones auxiliares
       deben declararse antes de ser utilizadas*/
-
-
-      
+    
+    //- sumar días
+    fecha->dia+=dias;
+    //? - WHILE
+    nat corte = 0; ///bandera con valor de inicio
+    do {
+        //- elegir CORTE en base al mes [M=2 => 28]
+        corte = largoMes[fecha->mes];
+        //- comprobar bisiestos
+        if (fecha->mes == 2 && esBisiesto(fecha->anio)) corte++;
+        //- si días > CORTE => cambio mes
+        if (fecha->dia>corte){
+            fecha->dia -= corte;
+            fecha->mes++;
+        }
+        //- si M>12 ANIO++
+        if (fecha->mes>12){
+            fecha->mes = 1;
+            fecha->anio++;
+        }
+    }while(fecha->dia>corte);
+    //? END
     /****** Fin de parte Parte 3.9 *****/
 }
 
@@ -65,4 +103,9 @@ int compararTFechas(TFecha fecha1, TFecha fecha2) {
 
     /****** Fin de parte Parte 3.10 *****/
     return res;
+}
+
+//+AUXILIARES
+bool esBisiesto(int anio) {
+    return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
 }
