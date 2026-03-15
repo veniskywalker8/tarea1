@@ -19,8 +19,8 @@ else
     echo "Uso: $0 <destino> [mensaje_commit]"
     exit 1
   fi
-  DESTINO=$1
-  ORIGEN="main"
+  DESTINO=$(git rev-parse --abbrev-ref HEAD)
+  ORIGEN=$1
   MENSAJE=${2:-"Merge branch '$ORIGEN' into $DESTINO"}
 fi
 
