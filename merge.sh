@@ -13,7 +13,7 @@ if [ "$1" == "-o" ]; then
   fi
   ORIGEN=$2
   DESTINO=$3
-  MENSAJE="${@:4}"
+  MENSAJE_IDX=4
 elif [ "$1" == "-d" ]; then
   # Caso con -d: destino y mensaje
   if [ $# -lt 2 ]; then
@@ -22,7 +22,7 @@ elif [ "$1" == "-d" ]; then
   fi
   ORIGEN=$(git rev-parse --abbrev-ref HEAD)
   DESTINO=$2
-  MENSAJE="${@:3}"
+  MENSAJE_IDX=3
 else
   # Caso sin -o: solo destino y mensaje, origen = main
   if [ $# -lt 1 ]; then
@@ -31,9 +31,11 @@ else
   fi
   DESTINO=$(git rev-parse --abbrev-ref HEAD)
   ORIGEN=$1
-  MENSAJE="${@:2}"
+  MENSAJE_IDX=2
 fi
-[ -z "$MENSAJE" ] && MENSAJE="Merge branch '$ORIGEN' into $DESTINO"
+
+MENSAJE="M['$ORIGEN' into $DESTINO] ${@:${MENSAJE_IDX}}"
+
 
 echo "Haciendo merge de $ORIGEN en $DESTINO..."
 
