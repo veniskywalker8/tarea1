@@ -10,7 +10,6 @@ struct rep_evento {
 };
 
 TEvento crearTEvento(int id, const char descripcion[MAX_DESCRIPCION], TFecha fecha) {
-    if (evento == nullptr) return;
     TEvento nuevoEvento = NULL;
     /************ Parte 4.2 ************/
     /*Escriba el código a continuación */
@@ -46,7 +45,7 @@ void liberarTEvento(TEvento &evento) {
 }
 
 int idTEvento(TEvento evento) {
-    if (evento == nullptr) return;
+    if (evento == nullptr) return -1;
     /************ Parte 4.4 ************/
     /*Escriba el código a continuación */
     int res = evento->id;
@@ -55,7 +54,7 @@ int idTEvento(TEvento evento) {
 }
 
 TFecha fechaTEvento(TEvento evento) {
-    if (evento == nullptr) return;
+    if (evento == nullptr) return nullptr;
     TFecha fecha = NULL;
     /************ Parte 4.4 ************/
     /*Escriba el código a continuación */

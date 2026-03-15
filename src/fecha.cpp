@@ -27,7 +27,6 @@ struct rep_fecha {
 };
 
 TFecha crearTFecha(nat dia, nat mes, nat anio) {
-    if (fecha == nullptr) return;
     TFecha nuevaFecha = NULL;
     /************ Parte 3.1 ************/
     /*Escriba el código a continuación */
@@ -93,7 +92,6 @@ void aumentarTFecha(TFecha &fecha, nat dias) {
 }
 
 int compararTFechas(TFecha fecha1, TFecha fecha2) {
-    if (fecha1 == nullptr || fecha2 == nullptr) return;
     int res = 0;
     /************ Parte 3.10 ************/
     /*Escriba el código a continuación */
