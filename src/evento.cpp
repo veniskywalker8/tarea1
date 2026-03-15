@@ -5,7 +5,7 @@ struct rep_evento {
     /*Escriba el código a continuación */
     int id;
     TFecha fecha;
-    char descripcion[];
+    char descripcion[MAX_DESCRIPCION];
     /****** Fin de parte Parte 4.1 *****/
 };
 
@@ -13,10 +13,14 @@ TEvento crearTEvento(int id, const char descripcion[MAX_DESCRIPCION], TFecha fec
     TEvento nuevoEvento = NULL;
     /************ Parte 4.2 ************/
     /*Escriba el código a continuación */
-    nuevoEvento->id = id;
-    strcpy(nuevoEvento->descripcion, descripcion);
+    //- Pedir memoria
+    nuevoEvento = new rep_evento;
+    //- Copiar la cadena de forma segura
+    strncpy(nuevoEvento->descripcion, descripcion, MAX_DESCRIPCION - 1);
+    nuevoEvento->descripcion[MAX_DESCRIPCION - 1] = '\0'; // asegurar terminación
+    //- asignar fecha e id
     nuevoEvento->fecha = fecha;
-
+    nuevoEvento->id = id;
     /****** Fin de parte Parte 4.2 *****/
     return nuevoEvento;
 }
@@ -24,7 +28,7 @@ TEvento crearTEvento(int id, const char descripcion[MAX_DESCRIPCION], TFecha fec
 void imprimirTEvento(TEvento evento) {
     /************ Parte 4.3 ************/
     /*Escriba el código a continuación */
-    printf("Evento %d: %s\nFecha:", evento->id, evento->descripcion);
+    printf("Evento %d: %s\nFecha: ", evento->id, evento->descripcion);
     imprimirTFecha(evento->fecha);
     /****** Fin de parte Parte 4.3 *****/
 }
@@ -32,15 +36,16 @@ void imprimirTEvento(TEvento evento) {
 void liberarTEvento(TEvento &evento) {
     /************ Parte 4.4 ************/
     /*Escriba el código a continuación */
-
+    liberarTFecha(evento->fecha);
+    delete evento;
+    evento = nullptr;
     /****** Fin de parte Parte 4.4 *****/
 }
 
 int idTEvento(TEvento evento) {
-    int res = 0;
     /************ Parte 4.4 ************/
     /*Escriba el código a continuación */
-
+    int res = evento->id;
     /****** Fin de parte Parte 4.4 *****/
     return res;
 }
@@ -57,6 +62,6 @@ TFecha fechaTEvento(TEvento evento) {
 void posponerTEvento(TEvento &evento, int dias) {
     /************ Parte 4.5 ************/
     /*Escriba el código a continuación */
-
+    aumentarTFecha(evento->fecha, dias);
     /****** Fin de parte Parte 4.5 *****/
 }
