@@ -95,8 +95,26 @@ int compararTFechas(TFecha fecha1, TFecha fecha2) {
     int res = 0;
     /************ Parte 3.10 ************/
     /*Escriba el código a continuación */
+    nat f1 = convertirFecha(fecha1);
+    nat f2 = convertirFecha(fecha2);
 
-
+    if (f1 > f2) {
+        res = 1;
+    }
+    else if (f1 == f2) {
+        res = 0;
+    }
+    else {
+        res = -1;
+    }
     /****** Fin de parte Parte 3.10 *****/
     return res;
+}
+
+//+AUXILIARES
+bool esBisiesto(int anio) {
+    return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
+}
+nat convertirFecha(TFecha fecha) {
+    return fecha->anio * 10000 + fecha->mes * 100 + fecha->dia;
 }
