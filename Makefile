@@ -219,3 +219,67 @@ check-syntax:
 LIB = tarea.a
 $(LIB):	$(ODIR)/utils.o $(ODIR)/$(PRINCIPAL).o
 	ar -qc $@ $^	
+
+#! Regla propia
+#? VARIABLES
+#* Colores ANSI
+ROJO=\033[31m
+VERDE=\033[32m
+AMARILLO=\033[33m
+AZUL=\033[34m
+MAGENTA=\033[35m
+CIAN=\033[36m
+NC=\033[0m   # Reset (No Color)
+#* borra binarios, resultados de ejecución y comparación, y copias de respaldo
+cc:clean_test clean_bin
+	@rm -f $(ARCHIVO_ENTREGA) $(ARCHIVO_CLAVES) *~ $(HDIR)/*~ $(CPPDIR)/*~ $(INDIR)/*~ $(OUTDIR)/*~
+#* Esta regla ejecuta el binario 
+pp: principal
+	@echo "$(VERDE)COMPILADO$(NC)"
+#*TESTING
+#? Esta regla se invoca con `make test-` y el nombre del modulo.
+#TODO: Llama todos los casos de prueba de un módulo.
+#? Por ejemplo, `make test-fecha` ejecuta los de fecha.
+#? Con `--no-print-directory` se evita que se imprima el nombre del directorio
+test-%:
+	@# Filtra los casos que pertenecen al módulo invocado
+	@# Si el patrón es "test-*", usar todos los casos
+	@if [ "$*" = "*" ]; then \
+		casos="$(tS)"; \
+	else \
+		casos="$(filter t-$*%,$(tS))"; \
+	fi; \
+	ok=0; fail=0; RES=""; PRUEBAS="";\
+	for c in $$casos; do \
+		# Quita el prefijo t- para obtener el ID real \
+		id="$${c#t-}"; \
+		# Define rutas de entrada, salida, esperado y diff \
+		in="$(INDIR)/$$id.in"; \
+		sal="$(SALIDADIR)/$$id.sal"; \
+		exp="$(OUTDIR)/$$id.out"; \
+		diff="$(SALIDADIR)/$$id.diff"; \
+		tmp=".tmp-salida"; \
+		# Ejecuta el programa con valgrind y timeout, redirige salida \
+		timeout 4 valgrind -q --leak-check=full ./$(EJECUTABLE) < "$$in" > "$$tmp" 2>&1; \
+		cp "$$tmp" "$$sal"; \
+		# Compara salida esperada vs generada \
+		if diff -u "$$exp" "$$sal" > "$$diff"; then \
+			ok=$$((ok + 1)); \
+			RES=$${RES}1; \
+			rm -f "$$diff"; \
+			printf "$(VERDE)✓ OK: %s$(NC)\n" "$$id"; \
+			PRUEBAS=$${PRUEBAS}"$(VERDE)✓ OK: $$id$(NC)\n"; \
+		else \
+			fail=$$((fail + 1)); \
+			RES=$${RES}0; \
+			cat "$$diff"; \
+			printf "$(ROJO)✗ FAIL: %s$(NC)\n" "$$id"; \
+			PRUEBAS=$${PRUEBAS}"$(ROJO)✗ FAIL: $$id$(NC)\n"; \
+		fi; \
+		rm -f "$$tmp"; \
+	done; \
+	echo -- RESULTADO DE CADA CASO --; \
+	total=$$((ok + fail)); \
+	echo "Resumen módulo '$*': $$ok bien, $$fail mal, $$total total"; \
+	echo "$$RES";\
+	echo "$$PRUEBAS"
