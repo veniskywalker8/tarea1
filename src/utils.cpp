@@ -1,11 +1,3 @@
-/* 1234567 */
-/*
-  Módulo de implementación de 'utils'.
-
-  Laboratorio de Programación 2.
-  InCo-FIng-UDELAR
- */
-
 #include "../include/utils.h"
 
 nat leerNat() {

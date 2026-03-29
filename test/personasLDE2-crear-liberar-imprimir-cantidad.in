@@ -1,0 +1,32 @@
+crearListaPersonas
+
+imprimirCantidadListaPersonas
+
+imprimirListaPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+insertarPersonaListaPersonas 1
+
+crearAgenda
+crearPersona 2 22 Persona2
+crearFecha 2/22/22
+crearEvento 2 Descripcion2
+agregarEventoPersona
+insertarPersonaListaPersonas 1
+
+imprimirCantidadListaPersonas
+imprimirListaPersonas
+
+# creo una nueva persona y la agrego a la lista
+
+crearAgenda
+crearPersona 3 33 Persona3
+insertarPersonaListaPersonas 5
+
+imprimirCantidadListaPersonas
+imprimirListaPersonas
+
+liberarListaPersonas
+
+Fin

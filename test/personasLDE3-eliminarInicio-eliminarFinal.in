@@ -1,0 +1,63 @@
+crearListaPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+crearFecha 1/11/11
+crearEvento 1 Descripcion1
+agregarEventoPersona
+insertarPersonaListaPersonas 1
+
+crearAgenda
+crearPersona 2 22 Persona2
+crearFecha 2/22/22
+crearEvento 2 Descripcion2
+agregarEventoPersona
+insertarPersonaListaPersonas 2
+
+crearAgenda
+crearPersona 3 33 Persona3
+crearFecha 3/33/33
+crearEvento 3 Descripcion3
+agregarEventoPersona
+insertarPersonaListaPersonas 2
+
+# debe haber 3 personas en la lista
+imprimirCantidadListaPersonas
+
+# la persona 3 debe estar en la posicion 2
+imprimirListaPersonas
+
+# elimino el inicio, es decir la persona 1
+eliminarInicioListaPersonas
+
+# lista sin la persona 1
+imprimirListaPersonas
+
+# elimino el final, es decir la persona 2
+eliminarFinalListaPersonas
+
+# debe quedar solo 1 persona en la lista
+imprimirCantidadListaPersonas
+
+# debe quedar solo la persona 3 en la lista
+imprimirListaPersonas
+
+# elimino el inicio, la lista queda vacia
+eliminarInicioListaPersonas
+
+# no se debe imprimir nada
+imprimirListaPersonas
+
+crearAgenda
+crearPersona 4 44 Persona4
+crearFecha 4/44/44
+crearEvento 4 Descripcion4
+agregarEventoPersona
+insertarPersonaListaPersonas 2
+
+# ahora debe haber solo 1 persona en la lista
+imprimirListaPersonas
+
+liberarListaPersonas
+
+Fin

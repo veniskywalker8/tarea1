@@ -32,4 +32,7 @@ void aumentarTFecha(TFecha &fecha, nat dias);
 // si son iguales retorna 0
 int compararTFechas(TFecha fecha1, TFecha fecha2);
 
+// Retorna una copia de la fecha
+TFecha copiarTFecha(TFecha fecha);
+
 #endif  // _FECHA_H_

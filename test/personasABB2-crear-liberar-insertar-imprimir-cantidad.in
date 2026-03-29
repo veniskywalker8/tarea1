@@ -1,0 +1,50 @@
+crearArbolPersonas
+
+imprimirCantidadArbolPersonas
+
+imprimirArbolPersonas
+
+crearAgenda
+crearPersona 5 55 Persona5
+crearFecha 5/55/55
+crearEvento 5 Descripcion5
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+imprimirArbolPersonas
+
+crearAgenda
+crearPersona 10 100 Persona10
+insertarPersonaArbolPersonas
+
+imprimirCantidadArbolPersonas
+imprimirArbolPersonas
+
+crearAgenda
+crearPersona 2 22 Persona2
+insertarPersonaArbolPersonas
+
+imprimirCantidadArbolPersonas
+imprimirArbolPersonas
+
+crearAgenda
+crearPersona 20 200 Persona20
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 7 77 Persona7
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 3 33 Persona3
+insertarPersonaArbolPersonas
+
+imprimirArbolPersonas
+
+liberarArbolPersonas
+
+Fin
