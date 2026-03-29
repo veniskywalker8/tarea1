@@ -2,20 +2,20 @@ crearAgenda
 
 # creo cuatro eventos para ingresarlos a la agenda
 
-crearFecha 18/3/2026
-crearEvento 1 Entrega de la Tarea 1
+crearFecha 22/3/2023
+crearEvento 1 Descripcion uno
 agregarEnAgenda
 
-crearFecha 22/4/2026
-crearEvento 2 Entrega de la Tarea 2
+crearFecha 23/3/2023
+crearEvento 2 Descripcion dos
 agregarEnAgenda
 
-crearFecha 27/5/2026
-crearEvento 3 Entrega de la Tarea 3
+crearFecha 24/3/2023
+crearEvento 3 Descripcion tres
 agregarEnAgenda
 
-crearFecha 24/6/2026
-crearEvento 4 Entrega de la Tarea 4
+crearFecha 1/4/2023
+crearEvento 4 Descripcion cuatro
 agregarEnAgenda
 
 # chequéo si existen diferentes ids de eventos y los obtengo
@@ -24,9 +24,6 @@ estaEnAgenda 3
 estaEnAgenda 5
 estaEnAgenda 4
 estaEnAgenda 0
-estaEnAgenda 10
-estaEnAgenda 200
-estaEnAgenda 1
 
 liberarAgenda
 Fin

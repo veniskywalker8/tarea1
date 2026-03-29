@@ -1,0 +1,72 @@
+crearArbolPersonas
+
+crearAgenda
+crearPersona 5 55 Persona5
+crearFecha 5/55/55
+crearEvento 5 Descripcion5
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+# arbol con 1 elemento - maxId 5
+maxIdPersonaArbolPersonas
+
+crearAgenda
+crearPersona 10 100 Persona10
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 2 22 Persona2
+insertarPersonaArbolPersonas
+
+# arbol con 3 elementos - maxId 10
+maxIdPersonaArbolPersonas
+
+crearAgenda
+crearPersona 20 200 Persona20
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 7 77 Persona7
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 3 33 Persona3
+insertarPersonaArbolPersonas
+
+# arbol con 7 elementos - maxId 20
+maxIdPersonaArbolPersonas
+
+# arbol con 7 elementos
+imprimirArbolPersonas
+
+# remuevo la persona 20
+removerArbolPersonas 20
+
+imprimirArbolPersonas
+
+# remuevo la persona 5
+removerArbolPersonas 5
+
+imprimirArbolPersonas
+
+# remuevo la persona 2
+removerArbolPersonas 2
+
+# arbol con 4 elementos - maxId 10
+maxIdPersonaArbolPersonas
+
+crearAgenda
+crearPersona 4 44 Persona4
+# inserto la persona 4
+insertarPersonaArbolPersonas
+
+imprimirCantidadArbolPersonas
+imprimirArbolPersonas
+
+liberarArbolPersonas
+
+Fin

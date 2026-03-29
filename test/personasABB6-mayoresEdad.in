@@ -1,0 +1,68 @@
+crearArbolPersonas
+
+# arbol vacio, retorna arbol vacio
+# mayoresEdadArbolPersonas 3
+
+crearAgenda
+crearPersona 5 55 Persona5
+crearFecha 5/55/55
+crearEvento 5 Descripcion5
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+# arbol con 1 elemento - maxId 5
+maxIdPersonaArbolPersonas
+
+crearAgenda
+crearPersona 10 100 Persona10
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 2 22 Persona2
+insertarPersonaArbolPersonas
+
+# arbol con 3 elementos max Id 10
+maxIdPersonaArbolPersonas
+
+# arbol con mayores a 30 - 2 elementos
+mayoresEdadArbolPersonas 30
+
+crearAgenda
+crearPersona 20 200 Persona20
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 7 77 Persona7
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 3 33 Persona3
+insertarPersonaArbolPersonas
+
+# arbol con mayores a 35 - 4 elementos
+mayoresEdadArbolPersonas 35
+
+# remuevo la persona 20
+removerArbolPersonas 20
+
+# remuevo la persona 5
+removerArbolPersonas 5
+
+# remuevo la persona 2
+removerArbolPersonas 2
+
+crearAgenda
+crearPersona 4 44 Persona4
+# inserto la persona 4
+insertarPersonaArbolPersonas
+
+# arbol con mayores a 35 - 3 elementos
+mayoresEdadArbolPersonas 35
+
+liberarArbolPersonas
+
+Fin
