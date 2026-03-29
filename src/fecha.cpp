@@ -33,6 +33,21 @@ int compararTFechas(TFecha fecha1, TFecha fecha2) {
 ////// FIN CÓDIGO TAREA 1 //////
 /////////////////////////////////
 
+/-----------------------------/
+
+///////////////////////////
+////// FUNCION NUEVA //////
+///////////////////////////
+
+// Retorna una copia de la fecha
+TFecha copiarTFecha(TFecha fecha) {
+    return NULL;
+}
+
+/////////////////////////////////
+////// FIN CÓDIGO TAREA 1 //////
+/////////////////////////////////
+
 /*-----------------------------*/
 
 ///////////////////////////
