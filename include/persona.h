@@ -1,0 +1,90 @@
+/*
+  Módulo de definición de 'persona'.
+
+  Los elementos de tipo TPersona son elementos que almacenan un identificador, un nombre, una edad y una agenda.
+
+  Laboratorio de Programación 2.
+  InCo-FIng-UDELAR
+ */
+#ifndef PERSONA_H
+#define PERSONA_H
+
+#include <string.h>
+#include "utils.h"
+#include "agendaLS.h"
+
+// Constante para definir el largo máximo del nombre de una persona
+const int MAX_NOMBRE = 100;
+
+// Definición de tipo TPersona como un puntero a rep_persona
+typedef struct rep_persona *TPersona;
+
+// Función para crear una persona
+// Devuelve una persona con el id, nombre, edad y agenda pasados por parámetro
+// El campo nombre tiene un largo máximo de MAX_NOMBRE caracteres y se puede asumir que el nombre pasado por parámetro no supera ese largo
+// El campo nombre es una copia del nombre pasado por parámetro, es decir, no debe compartir memoria con el nombre pasado por parámetro
+// La función es Theta(1) peor caso
+TPersona crearTPersona(nat id, nat edad, const char nombre[MAX_NOMBRE], TAgendaLS agenda);
+
+// Función para liberar la memoria asignada a una persona
+// Debe liberar también la memoria de la agenda asociada
+// La función es Theta(n) peor caso, donde n es la cantidad de eventos en la agenda de la persona
+void liberarTPersona(TPersona &persona);
+
+// Función para imprimir una persona con el siguiente formato:
+// "Persona *id*:  *nombre*, *edad* años\n"
+// [agenda de la persona (si tiene eventos en su agenda)]
+// Por ejemplo, si tenemos a la persona "Persona1" con id 1 y edad 20, y dos eventos en la agenda la función imprimirá:
+// "Persona 1: Persona1, 20 años
+// Evento 1:  Descripción uno
+// Fecha: 22/3/2023
+// Evento 2:  Descripción dos
+// Fecha: 23/3/2023"
+// La función es Theta(n) peor caso, donde n es la cantidad de eventos en la agenda de la persona
+void imprimirTPersona(TPersona persona);
+
+// Función para obtener el id de una persona
+// La función es Theta(1) peor caso
+nat idTPersona(TPersona persona);
+
+// Función para obtener la edad de una persona
+// La función es Theta(1) peor caso
+nat edadTPersona(TPersona persona);
+
+// Función para obtener el nombre de una persona
+// La función es Theta(1) peor caso
+char* nombreTPersona(TPersona persona);
+
+// Función para obtener la agenda de una persona
+// La función es Theta(1) peor caso
+TAgendaLS agendaTPersona(TPersona persona);
+
+// Función para agregar un evento a la agenda de una persona
+// La función es Theta(n) peor caso, siendo n la cantidad de eventos en la agenda de la persona
+void agregarEventoATPersona(TPersona &persona, TEvento evento);
+
+// Función para posponer un evento de la agenda de una persona
+// La función es Theta(n) peor caso, siendo n la cantidad de eventos en la agenda de la persona
+// PRE: el evento está en la agenda de la persona
+void posponerEventoEnTPersona(TPersona &persona, int id, nat n);
+
+// Función para remover un evento de la agenda de una persona
+// La función es Theta(n) peor caso, siendo n la cantidad de eventos en la agenda de la persona
+// PRE: el evento está en la agenda de la persona
+void removerEventoDeTPersona(TPersona &persona, int id);
+
+// Función para determinar si un evento está en la agenda de una persona
+// La función es Theta(n) peor caso, siendo n la cantidad de eventos en la agenda de la persona
+bool estaEnAgendaDeTPersona(TPersona persona, int id);
+
+// Función para obtener un evento de la agenda de una persona
+// La función es Theta(n) peor caso, siendo n la cantidad de eventos en la agenda de la persona
+// PRE: el evento está en la agenda de la persona
+TEvento obtenerDeAgendaDeTPersona(TPersona persona, int id);
+
+// Función para copiar una persona
+// Retorna una copia de la persona pasada por parámetro, donde la agenda de la copia es una copia de la agenda de la persona original
+// La función es Theta(n) peor caso, siendo n la cantidad de eventos en la agenda de la persona
+TPersona copiarTPersona(TPersona persona);
+
+#endif
