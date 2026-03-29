@@ -1,0 +1,39 @@
+1>2>1/2/2023
+3>La fecha copiada es: 1/2/2023
+4>La nueva fecha aplazada 28 dias es: 1/3/2023
+5>La fecha copiada es: 1/3/2023
+6>7>#  año bisiesto.
+8>9>1/2/2024
+10>La nueva fecha aplazada 28 dias es: 29/2/2024
+11>12>#  mas de un mes.
+13>14>18/12/2023
+15>La nueva fecha aplazada 50 dias es: 6/2/2024
+16>17>#  mas de un mes y bisiesto.
+18>19>18/12/2023
+20>La fecha copiada es: 18/12/2023
+21>La nueva fecha aplazada 73 dias es: 29/2/2024
+22>La fecha copiada es: 29/2/2024
+23>24>#  mas de un año.
+25>26>18/12/2022
+27>La nueva fecha aplazada 366 dias es: 19/12/2023
+28>29>#  mas de un año y bisiesto.
+30>31>18/12/2023
+32>La nueva fecha aplazada 366 dias es: 18/12/2024
+33>34>35>36>El evento copiado es: Evento 1:  Descripcion 1
+Fecha: 22/3/2023
+37>La fecha del evento es: 22/3/2023
+38>39>La fecha del evento es: 21/4/2023
+40>41>Evento 1:  Descripcion 1
+Fecha: 1/5/2023
+42>El evento copiado es: Evento 1:  Descripcion 1
+Fecha: 1/5/2023
+43>44>#  año bisiesto .
+45>46>47>La fecha del evento es: 1/2/2024
+48>49>La fecha del evento es: 29/2/2024
+50>El evento copiado es: Evento 2:  Descripcion 2
+Fecha: 29/2/2024
+51>52>Evento 2:  Descripcion 2
+Fecha: 1/3/2024
+53>El evento copiado es: Evento 2:  Descripcion 2
+Fecha: 1/3/2024
+54>55>Fin.

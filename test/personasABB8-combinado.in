@@ -1,0 +1,87 @@
+crearArbolPersonas
+
+# arbol vacio crea lista vacia
+aplanarArbolPersonas
+
+crearAgenda
+crearPersona 5 55 Persona5
+crearFecha 5/55/55
+crearEvento 5 Descripcion5
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+# arbol con 1 elemento, es perfecto
+esPerfectoArbolPersonas
+
+# lista con 1 solo elemento - Persona 5
+aplanarArbolPersonas
+
+crearAgenda
+crearPersona 10 100 Persona10
+crearFecha 10/1/10
+crearEvento 10 Descripcion10
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 2 22 Persona2
+crearFecha 2/2/22
+crearEvento 2 Descripcion2
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 20 200 Persona20
+crearFecha 7/12/23
+crearEvento 20 Descripcion20
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+# lista con 4 elementos
+aplanarArbolPersonas
+
+crearAgenda
+crearPersona 7 77 Persona7
+crearFecha 7/7/7
+crearEvento 7 Descripcion7
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+# arbol de altura 3
+alturaArbolPersonas
+
+# remuevo la raiz, queda el 2 de raiz
+removerArbolPersonas 5
+
+# arbol de altura 3
+alturaArbolPersonas
+
+# arbol solo con subarbol derecho, no es perfecto
+esPerfectoArbolPersonas
+
+# remuevo la raiz, me quedo con subarbol derecho
+removerArbolPersonas 2
+
+# arbol con 3 elementos
+imprimirCantidadArbolPersonas
+
+# lista con 3 elementos
+aplanarArbolPersonas
+
+# arbol perfecto
+esPerfectoArbolPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 3 33 Persona3
+insertarPersonaArbolPersonas
+
+# lista con 5 elementos
+aplanarArbolPersonas
+
+liberarArbolPersonas
+
+Fin

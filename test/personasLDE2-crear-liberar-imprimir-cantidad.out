@@ -1,0 +1,14 @@
+1>2>La cantidad de personas en la lista es: 0.
+3>4>5>6>7>8>9>10>11>12>13>La cantidad de personas en la lista es: 2.
+14>Persona 2:  Persona2, 22 años
+Evento 2:  Descripcion2
+Fecha: 2/22/22
+Persona 1:  Persona1, 11 años
+15>#  creo una nueva persona y la agrego a la lista.
+16>17>18>19>La cantidad de personas en la lista es: 3.
+20>Persona 2:  Persona2, 22 años
+Evento 2:  Descripcion2
+Fecha: 2/22/22
+Persona 1:  Persona1, 11 años
+Persona 3:  Persona3, 33 años
+21>22>Fin.

@@ -1,0 +1,55 @@
+1>2>#  arbol vacio crea lista vacia.
+3>4>5>6>7>8>9>10>#  arbol con 1 elemento, es perfecto.
+11>El árbol de personas es perfecto.
+12>#  lista con 1 solo elemento - Persona 5.
+13>Persona 5:  Persona5, 55 años
+Evento 5:  Descripcion5
+Fecha: 5/55/55
+14>15>16>17>18>19>20>21>22>23>24>25>26>27>28>29>30>31>32>#  lista con 4 elementos.
+33>Persona 2:  Persona2, 22 años
+Evento 2:  Descripcion2
+Fecha: 2/2/22
+Persona 5:  Persona5, 55 años
+Evento 5:  Descripcion5
+Fecha: 5/55/55
+Persona 10:  Persona10, 100 años
+Evento 10:  Descripcion10
+Fecha: 10/1/10
+Persona 20:  Persona20, 200 años
+Evento 20:  Descripcion20
+Fecha: 7/12/23
+34>35>36>37>38>39>40>#  arbol de altura 3.
+41>La altura del árbol de personas es: 3.
+42>#  remuevo la raiz, queda el 2 de raiz.
+43>44>#  arbol de altura 3.
+45>La altura del árbol de personas es: 3.
+46>#  arbol solo con subarbol derecho, no es perfecto.
+47>El árbol de personas NO es perfecto.
+48>#  remuevo la raiz, me quedo con subarbol derecho.
+49>50>#  arbol con 3 elementos.
+51>La cantidad de personas en el árbol es: 3.
+52>#  lista con 3 elementos.
+53>Persona 7:  Persona7, 77 años
+Evento 7:  Descripcion7
+Fecha: 7/7/7
+Persona 10:  Persona10, 100 años
+Evento 10:  Descripcion10
+Fecha: 10/1/10
+Persona 20:  Persona20, 200 años
+Evento 20:  Descripcion20
+Fecha: 7/12/23
+54>#  arbol perfecto.
+55>El árbol de personas es perfecto.
+56>57>58>59>60>61>62>#  lista con 5 elementos.
+63>Persona 1:  Persona1, 11 años
+Persona 3:  Persona3, 33 años
+Persona 7:  Persona7, 77 años
+Evento 7:  Descripcion7
+Fecha: 7/7/7
+Persona 10:  Persona10, 100 años
+Evento 10:  Descripcion10
+Fecha: 10/1/10
+Persona 20:  Persona20, 200 años
+Evento 20:  Descripcion20
+Fecha: 7/12/23
+64>65>Fin.

@@ -1,0 +1,41 @@
+crearAgenda
+
+crearPersona 1 20 Persona1
+
+imprimirCopiaPersona
+
+# creo cuatro eventos para ingresarlos a la agenda de la persona
+
+crearFecha 22/3/2023
+crearEvento 1 Descripcion uno
+agregarEventoPersona
+
+crearFecha 23/3/2023
+crearEvento 2 Descripcion dos
+agregarEventoPersona
+
+imprimirCopiaPersona
+
+crearFecha 24/3/2023
+crearEvento 3 Descripcion tres
+agregarEventoPersona
+
+crearFecha 1/4/2023
+crearEvento 4 Descripcion cuatro
+agregarEventoPersona
+
+imprimirCopiaPersona
+
+# chequéo si existen diferentes ids de eventos y los obtengo
+
+estaEnAgendaPersona 3
+estaEnAgendaPersona 5
+estaEnAgendaPersona 4
+estaEnAgendaPersona 0
+
+imprimirEventoPersona 3
+imprimirEventoPersona 1
+
+liberarPersona
+
+Fin

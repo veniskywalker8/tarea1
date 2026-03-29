@@ -1,0 +1,91 @@
+crearArbolPersonas
+
+# arbol con 0 elementos - altura 0
+alturaArbolPersonas
+
+# arbol es perfecto
+esPerfectoArbolPersonas
+
+crearAgenda
+crearPersona 5 55 Persona5
+crearFecha 5/55/55
+crearEvento 5 Descripcion5
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+# arbol con 1 elemento - altura 1
+alturaArbolPersonas
+
+# arbol es perfecto
+esPerfectoArbolPersonas
+
+crearAgenda
+crearPersona 10 100 Persona10
+insertarPersonaArbolPersonas
+
+# arbol con 2 elementos - altura 2
+alturaArbolPersonas
+
+# arbol no es perfecto
+esPerfectoArbolPersonas
+
+crearAgenda
+crearPersona 2 22 Persona2
+insertarPersonaArbolPersonas
+
+# arbol con 3 elementos - altura 2
+alturaArbolPersonas
+
+# arbol es perfecto
+esPerfectoArbolPersonas
+
+crearAgenda
+crearPersona 20 200 Persona20
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 7 77 Persona7
+insertarPersonaArbolPersonas
+
+# subarboles con alturas distintas
+# arbol no es perfecto
+esPerfectoArbolPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 3 33 Persona3
+insertarPersonaArbolPersonas
+
+# arbol con 7 elementos - altura 3
+alturaArbolPersonas
+
+# arbol es perfecto
+esPerfectoArbolPersonas
+
+# remuevo la persona 20 - altura 3
+removerArbolPersonas 20
+alturaArbolPersonas
+
+# arbol no es perfecto
+esPerfectoArbolPersonas
+
+# remuevo la persona 5
+removerArbolPersonas 5
+
+# remuevo la persona 2
+removerArbolPersonas 2
+
+crearAgenda
+crearPersona 4 44 Persona4
+# inserto la persona 4
+insertarPersonaArbolPersonas
+
+alturaArbolPersonas
+esPerfectoArbolPersonas
+
+liberarArbolPersonas
+
+Fin

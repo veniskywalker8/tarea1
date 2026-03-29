@@ -1,9 +1,9 @@
 #!/bin/bash
 # Script para hacer merge entre ramas
 # Uso:
-#   ./hacer_merge.sh -o <origen> <destino> [mensaje_commit]
-#   ./hacer_merge.sh -d <destino> [mensaje_commit]
-#   ./hacer_merge.sh <origen> [mensaje_commit]
+#   ./merge.sh -o <origen> <destino> [mensaje_commit]
+#   ./merge.sh -d <destino> [mensaje_commit]
+#   ./merge.sh <origen> [mensaje_commit]
 
 if [ "$1" == "-o" ]; then
   # Caso con -o: origen, destino y mensaje

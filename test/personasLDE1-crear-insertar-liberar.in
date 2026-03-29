@@ -1,0 +1,24 @@
+crearListaPersonas
+
+liberarListaPersonas
+
+crearListaPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+insertarPersonaListaPersonas 1
+
+crearAgenda
+crearPersona 2 22 Persona2
+crearFecha 1/12/22
+crearEvento 1 Descripcion1
+agregarEventoPersona
+insertarPersonaListaPersonas 1
+
+crearAgenda
+crearPersona 3 33 Persona3
+insertarPersonaListaPersonas 5
+
+liberarListaPersonas
+
+Fin

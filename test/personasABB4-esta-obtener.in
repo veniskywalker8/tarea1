@@ -1,0 +1,34 @@
+crearArbolPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+crearFecha 1/11/11
+crearEvento 1 Descripcion1
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 2 22 Persona2
+crearFecha 2/22/22
+crearEvento 2 Descripcion2
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 3 33 Persona3
+crearFecha 3/33/33
+crearEvento 3 Descripcion3
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+estaEnArbolPersonas 3
+estaEnArbolPersonas 5
+estaEnArbolPersonas 2
+estaEnArbolPersonas 0
+
+imprimirPersonaArbolPersonas 3
+imprimirPersonaArbolPersonas 1
+
+liberarArbolPersonas
+
+Fin

@@ -1,0 +1,66 @@
+crearListaPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+crearFecha 1/11/11
+crearEvento 1 Descripcion1
+agregarEventoPersona
+insertarPersonaListaPersonas 3
+
+crearAgenda
+crearPersona 2 22 Persona2
+crearFecha 2/22/22
+crearEvento 2 Descripcion2
+agregarEventoPersona
+insertarPersonaListaPersonas 2
+
+crearAgenda
+crearPersona 3 33 Persona3
+crearFecha 3/33/33
+crearEvento 3 Descripcion3
+agregarEventoPersona
+insertarPersonaListaPersonas 3
+
+crearAgenda
+crearPersona 0 01 Persona0
+crearFecha 01/10/1100
+crearEvento 0 Descripcion0
+agregarEventoPersona
+insertarPersonaListaPersonas 1
+
+imprimirCantidadListaPersonas
+imprimirListaPersonas
+
+estaEnListaPersonas 3
+estaEnListaPersonas 5
+estaEnListaPersonas 4
+estaEnListaPersonas 0
+
+concatenarConVacioListaPersonas
+
+eliminarInicioListaPersonas
+
+imprimirCantidadListaPersonas
+imprimirListaPersonas
+
+eliminarFinalListaPersonas
+
+imprimirPersonaListaPersonas 2
+
+imprimirCantidadListaPersonas
+imprimirListaPersonas
+
+eliminarFinalListaPersonas
+eliminarFinalListaPersonas
+
+imprimirCantidadListaPersonas
+imprimirListaPersonas
+
+crearYConcatenarListaPersonas
+
+imprimirListaPersonas
+imprimirCantidadListaPersonas
+
+liberarListaPersonas
+
+Fin
