@@ -40,4 +40,7 @@ void liberarTEvento(TEvento &evento);
 // Función que aumenta la cantidad de días en la fecha del evento
 void posponerTEvento(TEvento &evento, int dias);
 
+// Retorna una copia del evento
+TEvento copiarTEvento(TEvento evento);
+
 #endif  // EVENTO_H

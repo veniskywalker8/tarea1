@@ -1,6 +1,6 @@
 crearAgenda
 
-# se crean 5 eventos para ingresarlos a la agenda
+# creo cinco eventos para ingresarlos a la agenda
 
 crearFecha 22/3/2023
 crearEvento 1 Descripcion uno
@@ -10,7 +10,7 @@ crearFecha 23/3/2023
 crearEvento 2 Descripcion dos
 agregarEnAgenda
 
-crearFecha 23/3/2023
+crearFecha 24/3/2023
 crearEvento 3 Descripcion tres
 agregarEnAgenda
 
@@ -18,24 +18,19 @@ crearFecha 1/4/2023
 crearEvento 4 Descripcion cuatro
 agregarEnAgenda
 
-crearFecha 23/3/2023
+crearFecha 1/5/2023
 crearEvento 5 Descripcion cinco
 agregarEnAgenda
 
-imprimirAgenda
+crearPersona 1 11 Persona1
 
-removerDeAgenda 4
+imprimirIdPersona
+imprimirEdadPersona
+imprimirNombrePersona
+imprimirAgendaPersona
 
-imprimirAgenda
+imprimirPersona
 
-removerDeAgenda 1
-
-imprimirAgenda 
-
-removerDeAgenda 3
-
-imprimirAgenda 
-
-liberarAgenda
+liberarPersona
 
 Fin

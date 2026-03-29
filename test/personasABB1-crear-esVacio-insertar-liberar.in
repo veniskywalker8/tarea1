@@ -1,0 +1,32 @@
+crearArbolPersonas
+
+esVacioArobolPersonas
+
+liberarArbolPersonas
+
+crearArbolPersonas
+
+crearAgenda
+crearPersona 3 33 Persona3
+insertarPersonaArbolPersonas
+
+esVacioArobolPersonas
+
+crearAgenda
+crearPersona 1 11 Persona1
+insertarPersonaArbolPersonas
+
+esVacioArobolPersonas
+
+crearAgenda
+crearPersona 2 22 Persona2
+crearFecha 1/12/22
+crearEvento 1 Descripcion1
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+esVacioArobolPersonas
+
+liberarArbolPersonas
+
+Fin
