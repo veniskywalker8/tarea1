@@ -1,6 +1,6 @@
 
 # --------------------------------------------------------------------
-#  Makefile de tarea 1.
+#  Makefile de tarea 2.
 
 #  Laboratorio de Programación 2.
 #  InCo-FIng-UDELAR
@@ -30,9 +30,9 @@ all: principal
 # Objetivos que no son archivos.
 .PHONY: all clean_bin clean_test clean testing entrega claves
 
-ARCHIVO_ENTREGA=EntregaTarea1.tar.gz
+ARCHIVO_ENTREGA=EntregaTarea2.tar.gz
 
-ENTREGAR = fecha evento agenda 
+ENTREGAR = fecha evento agendaLS persona personasLDE personasABB 
 
 MODULOS = $(ENTREGAR) utils
 
@@ -85,22 +85,35 @@ $(EJECUTABLE):$(ODIR)/$(PRINCIPAL).o $(OS)
 	$(LD) $(CCFLAGS) $^ -o $@
 
 # casos de prueba
-
-IDS_PUBLICOS = fecha1-crear-imprimir-liberar \
-	           fecha2-aumentar \
-		       fecha3-comparar \
-		       fecha4-combinado \
-		       evento1-crear-imprimir-liberar \
-		       evento2-posponer \
-		       evento3-combinado \
-		       agenda1-crear-agregar-imprimir-liberar \
-		       agenda2-crear-agregar-imprimir-liberar \
-		       agenda3-esta \
-		       agenda4-obtener-posponer \
-		       agenda5-obtener-posponer \
-		       agenda6-hayEventosFecha-imprimirEventosFecha \
-		       agenda7-remover \
-		       agenda8-combinado
+IDS_PUBLICOS = fechaEvento1-combinado \
+		fechaEvento2-copia \
+		agenda1-crear-agregar-imprimir-liberar \
+		agenda2-crear-agregar-esVacia-copiar-imprimir-liberar \
+		agenda3-esta \
+		agenda4-obtener-posponer \
+		agenda5-obtener-posponer \
+		agenda6-hayEventosFecha-imprimirEventosFecha \
+		agenda7-remover \
+		agenda8-combinado \
+		persona1-crear-imprimir-liberar \
+		persona2-id-edad-nombre-agenda \
+		persona3-agregar-posponer-remover \
+		persona4-esta-obtener-copia \
+		personasLDE1-crear-insertar-liberar \
+		personasLDE2-crear-liberar-imprimir-cantidad \
+		personasLDE3-eliminarInicio-eliminarFinal \
+		personasLDE4-esta-obtener \
+		personasLDE5-concatenar \
+		personasLDE6-concatenar-tiempo \
+		personasLDE7-combinado \
+		personasABB1-crear-esVacio-insertar-liberar \
+		personasABB2-crear-liberar-insertar-imprimir-cantidad \
+		personasABB3-maxId-remover \
+		personasABB4-esta-obtener \
+		personasABB5-altura-esPerfecto \
+		personasABB6-mayoresEdad \
+		personasABB7-aPersonasLDE \
+		personasABB8-combinado
 
 IDS_PRIVADOS = 
 
@@ -122,7 +135,7 @@ $(SALIDADIR)/%.sal:$(INDIR)/%.in
 	fi
 
 # test de tiempo
-$(SALIDADIR)/t-%.sal:$(INDIR)/t-%.in
+$(SALIDADIR)/%-tiempo.sal:$(INDIR)/%-tiempo.in
 	-timeout 10 ./$(EJECUTABLE) < $< > $@ 2>&1
 
 %.diff:Makefile
@@ -141,11 +154,23 @@ $(SALIDADIR)%.diff: $(OUTDIR)%.out $(SALIDADIR)%.sal
 tS=$(CASOS:%=t-%)
 $(tS):$(EJECUTABLE)
 
+ttS=$(CASOS:%=tt-%)
+$(ttS):$(EJECUTABLE)
+
 # corre el ejecutable con el .in (el primer prerequisito $<) y lo guarda en un archivo temporal
 # hace el diff entre el -out (el segundo prerequisito, echo $(word 2,$^)) y el archivo temporal
 # borra el archivo temporal
 t-%:$(INDIR)/%.in $(OUTDIR)/%.out
 	@timeout 4 valgrind -q --leak-check=full ./$(EJECUTABLE) < $< > $@tmp 2>&1;  \
+	diff `echo $(word 2,$^)` $@tmp ; \
+	if [ $$? -eq 0 ];                                         \
+	then                                                      \
+		echo ---- Bien ----;                              \
+	fi;                                                       \
+	rm -f $@tmp
+
+tt-%:$(INDIR)/%.in $(OUTDIR)/%.out
+	@timeout 10 ./$(EJECUTABLE) < $< > $@tmp 2>&1;  \
 	diff `echo $(word 2,$^)` $@tmp ; \
 	if [ $$? -eq 0 ];                                         \
 	then                                                      \
@@ -184,7 +209,8 @@ testing:all $(DIFFS)
 			RES=$${RES}0 ;                                          \
 		fi;                                                             \
 	done;                                                                  \
-	echo $${RES}
+	echo $${RES}                                                            \
+
 
 # inlcuye la clave de cada archivo en $(ARCHIVO_CLAVES)
 $(ARCHIVO_CLAVES):
@@ -283,3 +309,4 @@ test-%:
 	echo "Resumen módulo '$*': $$ok bien, $$fail mal, $$total total"; \
 	echo "$$RES";\
 	echo "$$PRUEBAS"
+
