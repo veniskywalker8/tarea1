@@ -246,6 +246,7 @@ LIB = tarea.a
 $(LIB):	$(ODIR)/utils.o $(ODIR)/$(PRINCIPAL).o
 	ar -qc $@ $^	
 
+
 #! Regla propia
 #? VARIABLES
 #* Colores ANSI

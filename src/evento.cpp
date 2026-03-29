@@ -70,3 +70,18 @@ void posponerTEvento(TEvento &evento, int dias) {
     aumentarTFecha(evento->fecha, dias);
     /****** Fin de parte Parte 4.5 *****/
 }
+
+/////////////////////////////////
+////// FIN CÓDIGO TAREA 1 //////
+/////////////////////////////////
+
+/*-----------------------------*/
+
+///////////////////////////
+////// FUNCION NUEVA //////
+///////////////////////////
+
+// Retorna una copia del evento
+TEvento copiarTEvento(TEvento evento) {
+    return NULL;
+}
