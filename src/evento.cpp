@@ -70,3 +70,7 @@ void posponerTEvento(TEvento &evento, int dias) {
     aumentarTFecha(evento->fecha, dias);
     /****** Fin de parte Parte 4.5 *****/
 }
+// Retorna una copia del evento
+TEvento copiarTEvento(TEvento evento) {
+    return NULL;
+}
