@@ -309,4 +309,3 @@ test-%:
 	echo "Resumen módulo '$*': $$ok bien, $$fail mal, $$total total"; \
 	echo "$$RES";\
 	echo "$$PRUEBAS"
-
