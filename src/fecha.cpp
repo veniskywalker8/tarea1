@@ -43,7 +43,3 @@ int compararTFechas(TFecha fecha1, TFecha fecha2) {
 TFecha copiarTFecha(TFecha fecha) {
     return NULL;
 }
-// Retorna una copia de la fecha
-TFecha copiarTFecha(TFecha fecha) {
-    return NULL;
-}.
