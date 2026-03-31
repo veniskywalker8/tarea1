@@ -80,7 +80,11 @@ TAgendaLS copiarAgendaLS(TAgendaLS agenda){
 
 
 bool estaEnAgendaLS(TAgendaLS agenda, int id) {
-    return false;
+    TAgendaLS p = agenda;
+    while(p != NULL && idTEvento(p->evento) != id){
+        p = p->sig;
+    }
+    return p != NULL;
 }
 
 TEvento obtenerDeAgendaLS(TAgendaLS agenda, int id) {
