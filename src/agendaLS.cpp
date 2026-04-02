@@ -136,5 +136,18 @@ bool hayEventosFechaLS(TAgendaLS agenda, TFecha fecha) {
 }
 
 void removerDeAgendaLS(TAgendaLS &agenda, int id) {
-    
+    TAgendaLS p = agenda;
+    TAgendaLS q;
+    if(idTEvento(p->evento) == id){
+        q = p;
+        agenda=p->sig;
+    }else{
+        while (idTEvento(p->sig->evento) != id){
+            p=p->sig;
+        }
+        q = p->sig;
+        p->sig = p->sig->sig;
+    }
+    liberarTEvento(q->evento);
+    delete q;
 }
