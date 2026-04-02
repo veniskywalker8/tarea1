@@ -88,11 +88,30 @@ bool estaEnAgendaLS(TAgendaLS agenda, int id) {
 }
 
 TEvento obtenerDeAgendaLS(TAgendaLS agenda, int id) {
-    return NULL;
+    TAgendaLS p = agenda;
+    while (idTEvento(p->evento) != id){
+        p=p->sig;
+    }
+    return p->evento;
 }
 
 void posponerEnAgendaLS(TAgendaLS &agenda, int id, nat n) {
-    
+    TAgendaLS p = agenda;
+    TAgendaLS q;
+    if(idTEvento(p->evento) == id){
+        q = p;
+        agenda=p->sig;
+    }else{
+        while (idTEvento(p->sig->evento) != id){
+            p=p->sig;
+        }
+        q = p->sig;
+        p->sig = p->sig->sig;
+        
+    }
+    posponerTEvento(q->evento, n);
+    agregarEnAgendaLS(agenda, q->evento);
+    delete q;
 }
 
 void imprimirEventosFechaLS(TAgendaLS agenda, TFecha fecha) {
