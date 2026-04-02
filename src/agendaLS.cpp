@@ -115,11 +115,24 @@ void posponerEnAgendaLS(TAgendaLS &agenda, int id, nat n) {
 }
 
 void imprimirEventosFechaLS(TAgendaLS agenda, TFecha fecha) {
-    
+    TAgendaLS p = agenda;
+    if (hayEventosFechaLS(agenda, fecha)){
+        while(p!=NULL){
+            if (compararTFechas(fechaTEvento(p->evento), fecha) == 0){
+                imprimirTEvento(p->evento);
+            }
+            p = p->sig;
+        }
+    }
+    p=NULL;
 }
 
 bool hayEventosFechaLS(TAgendaLS agenda, TFecha fecha) {
-    return false;
+    TAgendaLS p = agenda;
+    while(p!=NULL && (compararTFechas(fechaTEvento(p->evento), fecha) != 0)){
+            p=p->sig;
+    }
+    return p!=NULL;;
 }
 
 void removerDeAgendaLS(TAgendaLS &agenda, int id) {
