@@ -36,19 +36,19 @@ void imprimirTPersona(TPersona persona) {
 }
 
 nat idTPersona(TPersona persona) {
-    return 0;
+    return persona->id;
 }
 
 nat edadTPersona(TPersona persona) {
-    return 0;
+    return persona->edad;
 }
 
 char* nombreTPersona(TPersona persona) {
-    return NULL;
+    return persona->nombre;
 }
 
 TAgendaLS agendaTPersona(TPersona persona) {
-    return NULL;
+    return persona->agenda;
 }
 
 void agregarEventoATPersona(TPersona &persona, TEvento evento) {
