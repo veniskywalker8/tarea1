@@ -64,13 +64,20 @@ void removerEventoDeTPersona(TPersona &persona, int id) {
 }
 
 bool estaEnAgendaDeTPersona(TPersona persona, int id) {
-    return false;
+    return estaEnAgendaLS(persona->agenda, id);
 }
 
 TEvento obtenerDeAgendaDeTPersona(TPersona persona, int id) {
-    return NULL;
+    return obtenerDeAgendaLS(persona->agenda, id);
 }
 
 TPersona copiarTPersona(TPersona persona) {
-    return NULL;
+    TPersona nuevo = new rep_persona;
+    nuevo->id = persona->id;
+    nuevo->edad = persona->edad;
+    for (int i=0; i<MAX_NOMBRE; i++){
+        nuevo->nombre[i]=persona->nombre[i];
+    }
+    nuevo->agenda = copiarAgendaLS(persona->agenda);
+    return nuevo;
 }
