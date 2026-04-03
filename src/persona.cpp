@@ -1,20 +1,38 @@
 #include "../include/persona.h"
 
 struct rep_persona {
-
+    nat id;
+    nat edad;
+    char nombre[MAX_NOMBRE];
+    TAgendaLS agenda;
 };
 
 TPersona crearTPersona(nat id, nat edad, const char nombre[MAX_NOMBRE], TAgendaLS agenda) {
-    return NULL;
+    TPersona nuevo = new rep_persona;
+    nuevo->id = id;
+    nuevo->edad = edad;
+    for (int i=0; i<MAX_NOMBRE; i++){
+        nuevo->nombre[i]=nombre[i];
+    } 
+    nuevo->agenda=copiarAgendaLS(agenda);
+    liberarAgendaLS(agenda);
+    return nuevo;
 }
 
 void liberarTPersona(TPersona &persona) {
-
+    liberarAgendaLS(persona->agenda);
+    delete persona;
+    persona = NULL;
 }
 
 //Imprime a la persona utilizando printf e imprimeAgendaLS
 void imprimirTPersona(TPersona persona) {
-
+    printf("Persona %d: %s, %d años\n", persona->id, persona->nombre, persona->edad);
+    /*for(int i=0; i<MAX_NOMBRE; i++){
+        printf("%c", persona->nombre[i]);
+    }
+    printf(", %d años", persona->edad);*/
+    imprimirAgendaLS(persona->agenda);
 }
 
 nat idTPersona(TPersona persona) {

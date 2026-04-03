@@ -61,6 +61,7 @@ void liberarAgendaLS(TAgendaLS &agenda) {
         delete q;
         q=NULL;
     }
+    agenda = NULL;
 }
 
 bool esVaciaAgendaLS(TAgendaLS agenda){
@@ -111,6 +112,7 @@ void posponerEnAgendaLS(TAgendaLS &agenda, int id, nat n) {
     }
     posponerTEvento(q->evento, n);
     agregarEnAgendaLS(agenda, q->evento);
+    q->evento = nullptr;
     delete q;
 }
 
