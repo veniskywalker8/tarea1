@@ -52,15 +52,15 @@ TAgendaLS agendaTPersona(TPersona persona) {
 }
 
 void agregarEventoATPersona(TPersona &persona, TEvento evento) {
-
+    agregarEnAgendaLS(persona->agenda, evento);
 }
 
 void posponerEventoEnTPersona(TPersona &persona, int id, nat n) {
-
+    posponerEnAgendaLS(persona->agenda, id, n);
 }
 
 void removerEventoDeTPersona(TPersona &persona, int id) {
-
+    removerDeAgendaLS(persona->agenda, id);
 }
 
 bool estaEnAgendaDeTPersona(TPersona persona, int id) {
