@@ -20,18 +20,17 @@ TPersona crearTPersona(nat id, nat edad, const char nombre[MAX_NOMBRE], TAgendaL
 }
 
 void liberarTPersona(TPersona &persona) {
+    if (persona == nullptr) return;
+    
     liberarAgendaLS(persona->agenda);
     delete persona;
-    persona = NULL;
+    persona = nullptr;
 }
 
 //Imprime a la persona utilizando printf e imprimeAgendaLS
 void imprimirTPersona(TPersona persona) {
     printf("Persona %d: %s, %d años\n", persona->id, persona->nombre, persona->edad);
-    /*for(int i=0; i<MAX_NOMBRE; i++){
-        printf("%c", persona->nombre[i]);
-    }
-    printf(", %d años", persona->edad);*/
+
     imprimirAgendaLS(persona->agenda);
 }
 
