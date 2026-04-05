@@ -29,6 +29,7 @@ void liberarTPersona(TPersona &persona) {
 
 //Imprime a la persona utilizando printf e imprimeAgendaLS
 void imprimirTPersona(TPersona persona) {
+    if (persona == nullptr) return;
     printf("Persona %d: %s, %d años\n", persona->id, persona->nombre, persona->edad);
 
     imprimirAgendaLS(persona->agenda);
