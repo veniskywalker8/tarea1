@@ -22,13 +22,12 @@ void insertarTPersonasLDE(TPersonasLDE &personas, TPersona persona, nat pos){
 }
 
 void liberarTPersonasLDE(TPersonasLDE &personasLDE){
-    while (personasLDE != nullptr) {
+    while (personasLDE) {
         TPersonasLDE actual = personasLDE;
         personasLDE = personasLDE->sig;
-        if (actual->nodo != nullptr) liberarTPersona(actual->nodo);
+        if (actual->nodo) liberarTPersona(actual->nodo);
         delete actual;
     }
-    personasLDE = nullptr;
 }
 
 void imprimirTPersonasLDE(TPersonasLDE personas){
@@ -48,7 +47,11 @@ void eliminarInicioTPersonasLDE(TPersonasLDE &personas){
 
     TPersonasLDE viejo = personas;
     TPersonasLDE nuevoInicio = personas->sig;
-
+    
+    // debuf("eliminarInicio",
+    //     "|Actual: %s%s%s\n|Siguiente: %s%s", 
+    //     ROJO,nombreTPersona(viejo->nodo), NC,
+    //     AMARILLO,nombreTPersona(nuevoInicio? nuevoInicio->nodo : nullptr));
     liberarTPersona(viejo->nodo);
     delete viejo;
 
@@ -61,11 +64,19 @@ void eliminarInicioTPersonasLDE(TPersonasLDE &personas){
 void eliminarFinalTPersonasLDE(TPersonasLDE &personas){
     if (personas == nullptr) return;
     TPersonasLDE it = personas;
-    while (it->sig != nullptr) {
-        it = it->sig;
-    }
-    if (it->nodo != nullptr) liberarTPersona(it->nodo);
-    if (it->ant != nullptr) it->ant->sig = nullptr;
+    for (;it->nodo && it->sig->nodo;it=it->sig);
+    // {
+    //     debuf("eliminarInicio: for",
+    //         "|Actual: %s%s%s\n|Siguiente: %s%s", 
+    //         ROJO,nombreTPersona(it->nodo), NC,
+    //         AMARILLO,nombreTPersona(it->sig? it->sig->nodo : nullptr));
+    // }
+    // debuf("eliminarInicio: forend",
+    //     "|Actual: %s%s%s\n|Siguiente: %s%s", 
+    //     ROJO,nombreTPersona(it->nodo), NC,
+    //     AMARILLO,nombreTPersona(it->sig? it->sig->nodo : nullptr));
+    if (it->nodo) liberarTPersona(it->nodo);
+    if (it->ant) it->ant->sig = it->sig;
     delete it;
 }
 
@@ -98,12 +109,8 @@ TPersonasLDE concatenarTPersonasLDE(TPersonasLDE personas1, TPersonasLDE persona
 
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact) {
     if (posact == pos) {
-        if (personas->nodo == nullptr){
-            personas->nodo = persona;
-        } else {
-            TPersonasLDE nuevo = auxEnlazar(persona, personas, personas->ant);
-            personas = nuevo;
-        }
+        TPersonasLDE nuevo = auxEnlazar(persona, personas, personas->ant);
+        personas = nuevo;
     }
     else if (personas->sig == nullptr) {
         auxEnlazar(persona, nullptr, personas);
