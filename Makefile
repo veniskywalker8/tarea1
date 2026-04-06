@@ -32,7 +32,7 @@ all: principal
 
 ARCHIVO_ENTREGA=EntregaTarea2.tar.gz
 
-ENTREGAR = fecha evento agendaLS persona personasLDE personasABB 
+ENTREGAR = fecha evento agendaLS persona personasLDE personasABB debug
 
 MODULOS = $(ENTREGAR) utils
 
