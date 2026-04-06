@@ -91,16 +91,6 @@ nat convertirFecha(TFecha fecha) {
     return fecha->anio * 10000 + fecha->mes * 100 + fecha->dia;
 }
 
-/////////////////////////////////
-////// FIN CÓDIGO TAREA 1 //////
-/////////////////////////////////
-
-bool esBisiesto(int anio) {
-    return (anio % 4 == 0 && anio % 100 != 0) || (anio % 400 == 0);
-}
-nat convertirFecha(TFecha fecha) {
-    return fecha->anio * 10000 + fecha->mes * 100 + fecha->dia;
-}
 /*-----------------------------*/
 
 ///////////////////////////

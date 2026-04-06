@@ -5,151 +5,138 @@ struct rep_agendaLS {
     TAgendaLS sig;
 };
 
+// Crear agenda vacía
 TAgendaLS crearAgendaLS() {
-    TAgendaLS nuevo = NULL;
-    return nuevo;
+    return nullptr;
 }
 
+// Insertar evento en orden por fecha
 void agregarEnAgendaLS(TAgendaLS &agenda, TEvento evento) {
-    TAgendaLS nuevo = new rep_agendaLS;
-    nuevo->evento=evento;
-    nuevo->sig = NULL;
-    if (agenda == NULL){
+    TAgendaLS nuevo = new rep_agendaLS{evento, nullptr};
+
+    // Caso: lista vacía o insertar al inicio
+    if (agenda == nullptr || compararTFechas(fechaTEvento(agenda->evento), fechaTEvento(evento)) != -1) {
+        nuevo->sig = agenda;
         agenda = nuevo;
-        nuevo = NULL;
-    }else{
-        TAgendaLS p = agenda;
-        if(compararTFechas(fechaTEvento(p->evento), fechaTEvento(evento)) != -1 ){
-            agenda = nuevo;
-            nuevo->sig = p;
-            p=NULL;
-        }else{        
-            while ((p->sig != NULL) && (compararTFechas(fechaTEvento(p->sig->evento), fechaTEvento(evento)) == -1)){
-                p=p->sig;
-            }
-            if (p->sig == NULL){
-                p->sig = nuevo;
-            }
-            else{
-                TAgendaLS q = p->sig;
-                p->sig = nuevo;
-                nuevo->sig = q;
-                p = NULL;
-                q = NULL;
-            }
-        }
+        return;
     }
-    
+
+    // Caso general: buscar posición
+    TAgendaLS actual = agenda;
+    while (actual->sig != nullptr &&
+           compararTFechas(fechaTEvento(actual->sig->evento), fechaTEvento(evento)) == -1) {
+        actual = actual->sig;
+    }
+    nuevo->sig = actual->sig;
+    actual->sig = nuevo;
 }
 
-
+// Imprimir todos los eventos
 void imprimirAgendaLS(TAgendaLS agenda) {
-    TAgendaLS p = agenda;
-    while (p!=NULL){
-        imprimirTEvento(p->evento);
-        p=p->sig;
+    for (TAgendaLS actual = agenda; actual != nullptr; actual = actual->sig) {
+        imprimirTEvento(actual->evento);
     }
 }
 
+// Liberar toda la agenda
 void liberarAgendaLS(TAgendaLS &agenda) {
-    TAgendaLS p = agenda;
-    TAgendaLS q;
-    while (p!=NULL){
-        liberarTEvento(p->evento);
-        q=p;
-        p=p->sig;
-        delete q;
-        q=NULL;
+    while (agenda != nullptr) {
+        TAgendaLS actual = agenda;
+        agenda = agenda->sig;
+        liberarTEvento(actual->evento);
+        delete actual;
     }
-    agenda = NULL;
 }
 
-bool esVaciaAgendaLS(TAgendaLS agenda){
-    return agenda == NULL;
+// Verificar si está vacía
+bool esVaciaAgendaLS(TAgendaLS agenda) {
+    return agenda == nullptr;
 }
 
-TAgendaLS copiarAgendaLS(TAgendaLS agenda){
+// Copiar agenda completa
+TAgendaLS copiarAgendaLS(TAgendaLS agenda) {
     TAgendaLS copia = crearAgendaLS();
-    TAgendaLS p = agenda;
-    while(p != NULL){
-        agregarEnAgendaLS(copia, copiarTEvento(p->evento));
-        p=p->sig;
+    for (TAgendaLS actual = agenda; actual != nullptr; actual = actual->sig) {
+        agregarEnAgendaLS(copia, copiarTEvento(actual->evento));
     }
-    p = NULL;
     return copia;
 }
 
-
+// Verificar si un evento está en la agenda
 bool estaEnAgendaLS(TAgendaLS agenda, int id) {
-    TAgendaLS p = agenda;
-    while(p != NULL && idTEvento(p->evento) != id){
-        p = p->sig;
+    for (TAgendaLS actual = agenda; actual != nullptr; actual = actual->sig) {
+        if (idTEvento(actual->evento) == id) return true;
     }
-    return p != NULL;
+    return false;
 }
 
+// Obtener un evento por id (precondición: existe)
 TEvento obtenerDeAgendaLS(TAgendaLS agenda, int id) {
-    TAgendaLS p = agenda;
-    while (idTEvento(p->evento) != id){
-        p=p->sig;
+    while (agenda != nullptr && idTEvento(agenda->evento) != id) {
+        agenda = agenda->sig;
     }
-    return p->evento;
+    return agenda->evento;
 }
 
+// Posponer un evento y reinsertarlo
 void posponerEnAgendaLS(TAgendaLS &agenda, int id, nat n) {
-    TAgendaLS p = agenda;
-    TAgendaLS q;
-    if(idTEvento(p->evento) == id){
-        q = p;
-        agenda=p->sig;
-    }else{
-        while (idTEvento(p->sig->evento) != id){
-            p=p->sig;
+    if (agenda == nullptr) return;
+
+    TAgendaLS actual = agenda;
+    TAgendaLS extraido = nullptr;
+
+    // Caso: el primero es el que buscamos
+    if (idTEvento(actual->evento) == id) {
+        extraido = actual;
+        agenda = actual->sig;
+    } else {
+        while (actual->sig != nullptr && idTEvento(actual->sig->evento) != id) {
+            actual = actual->sig;
         }
-        q = p->sig;
-        p->sig = p->sig->sig;
-        
+        extraido = actual->sig;
+        actual->sig = extraido->sig;
     }
-    posponerTEvento(q->evento, n);
-    agregarEnAgendaLS(agenda, q->evento);
-    q->evento = nullptr;
-    delete q;
+
+    posponerTEvento(extraido->evento, n);
+    agregarEnAgendaLS(agenda, extraido->evento);
+    delete extraido;
 }
 
+// Imprimir eventos de una fecha
 void imprimirEventosFechaLS(TAgendaLS agenda, TFecha fecha) {
-    TAgendaLS p = agenda;
-    if (hayEventosFechaLS(agenda, fecha)){
-        while(p!=NULL){
-            if (compararTFechas(fechaTEvento(p->evento), fecha) == 0){
-                imprimirTEvento(p->evento);
-            }
-            p = p->sig;
+    for (TAgendaLS actual = agenda; actual != nullptr; actual = actual->sig) {
+        if (compararTFechas(fechaTEvento(actual->evento), fecha) == 0) {
+            imprimirTEvento(actual->evento);
         }
     }
-    p=NULL;
 }
 
+// Verificar si hay eventos en una fecha
 bool hayEventosFechaLS(TAgendaLS agenda, TFecha fecha) {
-    TAgendaLS p = agenda;
-    while(p!=NULL && (compararTFechas(fechaTEvento(p->evento), fecha) != 0)){
-            p=p->sig;
+    for (TAgendaLS actual = agenda; actual != nullptr; actual = actual->sig) {
+        if (compararTFechas(fechaTEvento(actual->evento), fecha) == 0) return true;
     }
-    return p!=NULL;;
+    return false;
 }
 
+// Remover un evento por id
 void removerDeAgendaLS(TAgendaLS &agenda, int id) {
-    TAgendaLS p = agenda;
-    TAgendaLS q;
-    if(idTEvento(p->evento) == id){
-        q = p;
-        agenda=p->sig;
-    }else{
-        while (idTEvento(p->sig->evento) != id){
-            p=p->sig;
+    if (agenda == nullptr) return;
+
+    TAgendaLS actual = agenda;
+    TAgendaLS extraido = nullptr;
+
+    if (idTEvento(actual->evento) == id) {
+        extraido = actual;
+        agenda = actual->sig;
+    } else {
+        while (actual->sig != nullptr && idTEvento(actual->sig->evento) != id) {
+            actual = actual->sig;
         }
-        q = p->sig;
-        p->sig = p->sig->sig;
+        extraido = actual->sig;
+        actual->sig = extraido->sig;
     }
-    liberarTEvento(q->evento);
-    delete q;
+
+    liberarTEvento(extraido->evento);
+    delete extraido;
 }
