@@ -42,6 +42,6 @@ const char* estadoPuntero(T* ptr) {
     }
 }
 
-void debuf(const char* funcion,const char* fmt, ...);
+void debuf(const char* fmt, ...);
 
 #endif
