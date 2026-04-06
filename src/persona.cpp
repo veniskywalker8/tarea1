@@ -44,7 +44,7 @@ nat edadTPersona(TPersona persona) {
 }
 
 char* nombreTPersona(TPersona persona) {
-    if (persona == nullptr) {
+    if (!persona) {
         static char retorno[] = "salgo"; // buffer modificable
         return retorno;
     }
