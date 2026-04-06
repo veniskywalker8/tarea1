@@ -106,23 +106,10 @@ void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact) 
     //     ,MAGENTA, estadoPuntero(personas->nodo), NC
     //     ,VERDE, estadoPuntero(personas->sig)
     // );
-    if (posact == pos) {
+    if (posact == pos or !personas->nodo) {
         TPersonasLDE nuevo = auxEnlazar(persona, personas, personas->ant);
         personas = nuevo;
         // debuf("\n%sPOS %sen %s%d/%d\n%s%s\n%sPRS: %s \n%sTIP:%s %s%s=%s%s\n%sSIG:%s %s"
-        //     ,MAGENTA,NC, AMARILLO,posact, pos
-        //     ,ROJO, nombreTPersona(nuevo->nodo), NC
-        //     ,nombreTPersona(personas->ant?personas->ant->nodo:nullptr), NC
-        //     ,AMARILLO, mostrarTipo(personas->ant), NC
-        //     ,MAGENTA, estadoPuntero(personas->ant), NC
-        //     ,VERDE, estadoPuntero(personas->ant)
-        // );
-    }
-    else if (!personas->nodo) {
-        TPersonasLDE nuevo = auxEnlazar(persona, personas, personas->ant);
-        personas = nuevo;
-
-        // debuf("\n%sFIN %sen %s%d/%d\n%s%s\n%sPRS: %s \n%sTIP:%s %s%s=%s%s\n%sSIG:%s %s"
         //     ,MAGENTA,NC, AMARILLO,posact, pos
         //     ,ROJO, nombreTPersona(nuevo->nodo), NC
         //     ,nombreTPersona(personas->ant?personas->ant->nodo:nullptr), NC
