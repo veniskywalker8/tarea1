@@ -4,6 +4,7 @@
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact);
 TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
+void auxEnlazarABC(TPersonasLDE &A, TPersonasLDE &B, TPersonasLDE &C);
 
 struct rep_personasLDE {
     TPersona nodo;
@@ -121,7 +122,16 @@ TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
 
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
     TPersonasLDE nuevo = auxCrear(nodo, sig, ant);
-    if (sig != nullptr) sig->ant = nuevo;
-    if (ant != nullptr) ant->sig = nuevo;
+    auxEnlazarABC(ant, nuevo, sig);
     return nuevo;
+}
+
+void auxEnlazarABC(TPersonasLDE &A, TPersonasLDE &B, TPersonasLDE &C) {
+    //- Enlazar B con sus vecinos
+    B->ant = A;
+    B->sig = C;
+    //- Enlazar A con B (si A existe)
+    if (A != nullptr) A->sig = B;
+    //- Enlazar C con B (si C existe)
+    if (C != nullptr) C->ant = B;
 }
