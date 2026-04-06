@@ -4,7 +4,6 @@
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact);
 TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
-void auxEnlazarABC(TPersonasLDE &A, TPersonasLDE &B, TPersonasLDE &C);
 
 struct rep_personasLDE {
     TPersona nodo;
@@ -19,7 +18,9 @@ TPersonasLDE crearTPersonasLDE(){
 void insertarTPersonasLDE(TPersonasLDE &personas, TPersona persona, nat pos){
     if (pos < 1) return;
     nat posact = 1;
+    // TPersonasLDE aux = personas;
     auxInsertar(personas, persona, pos, posact);
+    // personas = aux;
 }
 
 void liberarTPersonasLDE(TPersonasLDE &personasLDE){
@@ -97,12 +98,38 @@ TPersonasLDE concatenarTPersonasLDE(TPersonasLDE personas1, TPersonasLDE persona
 //+ AUXILIARES
 
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact) {
+    // debuf("\n%sauxInsertar %sen %s%d/%d\n%s%s\n%sPRS: %s \n%sTIP:%s %s%s=%s%s\n%sSIG:%s %s"
+    //     ,AZUL,NC, AMARILLO,posact, pos
+    //     ,ROJO, nombreTPersona(persona), NC
+    //     ,nombreTPersona(personas->nodo?personas->nodo:nullptr), NC
+    //     ,AMARILLO, mostrarTipo(personas->nodo), NC
+    //     ,MAGENTA, estadoPuntero(personas->nodo), NC
+    //     ,VERDE, estadoPuntero(personas->sig)
+    // );
     if (posact == pos) {
         TPersonasLDE nuevo = auxEnlazar(persona, personas, personas->ant);
         personas = nuevo;
+        // debuf("\n%sPOS %sen %s%d/%d\n%s%s\n%sPRS: %s \n%sTIP:%s %s%s=%s%s\n%sSIG:%s %s"
+        //     ,MAGENTA,NC, AMARILLO,posact, pos
+        //     ,ROJO, nombreTPersona(nuevo->nodo), NC
+        //     ,nombreTPersona(personas->ant?personas->ant->nodo:nullptr), NC
+        //     ,AMARILLO, mostrarTipo(personas->ant), NC
+        //     ,MAGENTA, estadoPuntero(personas->ant), NC
+        //     ,VERDE, estadoPuntero(personas->ant)
+        // );
     }
-    else if (personas->sig == nullptr) {
-        auxEnlazar(persona, nullptr, personas);
+    else if (!personas->nodo) {
+        TPersonasLDE nuevo = auxEnlazar(persona, personas, personas->ant);
+        personas = nuevo;
+
+        // debuf("\n%sFIN %sen %s%d/%d\n%s%s\n%sPRS: %s \n%sTIP:%s %s%s=%s%s\n%sSIG:%s %s"
+        //     ,MAGENTA,NC, AMARILLO,posact, pos
+        //     ,ROJO, nombreTPersona(nuevo->nodo), NC
+        //     ,nombreTPersona(personas->ant?personas->ant->nodo:nullptr), NC
+        //     ,AMARILLO, mostrarTipo(personas->ant), NC
+        //     ,MAGENTA, estadoPuntero(personas->ant), NC
+        //     ,VERDE, estadoPuntero(personas->ant)
+        // );
     }
     else {
         auxInsertar(personas->sig, persona, pos, posact + 1);
@@ -112,26 +139,17 @@ void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact) 
 TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
     TPersonasLDE nuevo = new rep_personasLDE;
     nuevo->nodo = nodo;
-    nuevo->sig = sig;
     nuevo->ant = ant;
-    // printf("Tipo de personas: %s\n", estadoPuntero(nodo));
-    // printf("Tipo de sig: %s\n", estadoPuntero(sig));
-    // printf("Tipo de ant: %s\n", estadoPuntero(ant));
+    nuevo->sig = sig;
     return nuevo;
 }
 
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
     TPersonasLDE nuevo = auxCrear(nodo, sig, ant);
-    auxEnlazarABC(ant, nuevo, sig);
+    //- Enlazar A con nuevo (si A existe)
+    if (ant != nullptr) ant->sig = nuevo;
+    //- Enlazar C con nuevo (si C existe)
+    if (sig != nullptr) sig->ant = nuevo;
     return nuevo;
 }
 
-void auxEnlazarABC(TPersonasLDE &A, TPersonasLDE &B, TPersonasLDE &C) {
-    //- Enlazar B con sus vecinos
-    B->ant = A;
-    B->sig = C;
-    //- Enlazar A con B (si A existe)
-    if (A != nullptr) A->sig = B;
-    //- Enlazar C con B (si C existe)
-    if (C != nullptr) C->ant = B;
-}
