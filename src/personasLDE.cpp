@@ -33,6 +33,7 @@ void liberarTPersonasLDE(TPersonasLDE &personasLDE){
 void imprimirTPersonasLDE(TPersonasLDE personas){
     if (personas == nullptr) return;
     if (personas->nodo != nullptr) imprimirTPersona(personas->nodo);
+
     imprimirTPersonasLDE(personas->sig);
 }
 
@@ -48,10 +49,6 @@ void eliminarInicioTPersonasLDE(TPersonasLDE &personas){
     TPersonasLDE viejo = personas;
     TPersonasLDE nuevoInicio = personas->sig;
     
-    // debuf("eliminarInicio",
-    //     "|Actual: %s%s%s\n|Siguiente: %s%s", 
-    //     ROJO,nombreTPersona(viejo->nodo), NC,
-    //     AMARILLO,nombreTPersona(nuevoInicio? nuevoInicio->nodo : nullptr));
     liberarTPersona(viejo->nodo);
     delete viejo;
 
@@ -65,16 +62,7 @@ void eliminarFinalTPersonasLDE(TPersonasLDE &personas){
     if (personas == nullptr) return;
     TPersonasLDE it = personas;
     for (;it->nodo && it->sig->nodo;it=it->sig);
-    // {
-    //     debuf("eliminarInicio: for",
-    //         "|Actual: %s%s%s\n|Siguiente: %s%s", 
-    //         ROJO,nombreTPersona(it->nodo), NC,
-    //         AMARILLO,nombreTPersona(it->sig? it->sig->nodo : nullptr));
-    // }
-    // debuf("eliminarInicio: forend",
-    //     "|Actual: %s%s%s\n|Siguiente: %s%s", 
-    //     ROJO,nombreTPersona(it->nodo), NC,
-    //     AMARILLO,nombreTPersona(it->sig? it->sig->nodo : nullptr));
+  
     if (it->nodo) liberarTPersona(it->nodo);
     if (it->ant) it->ant->sig = it->sig;
     delete it;
@@ -125,6 +113,9 @@ TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
     nuevo->nodo = nodo;
     nuevo->sig = sig;
     nuevo->ant = ant;
+    // printf("Tipo de personas: %s\n", estadoPuntero(nodo));
+    // printf("Tipo de sig: %s\n", estadoPuntero(sig));
+    // printf("Tipo de ant: %s\n", estadoPuntero(ant));
     return nuevo;
 }
 
