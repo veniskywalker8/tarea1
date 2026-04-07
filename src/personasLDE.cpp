@@ -4,6 +4,7 @@
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact);
 TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
+void auxListar(TPersonasLDE personas);
 
 struct rep_personasLDE {
     TPersona nodo;
@@ -61,13 +62,47 @@ void eliminarInicioTPersonasLDE(TPersonasLDE &personas){
 }
 
 void eliminarFinalTPersonasLDE(TPersonasLDE &personas){
-    if (personas == nullptr) return;
+    if (personas == nullptr) {
+        // debuf("\nLista inexistente: []");
+        return;
+    }
+
+    if (personas->nodo == nullptr) {
+        // debuf("\nLista vacía: [(null, null, null)]");
+        return;
+    }
+
+    // Avanzar hasta el último nodo con datos (antes del centinela)
     TPersonasLDE it = personas;
-    for (;it->nodo && it->sig->nodo;it=it->sig);
-  
-    if (it->nodo) liberarTPersona(it->nodo);
-    if (it->ant) it->ant->sig = it->sig;
+    while (it->sig && it->sig->nodo) {
+        it = it->sig;
+    }
+
+    // debuf("\nEstado antes de eliminar:");
+    // auxListar(personas);
+
+    // debuf("\nLiberando persona: %s", nombreTPersona(it->nodo));
+    liberarTPersona(it->nodo);
+
+    if (it->ant) {
+        it->ant->sig = it->sig; // enlaza con el centinela
+        it->sig->ant = it->ant; // actualizar también el ant del centinela
+    } else {
+        // era el único nodo con datos, ahora la cabeza es el centinela
+        personas = it->sig;
+        if (personas) personas->ant = nullptr;
+    }
+
     delete it;
+
+    // // debuf("\nEstado después de eliminar:");
+    // if (personas == nullptr) {
+    //     // debuf("[]");
+    // } else if (personas->nodo == nullptr) {
+    //     // debuf("[(null, null, null)]");
+    // } else {
+    //     // auxListar(personas);
+    // }
 }
 
 bool estaEnTPersonasLDE(TPersonasLDE personas, nat id){
@@ -109,13 +144,18 @@ void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact) 
     if (posact == pos or !personas->nodo) {
         TPersonasLDE nuevo = auxEnlazar(persona, personas, personas->ant);
         personas = nuevo;
-        // debuf("\n%sPOS %sen %s%d/%d\n%s%s\n%sPRS: %s \n%sTIP:%s %s%s=%s%s\n%sSIG:%s %s"
-        //     ,MAGENTA,NC, AMARILLO,posact, pos
-        //     ,ROJO, nombreTPersona(nuevo->nodo), NC
-        //     ,nombreTPersona(personas->ant?personas->ant->nodo:nullptr), NC
-        //     ,AMARILLO, mostrarTipo(personas->ant), NC
-        //     ,MAGENTA, estadoPuntero(personas->ant), NC
-        //     ,VERDE, estadoPuntero(personas->ant)
+        // debuf("\n%sPOS:%s %d/%d"
+        //     "\n%sPERSONA:%s %s"
+        //     "\n%sLISTA nodo:%s %s"
+        //     "\n%sNUEVO nodo:%s %s"
+        //     "\n%sNUEVO sig:%s %s"
+        //     "\n%sNUEVO ant:%s %s",
+        //     MAGENTA, NC, posact, pos,
+        //     ROJO, NC, nombreTPersona(persona),
+        //     AMARILLO, NC, nombreTPersona(personas->nodo),
+        //     AZUL, NC, nombreTPersona(nuevo->nodo),
+        //     CIAN, NC, estadoPuntero(nuevo->sig ? nuevo->sig->nodo : nullptr),
+        //     VERDE, NC, estadoPuntero(nuevo->ant ? nuevo->ant->nodo : nullptr)
         // );
     }
     else {
@@ -138,5 +178,17 @@ TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
     //- Enlazar C con nuevo (si C existe)
     if (sig != nullptr) sig->ant = nuevo;
     return nuevo;
+}
+
+void auxEnlazrABC(TPersonasLDE &A, TPersonasLDE &B, TPersonasLDE &C);
+
+void auxListar(TPersonasLDE personas){
+    for (TPersonasLDE aux = personas; aux != nullptr; aux = aux->sig) {
+        debuf("%s(%s, %s, %s)", CIAN,
+            nombreTPersona(aux->nodo),
+            nombreTPersona(aux->sig ? aux->sig->nodo : nullptr),
+            nombreTPersona(aux->ant ? aux->ant->nodo : nullptr)
+        );
+    }
 }
 
