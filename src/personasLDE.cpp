@@ -19,9 +19,7 @@ TPersonasLDE crearTPersonasLDE(){
 void insertarTPersonasLDE(TPersonasLDE &personas, TPersona persona, nat pos){
     if (pos < 1) return;
     nat posact = 1;
-    // TPersonasLDE aux = personas;
     auxInsertar(personas, persona, pos, posact);
-    // personas = aux;
 }
 
 void liberarTPersonasLDE(TPersonasLDE &personasLDE){
@@ -78,10 +76,6 @@ void eliminarFinalTPersonasLDE(TPersonasLDE &personas){
         it = it->sig;
     }
 
-    // debuf("\nEstado antes de eliminar:");
-    // auxListar(personas);
-
-    // debuf("\nLiberando persona: %s", nombreTPersona(it->nodo));
     liberarTPersona(it->nodo);
 
     if (it->ant) {
@@ -95,14 +89,6 @@ void eliminarFinalTPersonasLDE(TPersonasLDE &personas){
 
     delete it;
 
-    // // debuf("\nEstado después de eliminar:");
-    // if (personas == nullptr) {
-    //     // debuf("[]");
-    // } else if (personas->nodo == nullptr) {
-    //     // debuf("[(null, null, null)]");
-    // } else {
-    //     // auxListar(personas);
-    // }
 }
 
 bool estaEnTPersonasLDE(TPersonasLDE personas, nat id){
@@ -133,30 +119,9 @@ TPersonasLDE concatenarTPersonasLDE(TPersonasLDE personas1, TPersonasLDE persona
 //+ AUXILIARES
 
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact) {
-    // debuf("\n%sauxInsertar %sen %s%d/%d\n%s%s\n%sPRS: %s \n%sTIP:%s %s%s=%s%s\n%sSIG:%s %s"
-    //     ,AZUL,NC, AMARILLO,posact, pos
-    //     ,ROJO, nombreTPersona(persona), NC
-    //     ,nombreTPersona(personas->nodo?personas->nodo:nullptr), NC
-    //     ,AMARILLO, mostrarTipo(personas->nodo), NC
-    //     ,MAGENTA, estadoPuntero(personas->nodo), NC
-    //     ,VERDE, estadoPuntero(personas->sig)
-    // );
     if (posact == pos or !personas->nodo) {
         TPersonasLDE nuevo = auxEnlazar(persona, personas, personas->ant);
         personas = nuevo;
-        // debuf("\n%sPOS:%s %d/%d"
-        //     "\n%sPERSONA:%s %s"
-        //     "\n%sLISTA nodo:%s %s"
-        //     "\n%sNUEVO nodo:%s %s"
-        //     "\n%sNUEVO sig:%s %s"
-        //     "\n%sNUEVO ant:%s %s",
-        //     MAGENTA, NC, posact, pos,
-        //     ROJO, NC, nombreTPersona(persona),
-        //     AMARILLO, NC, nombreTPersona(personas->nodo),
-        //     AZUL, NC, nombreTPersona(nuevo->nodo),
-        //     CIAN, NC, estadoPuntero(nuevo->sig ? nuevo->sig->nodo : nullptr),
-        //     VERDE, NC, estadoPuntero(nuevo->ant ? nuevo->ant->nodo : nullptr)
-        // );
     }
     else {
         auxInsertar(personas->sig, persona, pos, posact + 1);
