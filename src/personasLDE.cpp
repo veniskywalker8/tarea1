@@ -26,26 +26,26 @@ void liberarTPersonasLDE(TPersonasLDE &personasLDE){
     while (personasLDE) {
         TPersonasLDE actual = personasLDE;
         personasLDE = personasLDE->sig;
-        if (actual->nodo) liberarTPersona(actual->nodo);
+        liberarTPersona(actual->nodo);
         delete actual;
     }
 }
 
 void imprimirTPersonasLDE(TPersonasLDE personas){
     if (personas == nullptr) return;
-    if (personas->nodo != nullptr) imprimirTPersona(personas->nodo);
+    if (personas->nodo) imprimirTPersona(personas->nodo);
 
     imprimirTPersonasLDE(personas->sig);
 }
 
 nat cantidadTPersonasLDE(TPersonasLDE personas) {
     if (personas == nullptr) return 0;
-    return (personas->nodo != nullptr ? 1 : 0) + cantidadTPersonasLDE(personas->sig);
+    return (personas->nodo ? 1 : 0) + cantidadTPersonasLDE(personas->sig);
 }
 
 void eliminarInicioTPersonasLDE(TPersonasLDE &personas){
-    if (personas == nullptr) return;
-    if (personas->nodo == nullptr) return;
+    if (!personas) return;
+    if (!personas->nodo) return;
 
     TPersonasLDE viejo = personas;
     TPersonasLDE nuevoInicio = personas->sig;
@@ -54,27 +54,18 @@ void eliminarInicioTPersonasLDE(TPersonasLDE &personas){
     delete viejo;
 
     personas = nuevoInicio;
-    if (personas != nullptr) {
-        personas->ant = nullptr;
-    }
+    if (personas) personas->ant = nullptr;
+
 }
 
 void eliminarFinalTPersonasLDE(TPersonasLDE &personas){
-    if (personas == nullptr) {
-        // debuf("\nLista inexistente: []");
-        return;
-    }
+    if (!personas) return;
 
-    if (personas->nodo == nullptr) {
-        // debuf("\nLista vacía: [(null, null, null)]");
-        return;
-    }
+    if (!personas->nodo) return;
 
     // Avanzar hasta el último nodo con datos (antes del centinela)
     TPersonasLDE it = personas;
-    while (it->sig && it->sig->nodo) {
-        it = it->sig;
-    }
+    for (;it->sig && it->sig->nodo; it = it->sig);
 
     liberarTPersona(it->nodo);
 
@@ -92,15 +83,15 @@ void eliminarFinalTPersonasLDE(TPersonasLDE &personas){
 }
 
 bool estaEnTPersonasLDE(TPersonasLDE personas, nat id){
-    for (TPersonasLDE it = personas; it != nullptr; it = it->sig) {
-        if (it->nodo != nullptr && idTPersona(it->nodo) == id) return true;
+    for (; personas ; personas = personas->sig) {
+        if (personas->nodo && idTPersona(personas->nodo) == id) return true;
     }
     return false;
 }
 
 TPersona obtenerDeTPersonasLDE(TPersonasLDE personas, nat id){
-    for (TPersonasLDE it = personas; it != nullptr; it = it->sig) {
-        if (it->nodo != nullptr && idTPersona(it->nodo) == id) return it->nodo;
+    for (; personas; personas = personas->sig) {
+        if (personas->nodo && idTPersona(personas->nodo) == id) return personas->nodo;
     }
     return nullptr;
 }
@@ -108,11 +99,9 @@ TPersona obtenerDeTPersonasLDE(TPersonasLDE personas, nat id){
 TPersonasLDE concatenarTPersonasLDE(TPersonasLDE personas1, TPersonasLDE personas2){
     if (personas1 == nullptr) return personas2;
     TPersonasLDE it = personas1;
-    while (it->sig != nullptr) {
-        it = it->sig;
-    }
+    for (;it->sig; it = it->sig);
     it->sig = personas2;
-    if (personas2 != nullptr) personas2->ant = it;
+    if (personas2) personas2->ant = it;
     return personas1;
 }
 
