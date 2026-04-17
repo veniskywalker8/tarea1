@@ -3,6 +3,7 @@
 //+AUXILIAR
 void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo);
 static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino);
+static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista);
 
 //- Definición del nodo del ABB
 struct rep_personasAbb {
@@ -147,16 +148,8 @@ TPersonasABB mayoresTPersonasABB(TPersonasABB personasABB, nat edad) {
 
 //- Convertir el ABB a una lista doblemente enlazada (in-order)
 TPersonasLDE aTPersonasLDE(TPersonasABB personasABB) {
-    if (personasABB == nullptr) return crearTPersonasLDE();
-
-    TPersonasLDE lista = aTPersonasLDE(personasABB->izq);
-
-    nat pos = cantidadTPersonasLDE(lista) + 1;
-    insertarTPersonasLDE(lista, copiarTPersona(personasABB->persona), pos);
-
-    TPersonasLDE listaDer = aTPersonasLDE(personasABB->der);
-    lista = concatenarTPersonasLDE(lista, listaDer);
-
+    TPersonasLDE lista = crearTPersonasLDE();
+    construirListaInOrder(personasABB, lista);
     return lista;
 }
 
@@ -168,6 +161,7 @@ void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo) {
         personasABB = reemplazo;
     }
 }
+
 static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino) {
     if (arb == nullptr) return;
     recolectarMayores(arb->izq, edad, destino);
@@ -176,4 +170,15 @@ static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino)
         insertarTPersonasABB(destino, copia);
     }
     recolectarMayores(arb->der, edad, destino);
+}
+
+static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista) {
+    if (arb == nullptr) return;
+    construirListaInOrder(arb->izq, lista);
+    
+    TPersona copia = copiarTPersona(arb->persona);
+    nat pos = cantidadTPersonasLDE(lista) + 1;
+    insertarTPersonasLDE(lista, copia, pos);
+    
+    construirListaInOrder(arb->der, lista);
 }
