@@ -2,6 +2,7 @@
 
 //+AUXILIAR
 void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo);
+static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino);
 
 //- Definición del nodo del ABB
 struct rep_personasAbb {
@@ -139,20 +140,8 @@ bool esPerfectoTPersonasABB(TPersonasABB personasABB) {
 //- Crear un ABB con personas mayores a cierta edad
 TPersonasABB mayoresTPersonasABB(TPersonasABB personasABB, nat edad) {
     if (personasABB == nullptr) return nullptr;
-
-    TPersonasABB nuevo = nullptr;
-    if (edadTPersona(personasABB->persona) > edad) {
-        insertarTPersonasABB(nuevo, copiarTPersona(personasABB->persona));
-    }
-    TPersonasABB izq = mayoresTPersonasABB(personasABB->izq, edad);
-    TPersonasABB der = mayoresTPersonasABB(personasABB->der, edad);
-
-    if (izq != nullptr) {
-        insertarTPersonasABB(nuevo, copiarTPersona(izq->persona));
-    }
-    if (der != nullptr) {
-        insertarTPersonasABB(nuevo, copiarTPersona(der->persona));
-    }
+    TPersonasABB nuevo = crearTPersonasABB();
+    recolectarMayores(personasABB, edad, nuevo);
     return nuevo;
 }
 
@@ -178,4 +167,13 @@ void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo) {
         delete personasABB;
         personasABB = reemplazo;
     }
+}
+static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino) {
+    if (arb == nullptr) return;
+    recolectarMayores(arb->izq, edad, destino);
+    if (edadTPersona(arb->persona) > edad) {
+        TPersona copia = copiarTPersona(arb->persona);
+        insertarTPersonasABB(destino, copia);
+    }
+    recolectarMayores(arb->der, edad, destino);
 }
