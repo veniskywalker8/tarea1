@@ -1,5 +1,10 @@
 #include "../include/personasABB.h"
 
+//+AUXILIAR
+void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo);
+static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino);
+static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista);
+
 //- Definición del nodo del ABB
 struct rep_personasAbb {
     TPersona persona;              // dato principal (persona)
@@ -9,22 +14,21 @@ struct rep_personasAbb {
 
 //- Crear un ABB vacío
 TPersonasABB crearTPersonasABB() {
-    return NULL;
+    return nullptr;
 }
 
 //- Verificar si el ABB está vacío
 bool esVacioTPersonasABB(TPersonasABB personasABB) {
-    return personasABB == NULL;
+    return personasABB == nullptr;
 }
 
 //- Insertar una persona en el ABB según su id
 void insertarTPersonasABB(TPersonasABB &personasABB, TPersona p) {
-    if (personasABB == NULL) {
-        // Crear nuevo nodo
+    if (personasABB == nullptr) {
         personasABB = new rep_personasAbb;
         personasABB->persona = p;
-        personasABB->izq = NULL;
-        personasABB->der = NULL;
+        personasABB->izq = nullptr;
+        personasABB->der = nullptr;
     } else {
         nat idNodo = idTPersona(personasABB->persona);
         nat idNuevo = idTPersona(p);
@@ -33,7 +37,6 @@ void insertarTPersonasABB(TPersonasABB &personasABB, TPersona p) {
         } else if (idNuevo > idNodo) {
             insertarTPersonasABB(personasABB->der, p);
         } else {
-            // Si el id ya existe, se puede decidir reemplazar o ignorar
             liberarTPersona(personasABB->persona);
             personasABB->persona = p;
         }
@@ -42,75 +45,66 @@ void insertarTPersonasABB(TPersonasABB &personasABB, TPersona p) {
 
 //- Liberar todo el ABB
 void liberarTPersonasABB(TPersonasABB &personasABB) {
-    if (personasABB != NULL) {
-        liberarTPersonasABB(personasABB->izq);
-        liberarTPersonasABB(personasABB->der);
-        liberarTPersona(personasABB->persona);
-        delete personasABB;
-        personasABB = NULL;
-    }
+    if (personasABB == nullptr) return;
+    liberarTPersonasABB(personasABB->izq);
+    liberarTPersonasABB(personasABB->der);
+    auxLiberar(personasABB, nullptr);
 }
 
 //- Imprimir el ABB en orden (in-order traversal)
 void imprimirTPersonasABB(TPersonasABB personasABB) {
-    if (personasABB != NULL) {
-        imprimirTPersonasABB(personasABB->izq);
-        imprimirTPersona(personasABB->persona);
-        imprimirTPersonasABB(personasABB->der);
-    }
+    if (personasABB == nullptr) return;
+    imprimirTPersonasABB(personasABB->izq);
+    imprimirTPersona(personasABB->persona);
+    imprimirTPersonasABB(personasABB->der);
 }
 
 //- Contar la cantidad de nodos en el ABB
 nat cantidadTPersonasABB(TPersonasABB personasABB) {
-    if (personasABB == NULL) return 0;
+    if (personasABB == nullptr) return 0;
     return 1 + cantidadTPersonasABB(personasABB->izq) + cantidadTPersonasABB(personasABB->der);
 }
 
 //- Obtener la persona con el máximo id
 TPersona maxIdPersona(TPersonasABB personasABB) {
-    if (personasABB == NULL) return NULL;
-    if (personasABB->der == NULL) return personasABB->persona;
+    if (personasABB == nullptr) return nullptr;
+    if (personasABB->der == nullptr) return personasABB->persona;
     return maxIdPersona(personasABB->der);
 }
 
 //- Remover una persona por id
 void removerTPersonasABB(TPersonasABB &personasABB, nat id) {
-    if (personasABB == NULL) return;
+    if (personasABB == nullptr) return;
     nat idNodo = idTPersona(personasABB->persona);
     if (id < idNodo) {
         removerTPersonasABB(personasABB->izq, id);
     } else if (id > idNodo) {
         removerTPersonasABB(personasABB->der, id);
     } else {
-        // Caso encontrado
-        if (personasABB->izq == NULL && personasABB->der == NULL) {
-            liberarTPersona(personasABB->persona);
-            delete personasABB;
-            personasABB = NULL;
-        } else if (personasABB->izq == NULL) {
+        if (personasABB->izq == nullptr && personasABB->der == nullptr) {
+            auxLiberar(personasABB, nullptr);
+        } else if (personasABB->izq == nullptr) {
             TPersonasABB temp = personasABB->der;
-            liberarTPersona(personasABB->persona);
-            delete personasABB;
-            personasABB = temp;
-        } else if (personasABB->der == NULL) {
+            auxLiberar(personasABB, temp);
+        } else if (personasABB->der == nullptr) {
             TPersonasABB temp = personasABB->izq;
-            liberarTPersona(personasABB->persona);
-            delete personasABB;
-            personasABB = temp;
+            auxLiberar(personasABB, temp);
         } else {
-            // Reemplazar por el mínimo del subárbol derecho
-            TPersonasABB minDer = personasABB->der;
-            while (minDer->izq != NULL) minDer = minDer->izq;
+            // Usar el máximo del subárbol izquierdo (como exige el enunciado)
+            TPersonasABB maxIzq = personasABB->izq;
+            while (maxIzq->der != nullptr) {
+                maxIzq = maxIzq->der;
+            }
             liberarTPersona(personasABB->persona);
-            personasABB->persona = copiarTPersona(minDer->persona);
-            removerTPersonasABB(personasABB->der, idTPersona(minDer->persona));
+            personasABB->persona = copiarTPersona(maxIzq->persona);
+            removerTPersonasABB(personasABB->izq, idTPersona(maxIzq->persona));
         }
     }
 }
 
 //- Verificar si un id está en el ABB
 bool estaTPersonasABB(TPersonasABB personasABB, nat id) {
-    if (personasABB == NULL) return false;
+    if (personasABB == nullptr) return false;
     nat idNodo = idTPersona(personasABB->persona);
     if (id == idNodo) return true;
     if (id < idNodo) return estaTPersonasABB(personasABB->izq, id);
@@ -119,7 +113,7 @@ bool estaTPersonasABB(TPersonasABB personasABB, nat id) {
 
 //- Obtener la persona por id
 TPersona obtenerDeTPersonasABB(TPersonasABB personasABB, nat id) {
-    if (personasABB == NULL) return NULL;
+    if (personasABB == nullptr) return nullptr;
     nat idNodo = idTPersona(personasABB->persona);
     if (id == idNodo) return personasABB->persona;
     if (id < idNodo) return obtenerDeTPersonasABB(personasABB->izq, id);
@@ -128,15 +122,16 @@ TPersona obtenerDeTPersonasABB(TPersonasABB personasABB, nat id) {
 
 //- Calcular la altura del ABB
 nat alturaTPersonasABB(TPersonasABB personasABB) {
-    if (personasABB == NULL) return 0;
+    if (personasABB == nullptr) return 0;
     nat izqAlt = alturaTPersonasABB(personasABB->izq);
     nat derAlt = alturaTPersonasABB(personasABB->der);
-    return 1 + (izqAlt > derAlt ? izqAlt : derAlt);
+    nat altura = 1 + (izqAlt > derAlt ? izqAlt : derAlt);
+    return altura;
 }
 
 //- Verificar si el ABB es perfecto (todos los niveles completos)
 bool esPerfectoTPersonasABB(TPersonasABB personasABB) {
-    if (personasABB == NULL) return true;
+    if (personasABB == nullptr) return true;
     nat izqAlt = alturaTPersonasABB(personasABB->izq);
     nat derAlt = alturaTPersonasABB(personasABB->der);
     if (izqAlt != derAlt) return false;
@@ -145,42 +140,45 @@ bool esPerfectoTPersonasABB(TPersonasABB personasABB) {
 
 //- Crear un ABB con personas mayores a cierta edad
 TPersonasABB mayoresTPersonasABB(TPersonasABB personasABB, nat edad) {
-    if (personasABB == NULL) return NULL;
-
-    TPersonasABB nuevo = NULL;
-    if (edadTPersona(personasABB->persona) > edad) {
-        insertarTPersonasABB(nuevo, copiarTPersona(personasABB->persona));
-    }
-    TPersonasABB izq = mayoresTPersonasABB(personasABB->izq, edad);
-    TPersonasABB der = mayoresTPersonasABB(personasABB->der, edad);
-
-    // Insertar recursivamente los subárboles
-    if (izq != NULL) {
-        insertarTPersonasABB(nuevo, copiarTPersona(izq->persona));
-        // seguir recorriendo izq->izq y izq->der
-    }
-    if (der != NULL) {
-        insertarTPersonasABB(nuevo, copiarTPersona(der->persona));
-        // seguir recorriendo der->izq y der->der
-    }
+    if (personasABB == nullptr) return nullptr;
+    TPersonasABB nuevo = crearTPersonasABB();
+    recolectarMayores(personasABB, edad, nuevo);
     return nuevo;
 }
 
 //- Convertir el ABB a una lista doblemente enlazada (in-order)
 TPersonasLDE aTPersonasLDE(TPersonasABB personasABB) {
-    if (personasABB == NULL) return crearTPersonasLDE();
-
-    // Primero convertir el subárbol izquierdo
-    TPersonasLDE lista = aTPersonasLDE(personasABB->izq);
-
-    // Insertar la persona actual al final de la lista
-    nat pos = cantidadTPersonasLDE(lista) + 1;
-    insertarTPersonasLDE(lista, copiarTPersona(personasABB->persona), pos);
-
-    // Convertir el subárbol derecho y concatenar
-    TPersonasLDE listaDer = aTPersonasLDE(personasABB->der);
-    lista = concatenarTPersonasLDE(lista, listaDer);
-
+    TPersonasLDE lista = crearTPersonasLDE();
+    construirListaInOrder(personasABB, lista);
     return lista;
 }
 
+//+AUXILIAR
+void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo) {
+    if (personasABB != nullptr) {
+        liberarTPersona(personasABB->persona);
+        delete personasABB;
+        personasABB = reemplazo;
+    }
+}
+
+static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino) {
+    if (arb == nullptr) return;
+    recolectarMayores(arb->izq, edad, destino);
+    if (edadTPersona(arb->persona) > edad) {
+        TPersona copia = copiarTPersona(arb->persona);
+        insertarTPersonasABB(destino, copia);
+    }
+    recolectarMayores(arb->der, edad, destino);
+}
+
+static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista) {
+    if (arb == nullptr) return;
+    construirListaInOrder(arb->izq, lista);
+    
+    TPersona copia = copiarTPersona(arb->persona);
+    nat pos = cantidadTPersonasLDE(lista) + 1;
+    insertarTPersonasLDE(lista, copia, pos);
+    
+    construirListaInOrder(arb->der, lista);
+}
