@@ -1,69 +1,45 @@
 #include "../include/fecha.h"
+
+
 nat largoMes[13] = {
-    0,  /// índice 0 no se usa
-    31, /// 1 - Enero
-    28, /// 2 - Febrero (ajustar si es bisiesto)
-    31, /// 3 - Marzo
-    30, /// 4 - Abril
-    31, /// 5 - Mayo
-    30, /// 6 - Junio
-    31, /// 7 - Julio
-    31, /// 8 - Agosto
-    30, /// 9 - Septiembre
-    31, /// 10 - Octubre
-    30, /// 11 - Noviembre
-    31  /// 12 - Diciembre
+    0,  31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31  
 };
 
 //+AUXILIAR
 bool esBisiesto(int anio);
 nat convertirFecha(TFecha fecha);
 
+///////////////////////////////////
+////// PEGAR CÓDIGO TAREA 1 //////
+///////////////////////////////////
+
 struct rep_fecha {
-    /************ Parte 2.1 ************/
-    /*Escriba el código a continuación */
     nat dia, mes, anio;
-    /****** Fin de parte Parte 2.1 *****/
 };
 
 TFecha crearTFecha(nat dia, nat mes, nat anio) {
     TFecha nuevaFecha = NULL;
-    /************ Parte 3.1 ************/
-    /*Escriba el código a continuación */
 	nuevaFecha = new rep_fecha;
 	nuevaFecha->dia = dia;
 	nuevaFecha->mes = mes;
 	nuevaFecha->anio = anio;
-
-    /****** Fin de parte Parte 3.1 *****/
     return nuevaFecha;
 }
 
 void liberarTFecha(TFecha &fecha) {
     if (fecha == nullptr) return;
-    /************ Parte 3.3 ************/
-    /*Escriba el código a continuación */
     delete fecha;
     fecha = nullptr;
-    /****** Fin de parte Parte 3.3 *****/
 }
 
 void imprimirTFecha(TFecha fecha) {
     if (fecha == nullptr) return;
-    /************ Parte 3.5 ************/
-    /*Escriba el código a continuación */
 	printf("%d/%d/%d\n", fecha->dia, fecha->mes, fecha->anio);
-
-    /****** Fin de parte Parte 3.5 *****/
 }
+
 
 void aumentarTFecha(TFecha &fecha, nat dias) {
     if (fecha == nullptr) return;
-    /************ Parte 3.9 ************/
-    /*Escriba el código a continuación */
-    /*Recuerde que las funciones auxiliares
-      deben declararse antes de ser utilizadas*/
-    
     //- sumar días
     fecha->dia+=dias;
     //? - WHILE
@@ -87,14 +63,11 @@ void aumentarTFecha(TFecha &fecha, nat dias) {
         if (fecha->mes == 2 && esBisiesto(fecha->anio)) 
             corte++;
     }while(fecha->dia>corte);
-    //? END
-    /****** Fin de parte Parte 3.9 *****/
+
 }
 
 int compararTFechas(TFecha fecha1, TFecha fecha2) {
-    int res = 0;
-    /************ Parte 3.10 ************/
-    /*Escriba el código a continuación */
+     int res = 0;
     nat f1 = convertirFecha(fecha1);
     nat f2 = convertirFecha(fecha2);
 
@@ -107,7 +80,6 @@ int compararTFechas(TFecha fecha1, TFecha fecha2) {
     else {
         res = -1;
     }
-    /****** Fin de parte Parte 3.10 *****/
     return res;
 }
 
@@ -119,11 +91,7 @@ nat convertirFecha(TFecha fecha) {
     return fecha->anio * 10000 + fecha->mes * 100 + fecha->dia;
 }
 
-/////////////////////////////////
-////// FIN CÓDIGO TAREA 1 //////
-/////////////////////////////////
-
-//-----------------------------/
+/*-----------------------------*/
 
 ///////////////////////////
 ////// FUNCION NUEVA //////
@@ -131,7 +99,7 @@ nat convertirFecha(TFecha fecha) {
 
 // Retorna una copia de la fecha
 TFecha copiarTFecha(TFecha fecha) {
-    return NULL;
+    TFecha copia = crearTFecha(fecha->dia, fecha->mes, fecha->anio);
+    return copia;
 }
-
 
