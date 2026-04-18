@@ -1,0 +1,6 @@
+c19717d0c3a8e2c724cce3209f10f40bde6a68fd  src/fecha.cpp
+fe6049b17903bd71fa8934374702e1fa0d2b92c3  src/evento.cpp
+1391e10f7c56da9b325f04f785bfa26b2984d079  src/agendaLS.cpp
+5f1fc21b2c20fa9ef83de528b2adf88da83894c1  src/persona.cpp
+88f1c4ac471a79fdeb399efcfd34df9ca8cddc14  src/personasLDE.cpp
+51b404afd76546e74022a97a44698afd73fe447c  src/personasABB.cpp

@@ -8,7 +8,7 @@
 #define _UTILS_H
 
 #include <stdio.h>  // printf, scanf, sprintf
-#include "debug.h"
+// #include "debug.h"
 
 // tipo para los enteros no negativos
 typedef unsigned int nat;
