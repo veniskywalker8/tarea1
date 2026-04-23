@@ -1,0 +1,76 @@
+crearArbolPersonas
+
+crearAgenda
+crearPersona 1 1 Persona1
+crearFecha 1/1/1111
+crearEvento 1 Descripcion uno
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+imprimirArbolPersonas
+
+removerArbolPersonas 1
+
+estaEnArbolPersonas 1
+esVacioArobolPersonas
+
+crearAgenda
+crearPersona 5 55 Persona5
+crearFecha 5/5/55
+crearEvento 5 Descripcion5
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 10 10 Persona10
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 20 20 Persona20
+crearFecha 2/2/20
+crearEvento 20 Descripcion20
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+crearAgenda
+crearPersona 15 15 Persona15
+crearFecha 5/5/15
+crearEvento 15 Descripcion15
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+imprimirCantidadArbolPersonas
+alturaArbolPersonas
+estaEnArbolPersonas 15
+maxIdPersonaArbolPersonas
+
+aplanarArbolPersonas
+
+removerArbolPersonas 10
+estaEnArbolPersonas 10
+
+mayoresEdadArbolPersonas 10
+
+removerArbolPersonas 20
+
+esPerfectoArbolPersonas
+
+crearAgenda
+crearPersona 2 22 Persona2
+crearFecha 2/2/22
+crearEvento 2 Descripcion2
+agregarEventoPersona
+insertarPersonaArbolPersonas
+
+esPerfectoArbolPersonas
+
+liberarArbolPersonas
+
+Fin
+
+
+
+
+
+
+

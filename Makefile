@@ -115,7 +115,11 @@ IDS_PUBLICOS = fechaEvento1-combinado \
 		personasABB7-aPersonasLDE \
 		personasABB8-combinado
 
-IDS_PRIVADOS = 
+IDS_PRIVADOS = agenda9-combinado2 \
+				personasLDE8-combinado2 \
+				personasABB9-esPerfecto-tiempo \
+				personasABB10-mayoresEdad-tiempo \
+				personasABB11-combinado2 
 
 CASOS = $(IDS_PUBLICOS) $(IDS_PRIVADOS)
 
@@ -245,7 +249,6 @@ check-syntax:
 LIB = tarea.a
 $(LIB):	$(ODIR)/utils.o $(ODIR)/$(PRINCIPAL).o
 	ar -qc $@ $^	
-
 
 #! Regla propia
 #? VARIABLES

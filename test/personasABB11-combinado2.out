@@ -1,0 +1,35 @@
+1>2>3>4>5>6>7>8>Persona 1:  Persona1, 1 años
+Evento 1:  Descripcion uno
+Fecha: 1/1/1111
+9>10>La persona con id 1 NO está en el árbol de personas.
+11>El árbol de personas está vacío.
+12>13>14>15>16>17>18>19>20>21>22>23>24>25>26>27>28>29>30>31>32>33>La cantidad de personas en el árbol es: 4.
+34>La altura del árbol de personas es: 4.
+35>La persona con id 15 está en el árbol de personas.
+36>La persona con mayor id en el árbol es: 
+Persona 20:  Persona20, 20 años
+Evento 20:  Descripcion20
+Fecha: 2/2/20
+37>Persona 5:  Persona5, 55 años
+Evento 5:  Descripcion5
+Fecha: 5/5/55
+Persona 10:  Persona10, 10 años
+Persona 15:  Persona15, 15 años
+Evento 15:  Descripcion15
+Fecha: 5/5/15
+Persona 20:  Persona20, 20 años
+Evento 20:  Descripcion20
+Fecha: 2/2/20
+38>39>La persona con id 10 NO está en el árbol de personas.
+40>Persona 5:  Persona5, 55 años
+Evento 5:  Descripcion5
+Fecha: 5/5/55
+Persona 15:  Persona15, 15 años
+Evento 15:  Descripcion15
+Fecha: 5/5/15
+Persona 20:  Persona20, 20 años
+Evento 20:  Descripcion20
+Fecha: 2/2/20
+41>42>El árbol de personas NO es perfecto.
+43>44>45>46>47>48>49>El árbol de personas es perfecto.
+50>51>Fin.

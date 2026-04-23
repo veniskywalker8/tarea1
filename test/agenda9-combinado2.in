@@ -1,0 +1,39 @@
+crearAgenda
+
+estaEnAgenda 1
+
+crearFecha 19/4/2023
+crearEvento 1 Descripcion uno
+agregarEnAgenda
+
+estaEnAgenda 1
+
+crearFecha 15/4/2023
+crearEvento 2 Descripcion dos
+agregarEnAgenda
+
+crearFecha 21/4/2023
+crearEvento 3 Descripcion tres
+agregarEnAgenda
+
+crearFecha 31/12/2022
+crearEvento 4 Descripcion cuatro
+agregarEnAgenda
+
+imprimirAgenda
+
+posponerEnAgenda 4 109
+
+imprimirAgenda
+
+hayEventosFechaAgenda 31/12/2022
+
+imprimirEventosFechaAgenda 19/4/2023
+
+removerDeAgenda 1
+
+imprimirCopiaAgenda
+
+liberarAgenda
+
+Fin

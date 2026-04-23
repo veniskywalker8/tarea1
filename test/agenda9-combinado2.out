@@ -1,0 +1,32 @@
+1>2>El evento con id 1 NO está en la agenda.
+3>4>5>6>El evento con id 1 está en la agenda.
+7>8>9>10>11>12>13>14>15>16>Evento 4:  Descripcion cuatro
+Fecha: 31/12/2022
+Evento 2:  Descripcion dos
+Fecha: 15/4/2023
+Evento 1:  Descripcion uno
+Fecha: 19/4/2023
+Evento 3:  Descripcion tres
+Fecha: 21/4/2023
+17>La nueva fecha del evento 4 pospuesto 109 dias es: 19/4/2023
+18>Evento 2:  Descripcion dos
+Fecha: 15/4/2023
+Evento 4:  Descripcion cuatro
+Fecha: 19/4/2023
+Evento 1:  Descripcion uno
+Fecha: 19/4/2023
+Evento 3:  Descripcion tres
+Fecha: 21/4/2023
+19>No se encontraron eventos en la fecha determinada.
+20>Evento 4:  Descripcion cuatro
+Fecha: 19/4/2023
+Evento 1:  Descripcion uno
+Fecha: 19/4/2023
+21>El evento con id 1 se removió de la agenda.
+22>Evento 2:  Descripcion dos
+Fecha: 15/4/2023
+Evento 4:  Descripcion cuatro
+Fecha: 19/4/2023
+Evento 3:  Descripcion tres
+Fecha: 21/4/2023
+23>24>Fin.

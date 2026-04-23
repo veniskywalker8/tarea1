@@ -1,0 +1,49 @@
+crearListaPersonas
+
+crearAgenda
+crearPersona 1 18 Persona1
+crearFecha 18/4/2023
+crearEvento 1 Descripcion uno
+agregarEventoPersona
+insertarPersonaListaPersonas 1
+
+crearAgenda
+crearPersona 2 20 Persona 2
+insertarPersonaListaPersonas 1
+
+crearAgenda
+crearPersona 3 25 Persona3
+insertarPersonaListaPersonas 2
+
+crearAgenda
+crearPersona 4 30 Persona4
+crearFecha 19/4/2023
+crearEvento 1 Descripcion uno
+agregarEventoPersona
+crearFecha 20/4/2023
+crearEvento 2 Descripcion dos
+agregarEventoPersona
+insertarPersonaListaPersonas 4
+
+imprimirCantidadListaPersonas
+imprimirListaPersonas
+
+estaEnListaPersonas 5
+estaEnListaPersonas 2
+
+eliminarInicioListaPersonas
+
+estaEnListaPersonas 2
+
+imprimirListaPersonas
+
+concatenarConVacioListaPersonas
+
+imprimirListaPersonas
+
+imprimirPersonaListaPersonas 3
+imprimirPersonaListaPersonas 4
+
+liberarListaPersonas
+
+Fin

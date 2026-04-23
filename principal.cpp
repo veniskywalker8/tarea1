@@ -842,7 +842,7 @@ void main_esPerfectoArbolPersonasTiempo(TPersonasABB &arbolPersonas){
     else
         printf("El árbol de personas NO es perfecto.\n");
     float tiempo = ((float)tm) / CLOCKS_PER_SEC;
-    //printf("%f \n", tiempo);
+    // printf("%f \n", tiempo);
     if (tiempo > timeout)
         printf("ERROR, tiempo excedido; %.1f > %d \n", tiempo, timeout);
     else
@@ -878,7 +878,7 @@ void main_esPerfectoArbolPersonasTiempo2(TPersonasABB &arbolPersonas){
     else
         printf("El árbol de personas NO es perfecto.\n");
     float tiempo = ((float)tm) / CLOCKS_PER_SEC;
-    //printf("%f \n", tiempo);
+    // printf("%f \n", tiempo);
     if (tiempo > timeout)
         printf("ERROR, tiempo excedido; %.1f > %d \n", tiempo, timeout);
     else

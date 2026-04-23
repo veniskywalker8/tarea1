@@ -1,0 +1,13 @@
+crearArbolPersonas
+esPerfectoArbolPersonasTiempo 10000 2
+liberarArbolPersonas
+
+crearArbolPersonas
+esPerfectoArbolPersonasTiempo2 10000 2
+liberarArbolPersonas
+
+crearArbolPersonas
+esPerfectoArbolPersonasTiempo2 16383 2
+liberarArbolPersonas
+
+Fin
