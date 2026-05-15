@@ -144,19 +144,48 @@ TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
 ///////////////////////////////////////////////////////////////////////////
 
 void insertarInicioDeTPersonasLDE(TPersonasLDE &personas, TPersona persona){
-    
+    TPersonasLDE nuevo = new rep_personasLDE;
+    nuevo->nodo = persona;
+    if(personas != NULL){
+        personas->ant = nuevo;
+        nuevo->sig = personas;
+        nuevo->ant = NULL;
+        personas = nuevo; 
+    }
+    else{
+        personas = nuevo;
+        personas->sig = NULL;
+        personas->ant = NULL;
+    }
+
 }
 
-void insertarFinalDeTPersonasLDE(TPersonasLDE &personas, TPersona persona){    
-
+void insertarFinalDeTPersonasLDE(TPersonasLDE &personas, TPersona persona){  
+    TPersonasLDE nuevo = new rep_personasLDE;
+    nuevo->nodo = persona;  
+    if(personas != NULL){
+        TPersonasLDE p = personas;
+        while(p->sig != NULL && p->sig->nodo != NULL) p = p->sig;
+        nuevo->sig = p->sig; 
+        nuevo->ant = p;
+        if(p->sig != NULL) p->sig->ant = nuevo;
+        p->sig = nuevo;
+    }
+    else{
+        personas = nuevo;
+        personas->sig = NULL;
+        personas->ant = NULL;
+    }
 }
 
 TPersona obtenerInicioDeTPersonasLDE(TPersonasLDE personas){
-    return NULL;
+    return personas->nodo;
 }
 
 TPersona obtenerFinalDeTPersonasLDE(TPersonasLDE personas){
-    return NULL;
+    TPersonasLDE p = personas;
+    while(p->sig != NULL && p->sig->nodo != NULL) p = p->sig;
+    return p->nodo;
 }
 
 ///////////////////////////////////////////////////////////////////////////
