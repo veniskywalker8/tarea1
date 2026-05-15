@@ -1,61 +1,198 @@
 #include "../include/personasABB.h"
+//+ESTRUCTURA AXULIAR
+struct ResultadoAltura {
+    bool esPerfecto;
+    nat altura;
+};
+//+AUXILIAR
+void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo);
+static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino);
+static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista);
+ResultadoAltura verificarYAltura(TPersonasABB arb);
 
+//- Definición del nodo del ABB
 struct rep_personasAbb {
-
+    TPersona persona;              // dato principal (persona)
+    struct rep_personasAbb* izq;   // subárbol izquierdo
+    struct rep_personasAbb* der;   // subárbol derecho
 };
 
+//- Crear un ABB vacío
 TPersonasABB crearTPersonasABB() {
-    return NULL;
+    return nullptr;
 }
 
+//- Verificar si el ABB está vacío
 bool esVacioTPersonasABB(TPersonasABB personasABB) {
-    return false;
+    return personasABB == nullptr;
 }
 
+//- Insertar una persona en el ABB según su id
 void insertarTPersonasABB(TPersonasABB &personasABB, TPersona p) {
-
+    if (personasABB == nullptr) {
+        personasABB = new rep_personasAbb;
+        personasABB->persona = p;
+        personasABB->izq = nullptr;
+        personasABB->der = nullptr;
+    } else {
+        nat idNodo = idTPersona(personasABB->persona);
+        nat idNuevo = idTPersona(p);
+        if (idNuevo < idNodo) {
+            insertarTPersonasABB(personasABB->izq, p);
+        } else if (idNuevo > idNodo) {
+            insertarTPersonasABB(personasABB->der, p);
+        } else {
+            liberarTPersona(personasABB->persona);
+            personasABB->persona = p;
+        }
+    }
 }
 
+//- Liberar todo el ABB
 void liberarTPersonasABB(TPersonasABB &personasABB) {
-
+    if (personasABB == nullptr) return;
+    liberarTPersonasABB(personasABB->izq);
+    liberarTPersonasABB(personasABB->der);
+    auxLiberar(personasABB, nullptr);
 }
 
+//- Imprimir el ABB en orden (in-order traversal)
 void imprimirTPersonasABB(TPersonasABB personasABB) {
-   
+    if (personasABB == nullptr) return;
+    imprimirTPersonasABB(personasABB->izq);
+    imprimirTPersona(personasABB->persona);
+    imprimirTPersonasABB(personasABB->der);
 }
 
+//- Contar la cantidad de nodos en el ABB
 nat cantidadTPersonasABB(TPersonasABB personasABB) {
-    return 0;
+    if (personasABB == nullptr) return 0;
+    return 1 + cantidadTPersonasABB(personasABB->izq) + cantidadTPersonasABB(personasABB->der);
 }
 
+//- Obtener la persona con el máximo id
 TPersona maxIdPersona(TPersonasABB personasABB) {
-    return NULL;
+    if (personasABB == nullptr) return nullptr;
+    if (personasABB->der == nullptr) return personasABB->persona;
+    return maxIdPersona(personasABB->der);
 }
 
+//- Remover una persona por id
 void removerTPersonasABB(TPersonasABB &personasABB, nat id) {
-    
+    if (personasABB == nullptr) return;
+    nat idNodo = idTPersona(personasABB->persona);
+    if (id < idNodo) {
+        removerTPersonasABB(personasABB->izq, id);
+    } else if (id > idNodo) {
+        removerTPersonasABB(personasABB->der, id);
+    } else {
+        if (personasABB->izq == nullptr && personasABB->der == nullptr) {
+            auxLiberar(personasABB, nullptr);
+        } else if (personasABB->izq == nullptr) {
+            TPersonasABB temp = personasABB->der;
+            auxLiberar(personasABB, temp);
+        } else if (personasABB->der == nullptr) {
+            TPersonasABB temp = personasABB->izq;
+            auxLiberar(personasABB, temp);
+        } else {
+            // Usar el máximo del subárbol izquierdo (como exige el enunciado)
+            TPersonasABB maxIzq = personasABB->izq;
+            while (maxIzq->der != nullptr) {
+                maxIzq = maxIzq->der;
+            }
+            liberarTPersona(personasABB->persona);
+            personasABB->persona = copiarTPersona(maxIzq->persona);
+            removerTPersonasABB(personasABB->izq, idTPersona(maxIzq->persona));
+        }
+    }
 }
 
+//- Verificar si un id está en el ABB
 bool estaTPersonasABB(TPersonasABB personasABB, nat id) {
-    return false;
+    if (personasABB == nullptr) return false;
+    nat idNodo = idTPersona(personasABB->persona);
+    if (id == idNodo) return true;
+    if (id < idNodo) return estaTPersonasABB(personasABB->izq, id);
+    return estaTPersonasABB(personasABB->der, id);
 }
 
+//- Obtener la persona por id
 TPersona obtenerDeTPersonasABB(TPersonasABB personasABB, nat id) {
-    return NULL;
+    if (personasABB == nullptr) return nullptr;
+    nat idNodo = idTPersona(personasABB->persona);
+    if (id == idNodo) return personasABB->persona;
+    if (id < idNodo) return obtenerDeTPersonasABB(personasABB->izq, id);
+    return obtenerDeTPersonasABB(personasABB->der, id);
 }
 
+//- Calcular la altura del ABB
 nat alturaTPersonasABB(TPersonasABB personasABB) {
-    return 0;
+    return verificarYAltura(personasABB).altura;
 }
 
+//- Verificar si el ABB es perfecto (todos los niveles completos)
 bool esPerfectoTPersonasABB(TPersonasABB personasABB) {
-    return false;
+    return verificarYAltura(personasABB).esPerfecto;
 }
 
+//- Crear un ABB con personas mayores a cierta edad
 TPersonasABB mayoresTPersonasABB(TPersonasABB personasABB, nat edad) {
-    return NULL;
+    if (personasABB == nullptr) return nullptr;
+    TPersonasABB nuevo = crearTPersonasABB();
+    recolectarMayores(personasABB, edad, nuevo);
+    return nuevo;
 }
 
+//- Convertir el ABB a una lista doblemente enlazada (in-order)
 TPersonasLDE aTPersonasLDE(TPersonasABB personasABB) {
-    return NULL;
+    TPersonasLDE lista = crearTPersonasLDE();
+    construirListaInOrder(personasABB, lista);
+    return lista;
+}
+
+//+AUXILIAR
+void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo) {
+    if (personasABB != nullptr) {
+        liberarTPersona(personasABB->persona);
+        delete personasABB;
+        personasABB = reemplazo;
+    }
+}
+
+static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino) {
+    if (arb == nullptr) return;
+    recolectarMayores(arb->izq, edad, destino);
+    if (edadTPersona(arb->persona) > edad) {
+        TPersona copia = copiarTPersona(arb->persona);
+        insertarTPersonasABB(destino, copia);
+    }
+    recolectarMayores(arb->der, edad, destino);
+}
+
+static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista) {
+    if (arb == nullptr) return;
+    construirListaInOrder(arb->izq, lista);
+    
+    TPersona copia = copiarTPersona(arb->persona);
+    nat pos = cantidadTPersonasLDE(lista) + 1;
+    insertarTPersonasLDE(lista, copia, pos);
+    
+    construirListaInOrder(arb->der, lista);
+}
+
+ResultadoAltura verificarYAltura(TPersonasABB arb) {
+    if (arb == nullptr) {
+        return { true, 0 };
+    }
+
+    ResultadoAltura izq = verificarYAltura(arb->izq);
+    ResultadoAltura der = verificarYAltura(arb->der);
+
+    //* Un árbol es perfecto si:
+    // - ambos subárboles son perfectos
+    // - y tienen la misma altura
+    bool esPerfecto = izq.esPerfecto && der.esPerfecto && (izq.altura == der.altura);
+    nat altura = 1 + (izq.altura > der.altura ? izq.altura : der.altura);
+
+    return { esPerfecto, altura };
 }

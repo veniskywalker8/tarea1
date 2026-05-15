@@ -1,0 +1,19 @@
+crearArbolPersonas
+
+amplitudArbolPersonasTiempo 10000 2
+
+liberarArbolPersonas
+
+crearArbolPersonas
+
+amplitudArbolPersonasTiempo 16383 2
+
+liberarArbolPersonas
+
+crearArbolPersonas
+
+amplitudArbolPersonasTiempo 16381 2
+
+liberarArbolPersonas
+
+Fin

@@ -1,6 +1,6 @@
 
 # --------------------------------------------------------------------
-#  Makefile de tarea 2.
+#  Makefile de tarea 3.
 
 #  Laboratorio de Programación 2.
 #  InCo-FIng-UDELAR
@@ -30,9 +30,9 @@ all: principal
 # Objetivos que no son archivos.
 .PHONY: all clean_bin clean_test clean testing entrega claves
 
-ARCHIVO_ENTREGA=EntregaTarea2.tar.gz
+ARCHIVO_ENTREGA=EntregaTarea3.tar.gz
 
-ENTREGAR = fecha evento agendaLS persona personasLDE personasABB 
+ENTREGAR = fecha evento agendaLS persona personasLDE personasABB pilaPersona colaPersonasABB conjuntoIds aplicaciones debug
 
 MODULOS = $(ENTREGAR) utils
 
@@ -85,37 +85,28 @@ $(EJECUTABLE):$(ODIR)/$(PRINCIPAL).o $(OS)
 	$(LD) $(CCFLAGS) $^ -o $@
 
 # casos de prueba
-IDS_PUBLICOS = fechaEvento1-combinado \
-		fechaEvento2-copia \
-		agenda1-crear-agregar-imprimir-liberar \
-		agenda2-crear-agregar-esVacia-copiar-imprimir-liberar \
-		agenda3-esta \
-		agenda4-obtener-posponer \
-		agenda5-obtener-posponer \
-		agenda6-hayEventosFecha-imprimirEventosFecha \
-		agenda7-remover \
-		agenda8-combinado \
-		persona1-crear-imprimir-liberar \
-		persona2-id-edad-nombre-agenda \
-		persona3-agregar-posponer-remover \
-		persona4-esta-obtener-copia \
-		personasLDE1-crear-insertar-liberar \
-		personasLDE2-crear-liberar-imprimir-cantidad \
-		personasLDE3-eliminarInicio-eliminarFinal \
-		personasLDE4-esta-obtener \
-		personasLDE5-concatenar \
-		personasLDE6-concatenar-tiempo \
-		personasLDE7-combinado \
-		personasABB1-crear-esVacio-insertar-liberar \
-		personasABB2-crear-liberar-insertar-imprimir-cantidad \
-		personasABB3-maxId-remover \
-		personasABB4-esta-obtener \
-		personasABB5-altura-esPerfecto \
-		personasABB6-mayoresEdad \
-		personasABB7-aPersonasLDE \
-		personasABB8-combinado
+IDS_PUBLICOS = tarea2-combinado \
+		personasLDE-insertar-obtener \
+		pilaPersona1-crear-apilar-cantidad-liberar \
+		pilaPersona2-combinado \
+		colaPersonasABB1-crear-encolar-cantidad-liberar \
+		colaPersonasABB2-combinado \
+		personasABB1-amplitud \
+		personasABB2-serializar \
+		personasABB3-deserializar \
+		personasABB4-combinado \
+		personasABB5-amplitud-tiempo \
+		conjuntoIds1-crear-insertar-imprimir-liberar \
+		conjuntoIds2-esVacio-borrar \
+		conjuntoIds3-pertenece-cardinal-cantMax \
+		conjuntoIds4-union \
+		conjuntoIds5-interseccion \
+		conjuntoIds6-diferencia \
+		aplicaciones1-menoresQueElResto \
+		aplicaciones2-menoresQueElResto-tiempo \
+		aplicaciones3-sumaPares
 
-IDS_PRIVADOS = 
+IDS_PRIVADOS =
 
 CASOS = $(IDS_PUBLICOS) $(IDS_PRIVADOS)
 
@@ -209,8 +200,7 @@ testing:all $(DIFFS)
 			RES=$${RES}0 ;                                          \
 		fi;                                                             \
 	done;                                                                  \
-	echo $${RES}                                                            \
-
+	echo $${RES}  
 
 # inlcuye la clave de cada archivo en $(ARCHIVO_CLAVES)
 $(ARCHIVO_CLAVES):
@@ -245,7 +235,6 @@ check-syntax:
 LIB = tarea.a
 $(LIB):	$(ODIR)/utils.o $(ODIR)/$(PRINCIPAL).o
 	ar -qc $@ $^	
-
 
 #! Regla propia
 #? VARIABLES
