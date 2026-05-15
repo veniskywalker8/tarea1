@@ -1,14 +1,9 @@
 #include "../include/personasABB.h"
-//+ESTRUCTURA AXULIAR
-struct ResultadoAltura {
-    bool esPerfecto;
-    nat altura;
-};
+
 //+AUXILIAR
 void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo);
 static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino);
 static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista);
-ResultadoAltura verificarYAltura(TPersonasABB arb);
 
 //- Definición del nodo del ABB
 struct rep_personasAbb {
@@ -127,12 +122,20 @@ TPersona obtenerDeTPersonasABB(TPersonasABB personasABB, nat id) {
 
 //- Calcular la altura del ABB
 nat alturaTPersonasABB(TPersonasABB personasABB) {
-    return verificarYAltura(personasABB).altura;
+    if (personasABB == nullptr) return 0;
+    nat izqAlt = alturaTPersonasABB(personasABB->izq);
+    nat derAlt = alturaTPersonasABB(personasABB->der);
+    nat altura = 1 + (izqAlt > derAlt ? izqAlt : derAlt);
+    return altura;
 }
 
 //- Verificar si el ABB es perfecto (todos los niveles completos)
 bool esPerfectoTPersonasABB(TPersonasABB personasABB) {
-    return verificarYAltura(personasABB).esPerfecto;
+    if (personasABB == nullptr) return true;
+    nat izqAlt = alturaTPersonasABB(personasABB->izq);
+    nat derAlt = alturaTPersonasABB(personasABB->der);
+    if (izqAlt != derAlt) return false;
+    return esPerfectoTPersonasABB(personasABB->izq) && esPerfectoTPersonasABB(personasABB->der);
 }
 
 //- Crear un ABB con personas mayores a cierta edad
@@ -180,19 +183,27 @@ static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista) {
     construirListaInOrder(arb->der, lista);
 }
 
-ResultadoAltura verificarYAltura(TPersonasABB arb) {
-    if (arb == nullptr) {
-        return { true, 0 };
-    }
+///////////////////////////////////
+////// FIN CÓDIGO TAREA 2 //////
+///////////////////////////////////
 
-    ResultadoAltura izq = verificarYAltura(arb->izq);
-    ResultadoAltura der = verificarYAltura(arb->der);
+///////////////////////////////////////////////////////////////////////////
+/////////////  NUEVAS FUNCIONES  //////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
-    //* Un árbol es perfecto si:
-    // - ambos subárboles son perfectos
-    // - y tienen la misma altura
-    bool esPerfecto = izq.esPerfecto && der.esPerfecto && (izq.altura == der.altura);
-    nat altura = 1 + (izq.altura > der.altura ? izq.altura : der.altura);
-
-    return { esPerfecto, altura };
+nat amplitudTPersonasABB(TPersonasABB personasABB) {
+    return 0;
 }
+
+TPilaPersona serializarTPersonasABB(TPersonasABB personasABB) {
+    return NULL;
+}
+
+TPersonasABB deserializarTPersonasABB(TPilaPersona &pilaPersonas) {
+    return NULL;
+}
+
+///////////////////////////////////////////////////////////////////////////
+/////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
