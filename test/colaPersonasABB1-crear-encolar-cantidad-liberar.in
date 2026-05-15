@@ -1,0 +1,33 @@
+crearCola
+
+# imprimo la cantidad de elementos de la cola, que debe ser 0
+imprimirCantidadCola
+
+# Creo arbol con Persona 4 y 5
+crearArbolPersonas
+
+crearPersona 5 11 Maria
+insertarPersonaArbolPersonas
+
+crearPersona 4 55 Raul
+insertarPersonaArbolPersonas
+
+# Encolo el arbol con Persona 4 y 5
+encolar
+
+# imprimo la cantidad de elementos de la cola, que debe ser 1
+imprimirCantidadCola
+
+# obtengo el frente de la cola, que es el árbol con las Persona 4 y 5
+obtenerFrenteCola
+
+# libero la memoria asociada a la cola
+liberarCola
+
+# imrpimo el arbol con las Persona 4 y 5
+imprimirArbolPersonas
+
+# libero el árbol
+liberarArbolPersonas
+
+Fin

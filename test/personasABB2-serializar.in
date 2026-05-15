@@ -1,0 +1,21 @@
+crearArbolPersonas
+
+# Construyo arbol 
+crearPersona 7 7 Carlos
+insertarPersonaArbolPersonas
+
+crearPersona 20 20 Caroline
+insertarPersonaArbolPersonas
+
+crearPersona 2 2 Romina
+insertarPersonaArbolPersonas
+
+# imprimo arbol
+imprimirArbolPersonas
+
+# Transformo arbol en lista
+serializarArbolPersonas
+
+liberarArbolPersonas
+
+Fin

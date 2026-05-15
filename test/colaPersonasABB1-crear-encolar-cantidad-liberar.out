@@ -1,0 +1,15 @@
+1>2>#  imprimo la cantidad de elementos de la cola, que debe ser 0.
+3>La cantidad de arboles de personas en la cola es: 0.
+4>#  Creo arbol con Persona 4 y 5.
+5>6>7>8>9>10>#  Encolo el arbol con Persona 4 y 5.
+11>12>#  imprimo la cantidad de elementos de la cola, que debe ser 1.
+13>La cantidad de arboles de personas en la cola es: 1.
+14>#  obtengo el frente de la cola, que es el árbol con las Persona 4 y 5.
+15>Persona 4:  Raul, 55 años
+Persona 5:  Maria, 11 años
+16>#  libero la memoria asociada a la cola.
+17>18>#  imrpimo el arbol con las Persona 4 y 5.
+19>Persona 4:  Raul, 55 años
+Persona 5:  Maria, 11 años
+20>#  libero el árbol.
+21>22>Fin.

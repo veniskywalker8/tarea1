@@ -1,0 +1,21 @@
+crearPila
+
+imprimirCantidadPila
+
+crearPersona 1 1 Persona1
+
+apilar
+
+liberarPersona
+
+crearPersona 2 2 persona2
+
+apilar
+
+liberarPersona
+
+imprimirCantidadPila
+
+liberarPila
+
+Fin
