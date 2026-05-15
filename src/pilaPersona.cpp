@@ -22,8 +22,8 @@ nat cantidadEnTPilaPersona(TPilaPersona p) {
 }
 
 void apilarEnTPilaPersona(TPilaPersona &p, TPersona persona) {
-  //TPersona copia = copiarTPersona(persona);
-  
+  TPersona copia = copiarTPersona(persona);
+  insertarInicioDeTPersonasLDE(p->lista, copia);
 }
 
 TPersona cimaDeTPilaPersona(TPilaPersona p) { 
