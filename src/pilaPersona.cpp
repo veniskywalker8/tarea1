@@ -27,9 +27,9 @@ void apilarEnTPilaPersona(TPilaPersona &p, TPersona persona) {
 }
 
 TPersona cimaDeTPilaPersona(TPilaPersona p) { 
-  return NULL;
+  return obtenerInicioDeTPersonasLDE(p->lista);
 }
 
 void desapilarDeTPilaPersona(TPilaPersona &p) {
-
+  eliminarInicioTPersonasLDE(p->lista);
 }
