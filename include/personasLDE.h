@@ -66,4 +66,30 @@ TPersona obtenerDeTPersonasLDE(TPersonasLDE personas, nat id);
 // La función es Theta(1) peor caso
 TPersonasLDE concatenarTPersonasLDE(TPersonasLDE personas1, TPersonasLDE personas2);
 
+///////////////////////////////////////////////////////////////////////////
+/////////////  NUEVAS FUNCIONES  //////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+// Función para insertar una persona al inicio de la lista de personas.
+// La función es Theta(1) peor caso.
+void insertarInicioDeTPersonasLDE(TPersonasLDE &personas, TPersona persona);
+
+// Función para insertar una persona al final de la lista de personas.
+// La función es Theta(1) peor caso.
+void insertarFinalDeTPersonasLDE(TPersonasLDE &personas, TPersona persona);
+
+// Funcion que recibe una lista de personas y devuelve la persona que tiene en primer lugar.
+// PRE: cantidadTPersonasLDE(personas) > 0
+// La función es Theta(1) peor caso.
+TPersona obtenerInicioDeTPersonasLDE(TPersonasLDE personas);
+
+// Funcion que recibe una lista de personas y devuelve la persona que tiene en último lugar.
+// PRE: cantidadTPersonasLDE(personas) > 0
+// La función es Theta(1) peor caso.
+TPersona obtenerFinalDeTPersonasLDE(TPersonasLDE personas);
+
+///////////////////////////////////////////////////////////////////////////
+/////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
 #endif  // PERSONASLDE_H

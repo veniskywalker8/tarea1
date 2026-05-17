@@ -1,0 +1,38 @@
+1>2>#  Construyo arbol .
+3>4>5>6>7>8>9>10>11>12>13>14>15>16>17>18>19>20>21>22>23>24>25>26>27>28>29>30>31>32>33>34>35>#  La maxima amplitud es 5.
+36>La amplitud del árbol es: 5.
+37>38>39>#  Construyo arbol .
+40>41>42>43>44>45>46>47>48>49>50>51>52>53>54>55>56>57>58>59>60>61>62>63>64>65>66>67>68>69>70>#  Transformo arbol en lista.
+71>Persona 20:  Juan, 20 años
+Persona 12:  Rosa, 12 años
+Persona 30:  Perez, 30 años
+Persona 6:  Jose, 6 años
+Persona 15:  Raul, 15 años
+Persona 25:  Noelia, 25 años
+Persona 35:  Nicolas, 35 años
+Persona 3:  Sofia, 3 años
+Persona 7:  Emiliano, 7 años
+Persona 13:  Lucia, 13 años
+Persona 16:  Enrique, 16 años
+Persona 22:  Matias, 22 años
+Persona 26:  Martin, 26 años
+Persona 33:  Emily, 33 años
+Persona 36:  Diego, 36 años
+72>73>74>#  Construyo lista .
+75>76>77>78>79>80>81>82>83>84>85>86>87>88>89>90>91>92>93>94>95>96>97>98>99>100>101>102>103>104>105>106>107>108>109>110>111>112>113>114>115>116>117>118>119>120>#  Transformo lista en arbol.
+121>Persona 3:  Sofia, 3 años
+Persona 6:  Jose, 6 años
+Persona 7:  Emiliano, 7 años
+Persona 12:  Rosa, 12 años
+Persona 13:  Lucia, 13 años
+Persona 15:  Raul, 15 años
+Persona 16:  Enrique, 16 años
+Persona 20:  Juan, 20 años
+Persona 22:  Matias, 22 años
+Persona 25:  Noelia, 25 años
+Persona 26:  Martin, 26 años
+Persona 30:  Perez, 30 años
+Persona 33:  Emily, 33 años
+Persona 35:  Nicolas, 35 años
+Persona 36:  Diego, 36 años
+122>Fin.

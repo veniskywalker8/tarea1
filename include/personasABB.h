@@ -10,6 +10,7 @@
 #define PERSONASABB_H
 
 #include "personasLDE.h"
+#include "pilaPersona.h"
 
 // Definición de tipo TPersonasABB como un puntero a rep_personasAbb
 typedef struct rep_personasAbb* TPersonasABB;
@@ -88,5 +89,36 @@ TPersonasABB mayoresTPersonasABB(TPersonasABB personasABB, nat edad);
 // La función es O(n*m) peor caso, siendo n la cantidad de personas en el árbol binario y m la cantidad de eventos 
 // de la agenda con más eventos entre todas las personas del árbol.
 TPersonasLDE aTPersonasLDE(TPersonasABB personasABB);
+
+///////////////////////////////////////////////////////////////////////////
+/////////////  NUEVAS FUNCIONES  //////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+// Función que retorna la amplitud del árbol binario.
+// La amplitud es la cantidad de nodos en el nivel con mas nodos del árbol.
+// La función es Theta(n) peor caso, siendo n la cantidad de personas en el árbol binario.
+nat amplitudTPersonasABB(TPersonasABB t);
+
+// Función que transforma el árbol en una pila de personas de tipo TPersona, donde las personas están ordenadas como 
+// en una recorrida por niveles del árbol.
+// Es decir, en la pila primero deben estar los nodos del nivel 1 (la raiz), luego los del nivel 2, etc.
+// El árbol no se debe modificar y los elementos de la pila no comparten memoria con el árbol original.
+// La función es O(n*m) peor caso, siendo n la cantidad de personas en el árbol binario y m la cantidad de eventos 
+// de la agenda con mas eventos entre todas las personas del árbol.
+TPilaPersona serializarTPersonasABB(TPersonasABB t);
+
+// Función que transforma una pila de personas de tipo TPersona en un árbol binario de tipo TPersonasABB.
+// Las personas en la pila están ordenadas como en una recorrida por niveles del árbol.
+// Es decir, en la pila primero están las personas que corresponden a los nodos del nivel 1, luego los del nivel 2, etc.
+// Se asume que el árbol que generó la pila es completo.
+// Las personas en el árbol resultado deben estar ordenadas de tal forma que si se serializa se obtiene la misma pila.
+// Los elementos del árbol no comparten memoria con la pila original y al final de la función la pila queda vacía y se libera. 
+// La funcion es O(n*m) peor caso, siendo n la cantidad de personas en la pila y m la cantidad de eventos de la agenda 
+// con mas eventos entre todas las personas de la pila.
+TPersonasABB deserializarTPersonasABB(TPilaPersona &t);
+
+///////////////////////////////////////////////////////////////////////////
+/////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 #endif  // PERSONASABB_H

@@ -4,7 +4,6 @@
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact);
 TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
-void auxListar(TPersonasLDE personas);
 
 struct rep_personasLDE {
     TPersona nodo;
@@ -134,15 +133,36 @@ TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
     return nuevo;
 }
 
-void auxEnlazrABC(TPersonasLDE &A, TPersonasLDE &B, TPersonasLDE &C);
 
-void auxListar(TPersonasLDE personas){
-    for (TPersonasLDE aux = personas; aux != nullptr; aux = aux->sig) {
-        debuf("%s(%s, %s, %s)", CIAN,
-            nombreTPersona(aux->nodo),
-            nombreTPersona(aux->sig ? aux->sig->nodo : nullptr),
-            nombreTPersona(aux->ant ? aux->ant->nodo : nullptr)
-        );
-    }
+
+///////////////////////////////////
+////// FIN CÓDIGO TAREA 2 //////
+///////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+/////////////  NUEVAS FUNCIONES  //////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+void insertarInicioDeTPersonasLDE(TPersonasLDE &personas, TPersona persona){
+    insertarTPersonasLDE(personas, persona, 1);
+
 }
+
+void insertarFinalDeTPersonasLDE(TPersonasLDE &personas, TPersona persona){  
+    insertarTPersonasLDE(personas, persona, cantidadTPersonasLDE(personas)+1);
+}
+
+TPersona obtenerInicioDeTPersonasLDE(TPersonasLDE personas){
+    return personas->nodo;
+}
+
+TPersona obtenerFinalDeTPersonasLDE(TPersonasLDE personas){
+    TPersonasLDE p = personas;
+    while(p->sig != NULL && p->sig->nodo != NULL) p = p->sig;
+    return p->nodo;
+}
+
+///////////////////////////////////////////////////////////////////////////
+/////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
