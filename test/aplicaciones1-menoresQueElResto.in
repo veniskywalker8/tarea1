@@ -1,0 +1,79 @@
+crearListaPersonas
+
+# creo una lista con personas y las siguientes edades: 22, 27, 25, 30, 45, 35
+crearPersona 6 35 Persona6
+insertarPersonaListaPersonas 1
+
+crearPersona 5 45 Persona5
+insertarPersonaListaPersonas 1
+
+crearPersona 4 30 Persona4
+insertarPersonaListaPersonas 1
+
+crearPersona 3 25 Persona3
+insertarPersonaListaPersonas 1
+
+crearPersona 2 27 Persona2
+insertarPersonaListaPersonas 1
+
+crearPersona 1 22 Persona1
+insertarPersonaListaPersonas 1
+
+imprimirListaPersonas
+
+# la pila de menores es la siguiente: 35, 30, 25, 22
+menoresQueElResto
+
+liberarListaPersonas
+
+crearListaPersonas
+
+# creo una lista con personas y las siguientes edades: 10, 8, 4, 3, 1
+crearPersona 5 1 Persona5
+insertarPersonaInicioListaPersonas
+
+crearPersona 4 3 Persona4
+insertarPersonaInicioListaPersonas
+
+crearPersona 3 4 Persona3
+insertarPersonaInicioListaPersonas
+
+crearPersona 2 8 Persona2
+insertarPersonaInicioListaPersonas
+
+crearPersona 1 10 Persona1
+insertarPersonaInicioListaPersonas
+
+imprimirListaPersonas
+
+# la pila de menores es la siguiente: 1
+menoresQueElResto
+
+liberarListaPersonas
+
+crearListaPersonas
+
+# creo una lista con personas y las siguientes edades: 1, 3, 8, 10, 20
+crearPersona 5 20 Persona5
+insertarPersonaInicioListaPersonas
+
+crearPersona 4 10 Persona4
+insertarPersonaInicioListaPersonas
+
+crearPersona 3 8 Persona3
+insertarPersonaInicioListaPersonas
+
+crearPersona 2 3 Persona2
+insertarPersonaInicioListaPersonas
+
+crearPersona 1 1 Persona1
+insertarPersonaInicioListaPersonas
+
+imprimirListaPersonas
+
+# la pila de menores es la siguiente: 20, 10, 8, 3, 1
+menoresQueElResto
+
+liberarListaPersonas
+
+Fin

@@ -1,0 +1,176 @@
+crearArbolPersonas
+
+# Construyo arbol 
+crearPersona 20 20 Juan
+insertarPersonaArbolPersonas
+
+crearPersona 12 12 Rosa
+insertarPersonaArbolPersonas
+
+crearPersona 30 30 Perez
+insertarPersonaArbolPersonas
+
+crearPersona 6 6 Jose
+insertarPersonaArbolPersonas
+
+crearPersona 3 3 Sofia
+insertarPersonaArbolPersonas
+
+crearPersona 4 4 Mirta
+insertarPersonaArbolPersonas
+
+crearPersona 7 7 Emiliano
+insertarPersonaArbolPersonas
+
+crearPersona 15 15 Raul
+insertarPersonaArbolPersonas
+
+crearPersona 25 25 Noelia
+insertarPersonaArbolPersonas
+
+crearPersona 22 22 Matias
+insertarPersonaArbolPersonas
+
+crearPersona 35 35 Nicolas
+insertarPersonaArbolPersonas
+
+crearPersona 33 33 Emily
+insertarPersonaArbolPersonas
+
+crearPersona 36 36 Diego
+insertarPersonaArbolPersonas
+
+crearPersona 23 23 Martin
+insertarPersonaArbolPersonas
+
+crearPersona 8 8 Enrique
+insertarPersonaArbolPersonas
+
+crearPersona 39 39 Lucia
+insertarPersonaArbolPersonas
+
+# La maxima amplitud es 5
+amplitudArbolPersonas
+
+liberarArbolPersonas
+
+crearArbolPersonas
+
+# Construyo arbol 
+crearPersona 20 20 Juan
+insertarPersonaArbolPersonas
+
+crearPersona 12 12 Rosa
+insertarPersonaArbolPersonas
+
+crearPersona 30 30 Perez
+insertarPersonaArbolPersonas
+
+crearPersona 6 6 Jose
+insertarPersonaArbolPersonas
+
+crearPersona 3 3 Sofia
+insertarPersonaArbolPersonas
+
+crearPersona 7 7 Emiliano
+insertarPersonaArbolPersonas
+
+crearPersona 15 15 Raul
+insertarPersonaArbolPersonas
+
+crearPersona 25 25 Noelia
+insertarPersonaArbolPersonas
+
+crearPersona 22 22 Matias
+insertarPersonaArbolPersonas
+
+crearPersona 35 35 Nicolas
+insertarPersonaArbolPersonas
+
+crearPersona 33 33 Emily
+insertarPersonaArbolPersonas
+
+crearPersona 36 36 Diego
+insertarPersonaArbolPersonas
+
+crearPersona 26 26 Martin
+insertarPersonaArbolPersonas
+
+crearPersona 16 16 Enrique
+insertarPersonaArbolPersonas
+
+crearPersona 13 13 Lucia
+insertarPersonaArbolPersonas
+
+# Transformo arbol en lista
+serializarArbolPersonas
+
+liberarArbolPersonas
+
+crearPila
+
+# Construyo lista 
+crearPersona 36 36 Diego
+apilar
+liberarPersona
+
+crearPersona 33 33 Emily
+apilar
+liberarPersona
+
+crearPersona 26 26 Martin
+apilar
+liberarPersona
+
+crearPersona 22 22 Matias
+apilar
+liberarPersona
+
+crearPersona 16 16 Enrique
+apilar
+liberarPersona
+
+crearPersona 13 13 Lucia
+apilar
+liberarPersona
+
+crearPersona 7 7 Emiliano
+apilar
+liberarPersona
+
+crearPersona 3 3 Sofia
+apilar
+liberarPersona
+
+crearPersona 35 35 Nicolas
+apilar
+liberarPersona
+
+crearPersona 25 25 Noelia
+apilar
+liberarPersona
+
+crearPersona 15 15 Raul
+apilar
+liberarPersona
+
+crearPersona 6 6 Jose
+apilar
+liberarPersona
+
+crearPersona 30 30 Perez
+apilar
+liberarPersona
+
+crearPersona 12 12 Rosa
+apilar
+liberarPersona 
+
+crearPersona 20 20 Juan
+apilar
+liberarPersona
+
+# Transformo lista en arbol
+deserializarArbolPersonas
+
+Fin

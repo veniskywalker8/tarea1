@@ -1,0 +1,35 @@
+1>2>3>4>5>6>7>8>9>10>11>12>13>14>15>16>17>18>19>20>21>22>23>La cantidad de personas en la lista es: 4.
+24>Persona 2:  Persona 2, 20 años
+Persona 1:  Persona1, 18 años
+Evento 1:  Descripcion uno
+Fecha: 18/4/2023
+Persona 3:  Persona3, 25 años
+Persona 4:  Persona4, 30 años
+Evento 1:  Descripcion uno
+Fecha: 19/4/2023
+Evento 2:  Descripcion dos
+Fecha: 20/4/2023
+25>#  imprime Persona 2.
+26>Persona 2:  Persona 2, 20 años
+27>#  imprime Persona 4.
+28>Persona 4:  Persona4, 30 años
+Evento 1:  Descripcion uno
+Fecha: 19/4/2023
+Evento 2:  Descripcion dos
+Fecha: 20/4/2023
+29>30>#  imprime Persona 1.
+31>Persona 1:  Persona1, 18 años
+Evento 1:  Descripcion uno
+Fecha: 18/4/2023
+32>33>#  imprime Persona 4.
+34>Persona 4:  Persona4, 30 años
+Evento 1:  Descripcion uno
+Fecha: 19/4/2023
+Evento 2:  Descripcion dos
+Fecha: 20/4/2023
+35>36>#  imprime Persona 3.
+37>Persona 3:  Persona3, 25 años
+38>39>#  imprime la misma persona.
+40>Persona 3:  Persona3, 25 años
+41>Persona 3:  Persona3, 25 años
+42>43>Fin.

@@ -1,0 +1,16 @@
+1>2>La cantidad de personas en la pila es: 0.
+3>#  Agrego a Persona 5 a la Pila.
+4>5>6>7>La cantidad de personas en la pila es: 1.
+8>#  Agrego a Persona 2 a la Pila.
+9>10>11>12>La cantidad de personas en la pila es: 2.
+13>#  Agrego a Persona 9 a la Pila.
+14>15>16>17>La cantidad de personas en la pila es: 3.
+18>Persona 9:  pepe, 26 años
+19>#  Elimino a Persona 9 de la Pila.
+20>21>La cantidad de personas en la pila es: 2.
+22>Persona 2:  ana, 12 años
+23>#  Elimino a Persona 2 de la Pila.
+24>25>La cantidad de personas en la pila es: 1.
+26>Persona 5:  pedro, 34 años
+27>#  Elimino a Persona 5 de la Pila.
+28>29>30>Fin.

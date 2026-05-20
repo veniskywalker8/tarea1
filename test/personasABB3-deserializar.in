@@ -1,0 +1,19 @@
+crearPila
+
+# Construyo Pila
+crearPersona 20 20 Caroline
+apilar
+liberarPersona
+
+crearPersona 2 2 Romina
+apilar
+liberarPersona
+
+crearPersona 7 7 Carlos
+apilar
+liberarPersona
+
+# Transformo lista en arbol
+deserializarArbolPersonas
+
+Fin

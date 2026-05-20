@@ -1,0 +1,48 @@
+crearPila
+
+imprimirCantidadPila
+
+# Agrego a Persona 5 a la Pila
+crearPersona 5 34 pedro
+apilar
+liberarPersona
+
+imprimirCantidadPila
+
+# Agrego a Persona 2 a la Pila
+crearPersona 2 12 ana
+apilar
+liberarPersona
+
+imprimirCantidadPila
+
+# Agrego a Persona 9 a la Pila
+crearPersona 9 26 pepe
+apilar
+liberarPersona
+
+imprimirCantidadPila
+
+obtenerCimaPila
+
+# Elimino a Persona 9 de la Pila
+desapilar
+
+imprimirCantidadPila
+
+obtenerCimaPila
+
+# Elimino a Persona 2 de la Pila
+desapilar
+
+imprimirCantidadPila
+
+obtenerCimaPila
+
+# Elimino a Persona 5 de la Pila
+desapilar
+
+
+liberarPila
+
+Fin

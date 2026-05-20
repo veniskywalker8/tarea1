@@ -1,0 +1,30 @@
+crearArbolPersonas
+
+# Construyo arbol 
+crearPersona 7 7 Carlos
+insertarPersonaArbolPersonas
+
+crearPersona 20 20 Caroline
+insertarPersonaArbolPersonas
+
+crearPersona 2 2 Romina
+insertarPersonaArbolPersonas
+
+crearPersona 1 1 Jose
+insertarPersonaArbolPersonas
+
+crearPersona 3 3 Pedro
+insertarPersonaArbolPersonas
+
+crearPersona 8 8 Ana
+insertarPersonaArbolPersonas
+
+crearPersona 6 6 Maria
+insertarPersonaArbolPersonas
+
+# La maxima amplitud es 3
+amplitudArbolPersonas
+
+liberarArbolPersonas
+
+Fin
