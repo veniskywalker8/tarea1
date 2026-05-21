@@ -188,22 +188,113 @@ static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista) {
 ///////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////
-/////////////  NUEVAS FUNCIONES  //////////////////////////////////////////
+/////////////  IMPLEMENTACIÓN NUEVAS FUNCIONES  ///////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-nat amplitudTPersonasABB(TPersonasABB personasABB) {
-    return 0;
+//- Función que retorna la amplitud del árbol binario
+nat amplitudTPersonasABB(TPersonasABB t) {
+    if (t == nullptr) return 0;
+    
+    nat h = alturaTPersonasABB(t);
+    if (h == 0) return 0;
+    
+    nat* contador = new nat[h]();
+    
+    nat n = cantidadTPersonasABB(t);
+    TPersonasABB* cola = new TPersonasABB[n];
+    nat* nivelNodo = new nat[n];
+    
+    nat frente = 0, atras = 0;
+    cola[atras] = t;
+    nivelNodo[atras] = 0;
+    atras++;
+    
+    nat maximo = 0;
+    
+    while (frente < atras) {
+        TPersonasABB actual = cola[frente];
+        nat nivelActual = nivelNodo[frente];
+        frente++;
+        
+        contador[nivelActual]++;
+        if (contador[nivelActual] > maximo) {
+            maximo = contador[nivelActual];
+        }
+        
+        if (actual->izq != nullptr) {
+            cola[atras] = actual->izq;
+            nivelNodo[atras] = nivelActual + 1;
+            atras++;
+        }
+        if (actual->der != nullptr) {
+            cola[atras] = actual->der;
+            nivelNodo[atras] = nivelActual + 1;
+            atras++;
+        }
+    }
+    
+    delete[] contador;
+    delete[] cola;
+    delete[] nivelNodo;
+    return maximo;
 }
 
-TPilaPersona serializarTPersonasABB(TPersonasABB personasABB) {
-    return NULL;
+//- Función que serializa el árbol en una pila (nivel-orden)
+TPilaPersona serializarTPersonasABB(TPersonasABB t) {
+    TPilaPersona pila = crearTPilaPersona();
+    if (t == nullptr) return pila;
+    
+    nat n = cantidadTPersonasABB(t);
+    if (n == 0) return pila;
+    
+    TPersonasABB* cola = new TPersonasABB[n];
+    TPersona* orden = new TPersona[n];
+    
+    nat frente = 0, atras = 0, idx = 0;
+    
+    cola[atras++] = t;
+    
+    while (frente < atras) {
+        TPersonasABB actual = cola[frente++];
+        
+        // Copia profunda para el array temporal
+        orden[idx++] = copiarTPersona(actual->persona);
+        
+        if (actual->izq != nullptr) {
+            cola[atras++] = actual->izq;
+        }
+        if (actual->der != nullptr) {
+            cola[atras++] = actual->der;
+        }
+    }
+    
+    // Apilar en orden inverso: apilarEnTPilaPersona hace copia interna
+    for (nat i = n; i > 0; i--) {
+        apilarEnTPilaPersona(pila, orden[i - 1]);
+        liberarTPersona(orden[i - 1]); // Liberamos nuestra copia temporal
+    }
+    
+    delete[] orden;
+    delete[] cola;
+    return pila;
 }
 
-TPersonasABB deserializarTPersonasABB(TPilaPersona &pilaPersonas) {
-    return NULL;
+//- Función que deserializa una pila en un árbol binario (BST)
+TPersonasABB deserializarTPersonasABB(TPilaPersona &pila) {
+    nat n = cantidadEnTPilaPersona(pila);
+    if (n == 0) {
+        liberarTPilaPersona(pila); // Cumple contrato incluso si está vacía
+        return nullptr;
+    }
+    
+    TPersonasABB resultado = crearTPersonasABB();
+    
+    while (cantidadEnTPilaPersona(pila) > 0) {
+        TPersona persona = copiarTPersona(cimaDeTPilaPersona(pila));
+        desapilarDeTPilaPersona(pila);
+        insertarTPersonasABB(resultado, persona);
+    }
+    
+    liberarTPilaPersona(pila); // <- LIBERA la estructura de la pila
+    return resultado;
 }
-
-///////////////////////////////////////////////////////////////////////////
-/////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-
