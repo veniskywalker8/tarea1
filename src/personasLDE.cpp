@@ -37,24 +37,31 @@ void imprimirTPersonasLDE(TPersonasLDE personas){
     imprimirTPersonasLDE(personas->sig);
 }
 
-nat cantidadTPersonasLDE(TPersonasLDE personas) {
-    if (personas == nullptr) return 0;
-    return (personas->nodo ? 1 : 0) + cantidadTPersonasLDE(personas->sig);
+nat cantidadTPersonasLDE(TPersonasLDE personas){
+    nat c = 0; TPersonasLDE it = personas;
+    while(it){ if(it->nodo) c++; it = it->sig; } return c;
 }
 
 void eliminarInicioTPersonasLDE(TPersonasLDE &personas){
-    if (!personas) return;
-    if (!personas->nodo) return;
+    if (!personas || !personas->nodo) return;
 
     TPersonasLDE viejo = personas;
     TPersonasLDE nuevoInicio = personas->sig;
     
+    // 1. Cortar enlace inverso del nuevo nodo ANTES de borrar el viejo
+    if (nuevoInicio != nullptr) {
+        nuevoInicio->ant = nullptr;
+    }
+    
+    // 2. Liberar persona y aislar nodo viejo (evita punteros colgantes)
     liberarTPersona(viejo->nodo);
+    viejo->nodo = nullptr;
+    viejo->sig = nullptr;
+    viejo->ant = nullptr;
+    
+    // 3. Liberar estructura y actualizar referencia externa
     delete viejo;
-
     personas = nuevoInicio;
-    if (personas) personas->ant = nullptr;
-
 }
 
 void eliminarFinalTPersonasLDE(TPersonasLDE &personas){
