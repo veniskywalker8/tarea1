@@ -26,8 +26,10 @@ El comando '# comentario' imprime comentario.
 #include <time.h>
 
 #include "include/agendaLS.h"
-#include "include/personasABB.h"
-
+#include "include/colaPersonasABB.h"
+#include "include/pilaPersona.h"
+#include "include/conjuntoIds.h"
+#include "include/aplicaciones.h"
 
 #define MAX_PALABRA 32
 #define MAX_LINEA 256
@@ -90,6 +92,10 @@ void main_estaEnListaPersonas(TPersonasLDE &listaPersonas);
 void main_concatenarConVacioListaPersonas(TPersonasLDE &listaPersonas);
 void main_crearYConcatenarListaPersonas(TPersonasLDE &listaPersonas);
 void main_concatenarListaPersonasTiempo(TPersonasLDE &listaPersonas);
+void main_insertarPersonaInicioListaPersonas(TPersonasLDE &listaPersonas, TPersona &persona);
+void main_insertarPersonaFinalListaPersonas(TPersonasLDE &listaPersonas, TPersona &persona);
+void main_imprimirInicioListaPersonas(TPersonasLDE &listaPersonas);
+void main_imprimirFinalListaPersonas(TPersonasLDE &listaPersonas);
 //Funciones para testear personasABB
 void main_crearArbolPersonas(TPersonasABB &arbolPersonas);
 void main_esVacioArbolPersonas(TPersonasABB arbolPersonas);
@@ -108,6 +114,44 @@ void main_aplanarArbolPersonas(TPersonasABB &arbolPersonas);
 void main_esPerfectoArbolPersonasTiempo(TPersonasABB &arbolPersonas);
 void main_esPerfectoArbolPersonasTiempo2(TPersonasABB &arbolPersonas);
 void main_mayoresEdadArbolPersonasTiempo(TPersonasABB &arbolPersonas);
+void main_amplitudArbolPersonas(TPersonasABB arbolPersonas);
+void main_amplitudArbolPersonasTiempo(TPersonasABB &arbolPersonas);
+void main_serializarArbolPersonas(TPersonasABB arbolPersonas);
+void main_deserializarArbolPersonas(TPilaPersona pilaPersonas);
+void main_deserializarArbolPersonasTiempo();
+//Funciones para testear pilaPersona
+void main_crearPila(TPilaPersona &pilaPersona);
+void main_liberarPila(TPilaPersona &pilaPersona);
+void main_cantidadEnPila(TPilaPersona &pilaPersona);
+void main_apilar(TPilaPersona &pilaPersona, TPersona &persona);
+void main_cima(TPilaPersona &pilaPersona);
+void main_desapilar(TPilaPersona &pilaPersona);
+void main_imprimirPila(TPilaPersona &pilaPersona);
+//Funciones para testear colaPersonasABB
+void main_crearCola(TColaPersonasABB &colaPersonaABB);
+void main_liberarCola(TColaPersonasABB &colaPersonaABB);
+void main_cantidadEnCola(TColaPersonasABB &colaPersonaABB);
+void main_encolar(TColaPersonasABB &colaPersonaABB, TPersonasABB &arbolPersonas);
+void main_frente(TColaPersonasABB &colaPersonaABB, TPersonasABB &arbolPersonas);
+void main_desencolar(TColaPersonasABB &colaPersonaABB);
+//Funciones para testear conjuntoIds
+void main_crearConjuntoIds(TConjuntoIds &conjuntoIds);
+void main_insertarConjuntoIds(TConjuntoIds &conjuntoIds);
+void main_imprimirConjuntoIds(TConjuntoIds &conjuntoIds);
+void main_liberarConjuntoIds(TConjuntoIds &conjuntoIds);
+void main_esVacioConjuntoIds(TConjuntoIds &conjuntoIds);
+void main_borrarConjuntoIds(TConjuntoIds &conjuntoIds);
+void main_perteneceConjuntoIds(TConjuntoIds &conjuntoIds);
+void main_cardinalConjuntoIds(TConjuntoIds &conjuntoIds);
+void main_cantMaxConjuntoIds(TConjuntoIds &conjuntoIds);
+void main_unionConjuntoIds(TConjuntoIds &conjuntoIds1, TConjuntoIds &conjuntoIds2);
+void main_interseccionConjuntoIds(TConjuntoIds &conjuntoIds1, TConjuntoIds &conjuntoIds2);
+void main_diferenciaConjuntoIds(TConjuntoIds &conjuntoIds1, TConjuntoIds &conjuntoIds2);
+//Funciones para testear las aplicaciones
+void main_menoresQueElResto(TPersonasLDE lista);
+void main_menoresQueElRestoTiempo();
+void main_sumaPares(TConjuntoIds &conjuntoIds);
+void main_sumaParesTiempo();
 
 // programa principal que lee comandos de la entrada estándar e invoca a la función de test correspondiente
 int main() {
@@ -117,6 +161,9 @@ int main() {
     TPersona persona = NULL;
     TPersonasLDE listaPersonas = NULL;
     TPersonasABB arbolPersonas = NULL;
+    TPilaPersona pilaPersona = NULL;
+    TColaPersonasABB colaPersonaABB = NULL;
+    TConjuntoIds conjuntoIds[2] = {NULL, NULL};
 
     char restoLinea[MAX_LINEA + 1];
     char cmd[MAX_PALABRA];
@@ -311,6 +358,18 @@ int main() {
         } else if (cmd_es("concatenarListaPersonasTiempo", cmd)) {
             main_concatenarListaPersonasTiempo(listaPersonas);
             
+        } else if (cmd_es("insertarPersonaInicioListaPersonas", cmd)) {
+            main_insertarPersonaInicioListaPersonas(listaPersonas, persona);
+
+        } else if (cmd_es("insertarPersonaFinalListaPersonas", cmd)) {
+            main_insertarPersonaFinalListaPersonas(listaPersonas, persona);
+
+        } else if (cmd_es("imprimirInicioListaPersonas", cmd)) {
+            main_imprimirInicioListaPersonas(listaPersonas);
+            
+        } else if (cmd_es("imprimirFinalListaPersonas", cmd)) {
+            main_imprimirFinalListaPersonas(listaPersonas);
+            
         }
 
             ///////////////////////////////////
@@ -356,6 +415,21 @@ int main() {
         } else if (cmd_es("mayoresEdadArbolPersonas", cmd)) {
             main_mayoresEdadArbolPersonas(arbolPersonas);
 
+        } else if (cmd_es("amplitudArbolPersonas", cmd)) {
+            main_amplitudArbolPersonas(arbolPersonas);
+
+        } else if (cmd_es("amplitudArbolPersonasTiempo", cmd)) {
+            main_amplitudArbolPersonasTiempo(arbolPersonas);
+
+        } else if (cmd_es("serializarArbolPersonas", cmd)) {
+            main_serializarArbolPersonas(arbolPersonas);
+
+        } else if (cmd_es("deserializarArbolPersonas", cmd)) {
+            main_deserializarArbolPersonas(pilaPersona);
+
+        } else if (cmd_es("deserializarArbolPersonasTiempo", cmd)) {
+            main_deserializarArbolPersonasTiempo();
+
         } else if (cmd_es("aplanarArbolPersonas", cmd)) {
             main_aplanarArbolPersonas(arbolPersonas);
 
@@ -367,6 +441,120 @@ int main() {
 
         } else if (cmd_es("mayoresEdadArbolPersonasTiempo", cmd)) {
             main_mayoresEdadArbolPersonasTiempo(arbolPersonas);
+
+        }
+            ///////////////////////////////////
+            /* Funciones para testear pila de personas */
+            ///////////////////////////////////
+
+        else if (cmd_es("crearPila", cmd)) {
+            main_crearPila(pilaPersona);
+
+        } else if (cmd_es("liberarPila", cmd)) {
+            main_liberarPila(pilaPersona);
+
+        } else if (cmd_es("imprimirCantidadPila", cmd)) {
+            main_cantidadEnPila(pilaPersona);
+
+        } else if (cmd_es("apilar", cmd)) {
+            main_apilar(pilaPersona, persona);
+
+        } else if (cmd_es("obtenerCimaPila", cmd)) {
+            main_cima(pilaPersona);
+
+        } else if (cmd_es("desapilar", cmd)) {
+            main_desapilar(pilaPersona);
+        } 
+
+            ///////////////////////////////////
+            /* Funciones para testear cola de personasABB */
+            ///////////////////////////////////
+        
+        else if (cmd_es("crearCola", cmd)) {
+            main_crearCola(colaPersonaABB);
+
+        } else if (cmd_es("liberarCola", cmd)) {
+            main_liberarCola(colaPersonaABB);
+
+        } else if (cmd_es("imprimirCantidadCola", cmd)) {
+            main_cantidadEnCola(colaPersonaABB);
+
+        } else if (cmd_es("encolar", cmd)) {
+            main_encolar(colaPersonaABB, arbolPersonas);
+
+        } else if (cmd_es("obtenerFrenteCola", cmd)) {
+            main_frente(colaPersonaABB, arbolPersonas);
+
+        } else if (cmd_es("desencolar", cmd)) {
+            main_desencolar(colaPersonaABB);
+
+        }
+            ///////////////////////////////////
+            /* Funciones para testear conjunto de personas */
+            ///////////////////////////////////
+        else if (cmd_es("crearConjunto", cmd)) {
+            main_crearConjuntoIds(conjuntoIds[0]);
+
+        } else if (cmd_es("insertarConjunto", cmd)) {
+            main_insertarConjuntoIds(conjuntoIds[0]);
+
+        } else if (cmd_es("imprimirConjunto", cmd)) {
+            main_imprimirConjuntoIds(conjuntoIds[0]);
+
+        } else if (cmd_es("liberarConjunto", cmd)) {
+            main_liberarConjuntoIds(conjuntoIds[0]);
+
+        } else if (cmd_es("esVacioConjunto", cmd)) {
+            main_esVacioConjuntoIds(conjuntoIds[0]);
+
+        } else if (cmd_es("borrarConjunto", cmd)) {
+            main_borrarConjuntoIds(conjuntoIds[0]);
+
+        } else if (cmd_es("perteneceConjunto", cmd)) {
+            main_perteneceConjuntoIds(conjuntoIds[0]);
+
+        } else if (cmd_es("cardinalConjunto", cmd)) {
+            main_cardinalConjuntoIds(conjuntoIds[0]);
+
+        } else if (cmd_es("cantMaxConjunto", cmd)) {
+            main_cantMaxConjuntoIds(conjuntoIds[0]);
+
+        } else if (cmd_es("unionConjunto", cmd)) {
+            main_unionConjuntoIds(conjuntoIds[0], conjuntoIds[1]);
+
+        } else if (cmd_es("interseccionConjunto", cmd)) {
+            main_interseccionConjuntoIds(conjuntoIds[0], conjuntoIds[1]);
+
+        } else if (cmd_es("diferenciaConjunto", cmd)) {
+            main_diferenciaConjuntoIds(conjuntoIds[0], conjuntoIds[1]);
+
+        } else if (cmd_es("crearConjuntoAux", cmd)) {
+            main_crearConjuntoIds(conjuntoIds[1]);
+
+        } else if (cmd_es("liberarConjuntoAux", cmd)) {
+            main_liberarConjuntoIds(conjuntoIds[1]);
+
+        } else if (cmd_es("imprimirConjuntoAux", cmd)) {
+            main_imprimirConjuntoIds(conjuntoIds[1]);
+
+        } else if (cmd_es("insertarConjuntoAux", cmd)) {
+            main_insertarConjuntoIds(conjuntoIds[1]);
+
+        ///////////////////////////////////
+        /* Funciones para testear las aplicaciones */
+        ///////////////////////////////////
+
+        } else if (cmd_es("menoresQueElResto", cmd)) {
+            main_menoresQueElResto(listaPersonas);
+
+        } else if (cmd_es("menoresQueElRestoTiempo", cmd)) {
+            main_menoresQueElRestoTiempo();
+
+        } else if (cmd_es("sumaPares", cmd)) {
+            main_sumaPares(conjuntoIds[0]);
+
+        } else if (cmd_es("sumaParesTiempo", cmd)) {
+            main_sumaParesTiempo();
 
         } else {
             printf("Comando no reconocido.\n");  // Comando no reconocido
@@ -573,6 +761,10 @@ void main_imprimirCopiaAgenda (TAgendaLS agenda) {
     liberarAgendaLS(copia);
 }
 
+////////////////////////////////
+/* Funciones main para Persona */
+////////////////////////////////
+
 void main_crearPersona(TPersona &persona, TAgendaLS &agenda){
     assert (persona == NULL);
     nat id = leerNat();
@@ -586,6 +778,7 @@ void main_crearPersona(TPersona &persona, TAgendaLS &agenda){
 void main_liberarPersona(TPersona &persona){
     assert (persona != NULL);
     liberarTPersona(persona);
+    persona = NULL;
 }
 
 void main_imprimirIdPersona(TPersona persona){
@@ -654,6 +847,10 @@ void main_imprimirCopiaPersona(TPersona persona){
     imprimirTPersona(copia);
     liberarTPersona(copia);
 }
+
+////////////////////////////////
+/* Funciones main para PersonasLDE */
+////////////////////////////////
 
 void main_crearListaPersonas(TPersonasLDE &listaPersonas){
     assert (listaPersonas == NULL);
@@ -760,6 +957,34 @@ void main_concatenarListaPersonasTiempo(TPersonasLDE &listaPersonas){
     printf("Bien.\n");
 }
 
+void main_insertarPersonaInicioListaPersonas(TPersonasLDE &listaPersonas, TPersona &persona){
+    assert (listaPersonas != NULL && persona != NULL);
+    insertarInicioDeTPersonasLDE(listaPersonas, persona);
+    persona = NULL;
+}
+
+void main_insertarPersonaFinalListaPersonas(TPersonasLDE &listaPersonas, TPersona &persona){
+    assert (listaPersonas != NULL && persona != NULL);
+    insertarFinalDeTPersonasLDE(listaPersonas, persona);
+    persona = NULL;
+}
+
+void main_imprimirInicioListaPersonas(TPersonasLDE &listaPersonas){
+    assert (listaPersonas != NULL);
+    TPersona persona = obtenerInicioDeTPersonasLDE(listaPersonas);
+    imprimirTPersona(persona);
+}
+
+void main_imprimirFinalListaPersonas(TPersonasLDE &listaPersonas){
+    assert (listaPersonas != NULL);
+    TPersona persona = obtenerFinalDeTPersonasLDE(listaPersonas);
+    imprimirTPersona(persona);
+}
+
+////////////////////////////////
+/* Funciones main para PersonasABB */
+////////////////////////////////
+
 void main_crearArbolPersonas(TPersonasABB &arbolPersonas){
     assert (arbolPersonas == NULL);
     arbolPersonas = crearTPersonasABB();
@@ -842,7 +1067,7 @@ void main_esPerfectoArbolPersonasTiempo(TPersonasABB &arbolPersonas){
     else
         printf("El árbol de personas NO es perfecto.\n");
     float tiempo = ((float)tm) / CLOCKS_PER_SEC;
-    // printf("%f \n", tiempo);
+    //printf("%f \n", tiempo);
     if (tiempo > timeout)
         printf("ERROR, tiempo excedido; %.1f > %d \n", tiempo, timeout);
     else
@@ -878,7 +1103,7 @@ void main_esPerfectoArbolPersonasTiempo2(TPersonasABB &arbolPersonas){
     else
         printf("El árbol de personas NO es perfecto.\n");
     float tiempo = ((float)tm) / CLOCKS_PER_SEC;
-    // printf("%f \n", tiempo);
+    //printf("%f \n", tiempo);
     if (tiempo > timeout)
         printf("ERROR, tiempo excedido; %.1f > %d \n", tiempo, timeout);
     else
@@ -932,5 +1157,310 @@ void main_mayoresEdadArbolPersonasTiempo(TPersonasABB &arbolPersonas){
 void main_aplanarArbolPersonas(TPersonasABB &arbolPersonas){
     TPersonasLDE listaPersonas = aTPersonasLDE(arbolPersonas);
     imprimirTPersonasLDE(listaPersonas);
+    liberarTPersonasLDE(listaPersonas);
+}
+
+
+void main_amplitudArbolPersonas(TPersonasABB arbolPersonas){
+    nat amp = amplitudTPersonasABB(arbolPersonas);
+    printf ("La amplitud del árbol es: %d.\n", amp);
+}
+
+void main_amplitudArbolPersonasTiempo(TPersonasABB &arbolPersonas){
+    nat tamanio = leerNat();
+    nat timeout = leerNat();
+
+    TPersona *arreglo = new TPersona[tamanio];
+    for (nat i = 0; i < tamanio; i++) {
+        arreglo[i] = crearTPersona(i, i*2, "Juan", NULL);
+    }
+
+    nat inicio = 0;
+    nat final = tamanio - 1;
+    insertarEnArbolDeArreglo(arbolPersonas, arreglo, inicio, final);
+    clock_t tm = clock();
+    nat amp = amplitudTPersonasABB(arbolPersonas);
+    tm = clock() - tm;
+    printf ("La amplitud del árbol es: %d.\n", amp);
+    float tiempo = ((float)tm) / CLOCKS_PER_SEC;
+    //printf("%f \n", tiempo);
+    if (tiempo > timeout)
+        printf("ERROR, tiempo excedido; %.1f > %d \n", tiempo, timeout);
+    else
+        printf("Bien.\n");
+    
+    delete[] arreglo;
+}
+
+void main_serializarArbolPersonas(TPersonasABB arbolPersonas){
+    TPilaPersona pilaPersonas = serializarTPersonasABB(arbolPersonas);
+    main_imprimirPila(pilaPersonas);
+    liberarTPilaPersona(pilaPersonas);
+}
+
+void main_deserializarArbolPersonas(TPilaPersona pilaPersonas){
+    TPersonasABB arbolPersonas = deserializarTPersonasABB(pilaPersonas);
+    imprimirTPersonasABB(arbolPersonas);
+    liberarTPersonasABB(arbolPersonas);
+}
+
+void main_deserializarArbolPersonasTiempo(){
+    nat tamanio = leerNat();
+    nat timeout = leerNat();
+
+    TPilaPersona pila = crearTPilaPersona();
+    for (nat i = 0; i < tamanio; i++) {
+        TPersona persona = crearTPersona(i, i*2, "Juan", NULL);
+        apilarEnTPilaPersona(pila, persona);
+        liberarTPersona(persona);
+    }
+
+    clock_t tm = clock();
+    TPersonasABB arbol = deserializarTPersonasABB(pila);
+    tm = clock() - tm;
+    nat amp = amplitudTPersonasABB(arbol);
+    nat cant = cantidadTPersonasABB(arbol);
+    printf ("La amplitud del árbol es: %d.\n", amp);
+    printf ("La cantidad de personas en el árbol es: %d.\n", cant);
+    liberarTPersonasABB(arbol);
+    float tiempo = ((float)tm) / CLOCKS_PER_SEC;
+    //printf("%f \n", tiempo);
+    if (tiempo > timeout)
+        printf("ERROR, tiempo excedido; %.1f > %d \n", tiempo, timeout);
+    else
+        printf("Bien.\n");
+}
+
+////////////////////////////////
+/* Funciones main para PilaPersonas */
+////////////////////////////////
+
+void main_crearPila(TPilaPersona &pilaPersona){
+    assert (pilaPersona == NULL);
+    pilaPersona = crearTPilaPersona();
+}
+
+void main_liberarPila(TPilaPersona &pilaPersona){
+    liberarTPilaPersona(pilaPersona);
+}
+
+void main_cantidadEnPila(TPilaPersona &pilaPersona){
+    printf("La cantidad de personas en la pila es: %d.\n", cantidadEnTPilaPersona(pilaPersona));
+}
+
+void main_apilar(TPilaPersona &pilaPersona, TPersona &persona){
+    assert (pilaPersona != NULL && persona != NULL);
+    apilarEnTPilaPersona(pilaPersona, persona);
+}
+
+void main_cima(TPilaPersona &pilaPersona){
+    assert (pilaPersona != NULL);
+    TPersona persona = cimaDeTPilaPersona(pilaPersona);
+    imprimirTPersona(persona);
+    persona = NULL;
+}
+
+void main_desapilar(TPilaPersona &pilaPersona){
+    assert (pilaPersona != NULL);
+    desapilarDeTPilaPersona(pilaPersona);
+}
+
+void main_imprimirPila(TPilaPersona &pilaPersona){
+    assert (pilaPersona != NULL);
+    while (cantidadEnTPilaPersona(pilaPersona) > 0){
+        TPersona persona = cimaDeTPilaPersona(pilaPersona);
+        imprimirTPersona(persona);
+        desapilarDeTPilaPersona(pilaPersona);
+    }
+}
+
+////////////////////////////////
+/* Funciones main para ColaPersonasABB */
+////////////////////////////////
+
+void main_crearCola(TColaPersonasABB &colaPersonaABB){
+    assert (colaPersonaABB == NULL);
+    colaPersonaABB = crearTColaPersonasABB();
+}
+
+void main_liberarCola(TColaPersonasABB &colaPersonaABB){
+    liberarTColaPersonasABB(colaPersonaABB);
+}
+
+void main_cantidadEnCola(TColaPersonasABB &colaPersonaABB){
+    printf("La cantidad de arboles de personas en la cola es: %d.\n", cantidadEnTColaPersonasABB(colaPersonaABB));
+}
+
+void main_encolar(TColaPersonasABB &colaPersonaABB, TPersonasABB &arbolPersonas){
+    assert (colaPersonaABB != NULL);
+    encolarEnTColaPersonasABB(arbolPersonas, colaPersonaABB);
+    arbolPersonas = NULL; // se pierde la referencia al árbol, pero queda almacenado en la cola
+}
+
+void main_frente(TColaPersonasABB &colaPersonaABB, TPersonasABB &arbolPersonas){
+    assert (colaPersonaABB != NULL);
+    arbolPersonas = frenteDeTColaPersonasABB(colaPersonaABB); // recupero la referencia al arbol. debo encargarme de liberarlo
+    if(!esVacioTPersonasABB(arbolPersonas)){
+        imprimirTPersonasABB(arbolPersonas);
+    }else{
+        printf("Arbol vacio\n");
+    }
+}
+
+void main_desencolar(TColaPersonasABB &colaPersonaABB){
+    assert (colaPersonaABB != NULL);
+    desencolarDeTColaPersonasABB(colaPersonaABB);
+}
+
+////////////////////////////////
+/* Funciones main para ConjuntoPersonas */
+////////////////////////////////
+
+void main_crearConjuntoIds(TConjuntoIds &conjuntoIds) {
+    assert (conjuntoIds == NULL);
+    nat cantMax = leerNat();
+    conjuntoIds = crearTConjuntoIds(cantMax);
+}
+
+void main_insertarConjuntoIds(TConjuntoIds &conjuntoIds) {
+    assert (conjuntoIds != NULL);
+    nat id = leerNat();
+    insertarTConjuntoIds(id, conjuntoIds);
+}
+
+void main_imprimirConjuntoIds(TConjuntoIds &conjuntoIds) {
+    imprimirTConjuntoIds(conjuntoIds);
+}
+
+void main_liberarConjuntoIds(TConjuntoIds &conjuntoIds) {
+    liberarTConjuntoIds(conjuntoIds);
+}
+
+void main_esVacioConjuntoIds(TConjuntoIds &conjuntoIds){
+    if (esVacioTConjuntoIds(conjuntoIds))
+       	printf("El conjunto de ids está vacío.\n");
+    else
+        printf("El conjunto de ids NO está vacío.\n");
+}
+
+void main_borrarConjuntoIds(TConjuntoIds &conjuntoIds) {
+    assert (conjuntoIds != NULL);
+    nat id = leerNat();
+    borrarTConjuntoIds(id, conjuntoIds);
+}
+
+void main_perteneceConjuntoIds(TConjuntoIds &conjuntoIds) {
+    assert (conjuntoIds != NULL);
+    nat id = leerNat();
+    if (perteneceTConjuntoIds(id, conjuntoIds)) {
+        printf("El elemento %d pertenece al conjunto.\n", id);
+    } else {
+        printf("El elemento %d no pertenece al conjunto.\n", id);
+    }
+}
+
+void main_cardinalConjuntoIds(TConjuntoIds &conjuntoIds) {
+    assert (conjuntoIds != NULL);
+    printf("El cardinal del conjunto es: %d.\n", cardinalTConjuntoIds(conjuntoIds));
+}
+
+void main_cantMaxConjuntoIds(TConjuntoIds &conjuntoIds) {
+    assert (conjuntoIds != NULL);
+    printf("La cantidad máxima del conjunto es: %d.\n", cantMaxTConjuntoIds(conjuntoIds));
+}
+
+void main_unionConjuntoIds(TConjuntoIds &conjuntoIds1, TConjuntoIds &conjuntoIds2) {
+    assert (conjuntoIds1 != NULL && conjuntoIds2 != NULL);
+    TConjuntoIds conjuntoIds = unionTConjuntoIds(conjuntoIds1, conjuntoIds2);
+    imprimirTConjuntoIds(conjuntoIds);
+    liberarTConjuntoIds(conjuntoIds);
+}
+
+void main_interseccionConjuntoIds(TConjuntoIds &conjuntoIds1, TConjuntoIds &conjuntoIds2) {
+    assert (conjuntoIds1 != NULL && conjuntoIds2 != NULL);
+    TConjuntoIds conjuntoIds = interseccionTConjuntoIds(conjuntoIds1, conjuntoIds2);
+    imprimirTConjuntoIds(conjuntoIds);
+    liberarTConjuntoIds(conjuntoIds);
+}
+
+void main_diferenciaConjuntoIds(TConjuntoIds &conjuntoIds1, TConjuntoIds &conjuntoIds2) {
+    assert (conjuntoIds1 != NULL && conjuntoIds2 != NULL);
+    TConjuntoIds conjuntoIds = diferenciaTConjuntoIds(conjuntoIds1, conjuntoIds2);
+    imprimirTConjuntoIds(conjuntoIds);
+    liberarTConjuntoIds(conjuntoIds);
+}
+
+////////////////////////////////
+/* Funciones main para Aplicaciones */
+////////////////////////////////
+
+void main_sumaPares(TConjuntoIds &conjuntoIds) {
+    assert (conjuntoIds != NULL);
+    nat k = leerNat();
+    if (sumaPares(k, conjuntoIds)) {
+        printf("Existe un par de elementos en el conjunto cuya suma es %d.\n", k);
+    } else {
+        printf("No existe un par de elementos en el conjunto cuya suma es %d.\n", k);
+    }
+}
+
+void main_sumaParesTiempo() {
+    nat k = leerNat();
+    nat tamanio = leerNat();
+    nat timeout = leerNat();
+    
+    TConjuntoIds conjuntoIds = crearTConjuntoIds(tamanio);
+    for (nat i = 0; i < tamanio; i++) {  
+        insertarTConjuntoIds(i, conjuntoIds);
+    }
+
+    clock_t tm = clock();
+    bool pares = sumaPares(k, conjuntoIds);
+    tm = clock() - tm;
+    float tiempo = ((float)tm) / CLOCKS_PER_SEC;
+    //printf("%f \n", tiempo);
+    if (pares) {
+        printf("Existe un par de elementos en el conjunto cuya suma es %d.\n", k);
+    } else {
+        printf("No existe un par de elementos en el conjunto cuya suma es %d.\n", k);
+    }
+    liberarTConjuntoIds(conjuntoIds);
+    
+    if (tiempo > timeout)
+        printf("ERROR, tiempo excedido; %.1f > %d \n", tiempo, timeout);
+    else
+        printf("Bien.\n");    
+}
+
+void main_menoresQueElResto(TPersonasLDE lista) {
+    assert (lista != NULL);
+    TPilaPersona menores = menoresQueElResto(lista);
+    main_imprimirPila(menores);
+    liberarTPilaPersona(menores);    
+}
+
+void main_menoresQueElRestoTiempo(){
+    nat tamanio = leerNat();
+    nat timeout = leerNat();
+
+    TPersonasLDE listaPersonas = crearTPersonasLDE();
+    for (nat i = 0; i < tamanio; i++){
+        TAgendaLS agenda = crearAgendaLS();
+        TPersona persona = crearTPersona(i, (i % 13) * (i % 11), "Juan", agenda);
+        insertarTPersonasLDE(listaPersonas, persona, 1);
+    }    
+
+    clock_t tm = clock();
+    TPilaPersona res = menoresQueElResto(listaPersonas);
+    imprimirTPersona(cimaDeTPilaPersona(res));
+    liberarTPilaPersona(res);   
+    tm = clock() - tm;
+    float tiempo = ((float)tm) / CLOCKS_PER_SEC;
+    //printf("%f \n", tiempo);
+    if (tiempo > timeout)
+        printf("ERROR, tiempo excedido; %.1f > %d \n", tiempo, timeout);
+    else
+        printf("Bien.\n");
+
     liberarTPersonasLDE(listaPersonas);
 }

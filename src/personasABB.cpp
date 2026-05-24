@@ -1,14 +1,9 @@
 #include "../include/personasABB.h"
-//+ESTRUCTURA AXULIAR
-struct ResultadoAltura {
-    bool esPerfecto;
-    nat altura;
-};
+
 //+AUXILIAR
 void auxLiberar(TPersonasABB &personasABB, TPersonasABB reemplazo);
 static void recolectarMayores(TPersonasABB arb, nat edad, TPersonasABB &destino);
 static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista);
-ResultadoAltura verificarYAltura(TPersonasABB arb);
 
 //- Definición del nodo del ABB
 struct rep_personasAbb {
@@ -127,12 +122,20 @@ TPersona obtenerDeTPersonasABB(TPersonasABB personasABB, nat id) {
 
 //- Calcular la altura del ABB
 nat alturaTPersonasABB(TPersonasABB personasABB) {
-    return verificarYAltura(personasABB).altura;
+    if (personasABB == nullptr) return 0;
+    nat izqAlt = alturaTPersonasABB(personasABB->izq);
+    nat derAlt = alturaTPersonasABB(personasABB->der);
+    nat altura = 1 + (izqAlt > derAlt ? izqAlt : derAlt);
+    return altura;
 }
 
 //- Verificar si el ABB es perfecto (todos los niveles completos)
 bool esPerfectoTPersonasABB(TPersonasABB personasABB) {
-    return verificarYAltura(personasABB).esPerfecto;
+    if (personasABB == nullptr) return true;
+    nat izqAlt = alturaTPersonasABB(personasABB->izq);
+    nat derAlt = alturaTPersonasABB(personasABB->der);
+    if (izqAlt != derAlt) return false;
+    return esPerfectoTPersonasABB(personasABB->izq) && esPerfectoTPersonasABB(personasABB->der);
 }
 
 //- Crear un ABB con personas mayores a cierta edad
@@ -180,19 +183,118 @@ static void construirListaInOrder(TPersonasABB arb, TPersonasLDE &lista) {
     construirListaInOrder(arb->der, lista);
 }
 
-ResultadoAltura verificarYAltura(TPersonasABB arb) {
-    if (arb == nullptr) {
-        return { true, 0 };
+///////////////////////////////////
+////// FIN CÓDIGO TAREA 2 //////
+///////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+/////////////  IMPLEMENTACIÓN NUEVAS FUNCIONES  ///////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+//- Función que retorna la amplitud del árbol binario
+nat amplitudTPersonasABB(TPersonasABB t) {
+    if (t == nullptr) return 0;
+    
+    nat h = alturaTPersonasABB(t);
+    if (h == 0) return 0;
+    
+    nat* contador = new nat[h]();
+    
+    nat n = cantidadTPersonasABB(t);
+    TPersonasABB* cola = new TPersonasABB[n];
+    nat* nivelNodo = new nat[n];
+    
+    nat frente = 0, atras = 0;
+    cola[atras] = t;
+    nivelNodo[atras] = 0;
+    atras++;
+    
+    nat maximo = 0;
+    
+    while (frente < atras) {
+        TPersonasABB actual = cola[frente];
+        nat nivelActual = nivelNodo[frente];
+        frente++;
+        
+        contador[nivelActual]++;
+        if (contador[nivelActual] > maximo) {
+            maximo = contador[nivelActual];
+        }
+        
+        if (actual->izq != nullptr) {
+            cola[atras] = actual->izq;
+            nivelNodo[atras] = nivelActual + 1;
+            atras++;
+        }
+        if (actual->der != nullptr) {
+            cola[atras] = actual->der;
+            nivelNodo[atras] = nivelActual + 1;
+            atras++;
+        }
     }
+    
+    delete[] contador;
+    delete[] cola;
+    delete[] nivelNodo;
+    return maximo;
+}
 
-    ResultadoAltura izq = verificarYAltura(arb->izq);
-    ResultadoAltura der = verificarYAltura(arb->der);
+//- Función que serializa el árbol en una pila (nivel-orden)
+TPilaPersona serializarTPersonasABB(TPersonasABB t) {
+    TPilaPersona pila = crearTPilaPersona();
+    if (t == nullptr) return pila;
+    
+    nat n = cantidadTPersonasABB(t);
+    if (n == 0) return pila;
+    
+    TPersonasABB* cola = new TPersonasABB[n];
+    TPersona* orden = new TPersona[n];
+    
+    nat frente = 0, atras = 0, idx = 0;
+    
+    cola[atras++] = t;
+    
+    while (frente < atras) {
+        TPersonasABB actual = cola[frente++];
+        
+        // Copia profunda para el array temporal
+        orden[idx++] = copiarTPersona(actual->persona);
+        
+        if (actual->izq != nullptr) {
+            cola[atras++] = actual->izq;
+        }
+        if (actual->der != nullptr) {
+            cola[atras++] = actual->der;
+        }
+    }
+    
+    // Apilar en orden inverso: apilarEnTPilaPersona hace copia interna
+    for (nat i = n; i > 0; i--) {
+        apilarEnTPilaPersona(pila, orden[i - 1]);
+        liberarTPersona(orden[i - 1]); // Liberamos nuestra copia temporal
+    }
+    
+    delete[] orden;
+    delete[] cola;
+    return pila;
+}
 
-    //* Un árbol es perfecto si:
-    // - ambos subárboles son perfectos
-    // - y tienen la misma altura
-    bool esPerfecto = izq.esPerfecto && der.esPerfecto && (izq.altura == der.altura);
-    nat altura = 1 + (izq.altura > der.altura ? izq.altura : der.altura);
-
-    return { esPerfecto, altura };
+//- Función que deserializa una pila en un árbol binario (BST)
+TPersonasABB deserializarTPersonasABB(TPilaPersona &pila) {
+    nat n = cantidadEnTPilaPersona(pila);
+    if (n == 0) {
+        liberarTPilaPersona(pila); // Cumple contrato incluso si está vacía
+        return nullptr;
+    }
+    
+    TPersonasABB resultado = crearTPersonasABB();
+    
+    while (cantidadEnTPilaPersona(pila) > 0) {
+        TPersona persona = copiarTPersona(cimaDeTPilaPersona(pila));
+        desapilarDeTPilaPersona(pila);
+        insertarTPersonasABB(resultado, persona);
+    }
+    
+    liberarTPilaPersona(pila); // <- LIBERA la estructura de la pila
+    return resultado;
 }

@@ -2,29 +2,34 @@
 #include "../include/personasLDE.h"
 
 struct rep_pilaPersona {
-
+  TPersonasLDE lista;
 };
 
 TPilaPersona crearTPilaPersona() {
-  return NULL;
+  TPilaPersona nuevo = new rep_pilaPersona;
+  nuevo->lista = crearTPersonasLDE();
+  return nuevo;
 }
 
 void liberarTPilaPersona(TPilaPersona &p) {
-
+  liberarTPersonasLDE(p->lista);
+  delete p;
+  p=NULL;
 }
 
 nat cantidadEnTPilaPersona(TPilaPersona p) { 
-  return 0;
+  return cantidadTPersonasLDE(p->lista);
 }
 
 void apilarEnTPilaPersona(TPilaPersona &p, TPersona persona) {
-
+  TPersona copia = copiarTPersona(persona);
+  insertarInicioDeTPersonasLDE(p->lista, copia);
 }
 
 TPersona cimaDeTPilaPersona(TPilaPersona p) { 
-  return NULL;
+  return obtenerInicioDeTPersonasLDE(p->lista);
 }
 
 void desapilarDeTPilaPersona(TPilaPersona &p) {
-
+  eliminarInicioTPersonasLDE(p->lista);
 }

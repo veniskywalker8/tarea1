@@ -257,45 +257,39 @@ pp: principal
 #TODO: Llama todos los casos de prueba de un módulo.
 #? Por ejemplo, `make test-fecha` ejecuta los de fecha.
 #? Con `--no-print-directory` se evita que se imprima el nombre del directorio
-test-%:
-	@# Filtra los casos que pertenecen al módulo invocado
-	@# Si el patrón es "test-*", usar todos los casos
-	@if [ "$*" = "*" ]; then \
-		casos="$(tS)"; \
-	else \
-		casos="$(filter t-$*%,$(tS))"; \
-	fi; \
-	ok=0; fail=0; RES=""; PRUEBAS="";\
+test-%: 
+	@: "*Filtra casos por módulo o todos si es asterisco"; \
+	casos="$(filter t-$*%,$(tS))"; \
+	if [ "$*" = "*" ]; then casos="$(tS)"; fi; \
+	ok=0; fail=0; RES=""; PRUEBAS=""; \
 	for c in $$casos; do \
-		# Quita el prefijo t- para obtener el ID real \
+		: "*Quita prefijo t- para obtener el ID real"; \
 		id="$${c#t-}"; \
-		# Define rutas de entrada, salida, esperado y diff \
+		: "*Define rutas de entrada, salida esperada, generada y diff"; \
 		in="$(INDIR)/$$id.in"; \
 		sal="$(SALIDADIR)/$$id.sal"; \
 		exp="$(OUTDIR)/$$id.out"; \
 		diff="$(SALIDADIR)/$$id.diff"; \
 		tmp=".tmp-salida"; \
-		# Ejecuta el programa con valgrind y timeout, redirige salida \
-		timeout 4 valgrind -q --leak-check=full ./$(EJECUTABLE) < "$$in" > "$$tmp" 2>&1; \
-		cp "$$tmp" "$$sal"; \
-		# Compara salida esperada vs generada \
-		if diff -u "$$exp" "$$sal" > "$$diff"; then \
-			ok=$$((ok + 1)); \
-			RES=$${RES}1; \
-			rm -f "$$diff"; \
-			printf "$(VERDE)✓ OK: %s$(NC)\n" "$$id"; \
-			PRUEBAS=$${PRUEBAS}"$(VERDE)✓ OK: $$id$(NC)\n"; \
+		: "!Tests de tiempo: sin valgrind 10s. Normales: valgrind 4s"; \
+		if echo "$$id" | grep -q "\-tiempo$$"; then \
+			timeout 10 ./$(EJECUTABLE) < "$$in" > "$$tmp" 2>&1; \
 		else \
-			fail=$$((fail + 1)); \
-			RES=$${RES}0; \
-			cat "$$diff"; \
-			printf "$(ROJO)✗ FAIL: %s$(NC)\n" "$$id"; \
-			PRUEBAS=$${PRUEBAS}"$(ROJO)✗ FAIL: $$id$(NC)\n"; \
+			timeout 4 valgrind -q --leak-check=full ./$(EJECUTABLE) < "$$in" > "$$tmp" 2>&1; \
 		fi; \
+		: "*Copia salida generada al archivo .sal para registro"; \
+		cp "$$tmp" "$$sal"; \
+		: "?Compara salida esperada con generada"; \
+		if diff -u "$$exp" "$$sal" > "$$diff"; then \
+			ok=$$((ok + 1)); RES=$${RES}1; rm -f "$$diff"; \
+			printf "$(VERDE)✓ OK: %s$(NC)\n" "$$id"; \
+		else \
+			fail=$$((fail + 1)); RES=$${RES}0; cat "$$diff"; \
+			printf "$(ROJO)✗ FAIL: %s$(NC)\n" "$$id"; \
+		fi; \
+		: "!Borra archivo temporal"; \
 		rm -f "$$tmp"; \
 	done; \
-	echo -- RESULTADO DE CADA CASO --; \
 	total=$$((ok + fail)); \
-	echo "Resumen módulo '$*': $$ok bien, $$fail mal, $$total total"; \
-	echo "$$RES";\
-	echo "$$PRUEBAS"
+	echo "Resumen '$*': $$ok bien, $$fail mal, $$total total"; \
+	echo "$$RES"
