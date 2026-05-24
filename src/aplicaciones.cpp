@@ -5,36 +5,30 @@ TPilaPersona menoresQueElResto(TPersonasLDE lista) {
     nat n = cantidadTPersonasLDE(lista);
     if (n == 0) return pila;
 
-    // Lectura segura sin mutar la lista (evita puntero colgante en main)
     TPersona* buffer = new TPersona[n];
     for (nat i = 0; i < n; i++) {
-        buffer[i] = copiarTPersona(obtenerDeTPersonasLDE(lista, i + 1));
+        buffer[i] = copiarTPersona(obtenerInicioDeTPersonasLDE(lista));
+        eliminarInicioTPersonasLDE(lista);
     }
 
-    // Filtrado de derecha a izquierda
     nat min_suffix = edadTPersona(buffer[n - 1]) + 1;
     TPersona* calificados = new TPersona[n];
     nat k = 0;
 
     for (int i = n - 1; i >= 0; i--) {
         nat edad = edadTPersona(buffer[i]);
-        if (edad < min_suffix) {
-            calificados[k++] = buffer[i];
-            min_suffix = edad;
-        } else {
-            liberarTPersona(buffer[i]);
-        }
+        if (edad < min_suffix) { calificados[k++] = buffer[i]; min_suffix = edad; }
+        else liberarTPersona(buffer[i]);
     }
 
-    // Apilado en orden reverso (cima = mayor edad)
     for (int i = k - 1; i >= 0; i--) {
         apilarEnTPilaPersona(pila, calificados[i]);
-        liberarTPersona(calificados[i]); // Pila ya hizo copia interna
+        liberarTPersona(calificados[i]);
     }
 
     delete[] buffer;
     delete[] calificados;
-    return pila; // Lista intacta: liberarTPersonasLDE en main será segura
+    return pila;
 }
 
 bool sumaPares(nat k, TConjuntoIds c) {

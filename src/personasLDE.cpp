@@ -1,146 +1,157 @@
 #include "../include/personasLDE.h"
 
-//+ AUXILIARES
+//+ DECLARACIONES AUXILIARES
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact);
 TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 
 struct rep_personasLDE {
-    TPersona nodo;
+    TPersona     nodo;
     TPersonasLDE sig;
     TPersonasLDE ant;
+    TPersonasLDE inicio;
+    TPersonasLDE fin;
 };
 
-TPersonasLDE crearTPersonasLDE(){
-    return auxCrear(nullptr, nullptr, nullptr); // lista vacía
+///////////////////////////////////////////////////////////////////////////
+/////////////  FUNCIONES PRINCIPALES  /////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+TPersonasLDE crearTPersonasLDE() {
+    TPersonasLDE cabezal = new rep_personasLDE;
+    cabezal->nodo   = nullptr;
+    cabezal->sig    = nullptr;
+    cabezal->ant    = nullptr;
+    cabezal->inicio = nullptr;
+    cabezal->fin    = nullptr;
+    return cabezal;
 }
 
-void insertarTPersonasLDE(TPersonasLDE &personas, TPersona persona, nat pos){
+void insertarTPersonasLDE(TPersonasLDE &personas, TPersona persona, nat pos) {
     if (pos < 1) return;
-    nat posact = 1;
-    auxInsertar(personas, persona, pos, posact);
+    auxInsertar(personas, persona, pos, 1);
 }
 
-void liberarTPersonasLDE(TPersonasLDE &personasLDE){
-    while (personasLDE) {
-        TPersonasLDE actual = personasLDE;
-        personasLDE = personasLDE->sig;
+void liberarTPersonasLDE(TPersonasLDE &personas) {
+    if (!personas) return;
+    TPersonasLDE actual = personas->inicio;
+    while (actual) {
+        TPersonasLDE siguiente = actual->sig;
         liberarTPersona(actual->nodo);
         delete actual;
+        actual = siguiente;
     }
+    delete personas;
+    personas = nullptr;
 }
 
-void imprimirTPersonasLDE(TPersonasLDE personas){
-    if (personas == nullptr) return;
-    if (personas->nodo) imprimirTPersona(personas->nodo);
-
-    imprimirTPersonasLDE(personas->sig);
-}
-
-nat cantidadTPersonasLDE(TPersonasLDE personas){
-    nat c = 0; TPersonasLDE it = personas;
-    while(it){ if(it->nodo) c++; it = it->sig; } return c;
-}
-
-void eliminarInicioTPersonasLDE(TPersonasLDE &personas){
-    if (!personas || !personas->nodo) return;
-
-    TPersonasLDE viejo = personas;
-    TPersonasLDE nuevoInicio = personas->sig;
-    
-    // 1. Cortar enlace inverso del nuevo nodo ANTES de borrar el viejo
-    if (nuevoInicio != nullptr) {
-        nuevoInicio->ant = nullptr;
-    }
-    
-    // 2. Liberar persona y aislar nodo viejo (evita punteros colgantes)
-    liberarTPersona(viejo->nodo);
-    viejo->nodo = nullptr;
-    viejo->sig = nullptr;
-    viejo->ant = nullptr;
-    
-    // 3. Liberar estructura y actualizar referencia externa
-    delete viejo;
-    personas = nuevoInicio;
-}
-
-void eliminarFinalTPersonasLDE(TPersonasLDE &personas){
+void imprimirTPersonasLDE(TPersonasLDE personas) {
     if (!personas) return;
-
-    if (!personas->nodo) return;
-
-    // Avanzar hasta el último nodo con datos (antes del centinela)
-    TPersonasLDE it = personas;
-    for (;it->sig && it->sig->nodo; it = it->sig);
-
-    liberarTPersona(it->nodo);
-
-    if (it->ant) {
-        it->ant->sig = it->sig; // enlaza con el centinela
-        it->sig->ant = it->ant; // actualizar también el ant del centinela
-    } else {
-        // era el único nodo con datos, ahora la cabeza es el centinela
-        personas = it->sig;
-        if (personas) personas->ant = nullptr;
-    }
-
-    delete it;
-
+    for (TPersonasLDE it = personas->inicio; it; it = it->sig)
+        imprimirTPersona(it->nodo);
 }
 
-bool estaEnTPersonasLDE(TPersonasLDE personas, nat id){
-    for (; personas ; personas = personas->sig) {
-        if (personas->nodo && idTPersona(personas->nodo) == id) return true;
-    }
+nat cantidadTPersonasLDE(TPersonasLDE personas) {
+    if (!personas) return 0;
+    nat c = 0;
+    for (TPersonasLDE it = personas->inicio; it; it = it->sig) c++;
+    return c;
+}
+
+void eliminarInicioTPersonasLDE(TPersonasLDE &personas) {
+    if (!personas || !personas->inicio) return;
+
+    TPersonasLDE viejo = personas->inicio;
+    personas->inicio   = viejo->sig;
+    if (personas->inicio)
+        personas->inicio->ant = nullptr;
+    else
+        personas->fin = nullptr;
+
+    liberarTPersona(viejo->nodo);
+    delete viejo;
+}
+
+void eliminarFinalTPersonasLDE(TPersonasLDE &personas) {
+    if (!personas || !personas->fin) return;
+
+    TPersonasLDE viejo = personas->fin;
+    personas->fin      = viejo->ant;
+    if (personas->fin)
+        personas->fin->sig = nullptr;
+    else
+        personas->inicio = nullptr;
+
+    liberarTPersona(viejo->nodo);
+    delete viejo;
+}
+
+bool estaEnTPersonasLDE(TPersonasLDE personas, nat id) {
+    if (!personas) return false;
+    for (TPersonasLDE it = personas->inicio; it; it = it->sig)
+        if (idTPersona(it->nodo) == id) return true;
     return false;
 }
 
-TPersona obtenerDeTPersonasLDE(TPersonasLDE personas, nat id){
-    for (; personas; personas = personas->sig) {
-        if (personas->nodo && idTPersona(personas->nodo) == id) return personas->nodo;
-    }
+TPersona obtenerDeTPersonasLDE(TPersonasLDE personas, nat id) {
+    if (!personas) return nullptr;
+    for (TPersonasLDE it = personas->inicio; it; it = it->sig)
+        if (idTPersona(it->nodo) == id) return it->nodo;
     return nullptr;
 }
 
-TPersonasLDE concatenarTPersonasLDE(TPersonasLDE personas1, TPersonasLDE personas2){
-    if (personas1 == nullptr) return personas2;
-    TPersonasLDE it = personas1;
-    for (;it->sig; it = it->sig);
-    it->sig = personas2;
-    if (personas2) personas2->ant = it;
+TPersonasLDE concatenarTPersonasLDE(TPersonasLDE personas1, TPersonasLDE personas2) {
+    if (!personas1) return personas2;
+    if (!personas2) return personas1;
+    if (!personas2->inicio) {
+        // personas2 vacía: no hay nada que concatenar
+        delete personas2;
+        return personas1;
+    }
+    if (!personas1->fin) {
+        personas1->inicio = personas2->inicio;
+        personas1->fin    = personas2->fin;
+    } else {
+        personas1->fin->sig = personas2->inicio;
+        personas2->inicio->ant = personas1->fin;
+        personas1->fin = personas2->fin;
+    }
+    delete personas2;
     return personas1;
 }
 
-//+ AUXILIARES
+///////////////////////////////////////////////////////////////////////////
+/////////////  AUXILIARES  ////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
 
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact) {
-    if (posact == pos or !personas->nodo) {
-        TPersonasLDE nuevo = auxEnlazar(persona, personas, personas->ant);
-        personas = nuevo;
-    }
-    else {
-        auxInsertar(personas->sig, persona, pos, posact + 1);
-    }
+    // Avanzar hasta el nodo en posición pos (it será el desplazado)
+    TPersonasLDE it = personas->inicio;
+    for (nat i = 1; i < pos && it; i++, it = it->sig);
+
+    TPersonasLDE ant   = it ? it->ant : personas->fin;
+    TPersonasLDE nuevo = auxEnlazar(persona, it, ant);
+
+    if (it == personas->inicio) personas->inicio = nuevo; // frente o lista vacía
+    if (!it)                    personas->fin    = nuevo; // final
 }
 
-TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
+TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant) {
     TPersonasLDE nuevo = new rep_personasLDE;
-    nuevo->nodo = nodo;
-    nuevo->ant = ant;
-    nuevo->sig = sig;
+    nuevo->nodo   = nodo;
+    nuevo->sig    = sig;
+    nuevo->ant    = ant;
+    nuevo->inicio = nullptr;
+    nuevo->fin    = nullptr;
     return nuevo;
 }
 
-TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
+TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant) {
     TPersonasLDE nuevo = auxCrear(nodo, sig, ant);
-    //- Enlazar A con nuevo (si A existe)
-    if (ant != nullptr) ant->sig = nuevo;
-    //- Enlazar C con nuevo (si C existe)
-    if (sig != nullptr) sig->ant = nuevo;
+    if (ant) ant->sig = nuevo;
+    if (sig) sig->ant = nuevo;
     return nuevo;
 }
-
-
 
 ///////////////////////////////////
 ////// FIN CÓDIGO TAREA 2 //////
@@ -150,26 +161,28 @@ TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant){
 /////////////  NUEVAS FUNCIONES  //////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
-void insertarInicioDeTPersonasLDE(TPersonasLDE &personas, TPersona persona){
+void insertarInicioDeTPersonasLDE(TPersonasLDE &personas, TPersona persona) {
     insertarTPersonasLDE(personas, persona, 1);
-
 }
 
-void insertarFinalDeTPersonasLDE(TPersonasLDE &personas, TPersona persona){  
-    insertarTPersonasLDE(personas, persona, cantidadTPersonasLDE(personas)+1);
+void insertarFinalDeTPersonasLDE(TPersonasLDE &personas, TPersona persona) {
+    if (!personas) return;
+    TPersonasLDE nuevo = auxCrear(persona, nullptr, personas->fin);
+    if (personas->fin) personas->fin->sig = nuevo;
+    else               personas->inicio   = nuevo;
+    personas->fin = nuevo;
 }
 
-TPersona obtenerInicioDeTPersonasLDE(TPersonasLDE personas){
-    return personas->nodo;
+TPersona obtenerInicioDeTPersonasLDE(TPersonasLDE personas) {
+    if (!personas || !personas->inicio) return nullptr;
+    return personas->inicio->nodo;
 }
 
-TPersona obtenerFinalDeTPersonasLDE(TPersonasLDE personas){
-    TPersonasLDE p = personas;
-    while(p->sig != NULL && p->sig->nodo != NULL) p = p->sig;
-    return p->nodo;
+TPersona obtenerFinalDeTPersonasLDE(TPersonasLDE personas) {
+    if (!personas || !personas->fin) return nullptr;
+    return personas->fin->nodo;
 }
 
 ///////////////////////////////////////////////////////////////////////////
 /////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
-
