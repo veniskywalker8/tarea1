@@ -1,3 +1,5 @@
 test/salidas/
 principal
+*.tar.gz
+claves.txt
 *.o
