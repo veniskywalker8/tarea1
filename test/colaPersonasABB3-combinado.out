@@ -1,0 +1,70 @@
+1>2>#  imprimo la cantidad de elementos en la cola, que debe ser 0.
+3>La cantidad de arboles de personas en la cola es: 0.
+4>#  creo un árbol de personas, inicialmente vacío.
+5>6>#  Encolo el arbol vacio recién creado.
+7>8>#  imprimo la cantidad de elementos en la cola, debe haber 1 elemento.
+9>La cantidad de arboles de personas en la cola es: 1.
+10>#  obtengo nuevamente el Arbol y lo desencolo.
+11>Arbol vacio
+12>13>#  imprimo la cantidad de elementos en la cola, debe haber 0 elemento.
+14>La cantidad de arboles de personas en la cola es: 0.
+15>#  creo e inserto 2 personas en el árbol.
+16>17>18>19>20>#  Encolo el arbol con dos personas.
+21>22>#  imprimo la cantidad de elementos en la cola, debe haber 1 elemento.
+23>La cantidad de arboles de personas en la cola es: 1.
+24>#  creo un árbol de personas, inicialmente vacío.
+25>26>#  creo e inserto 1 persona en el árbol.
+27>28>29>#  Encolo el arbol con dos personas.
+30>31>#  imprimo la cantidad de elementos en la cola, debe haber 2 elementos.
+32>La cantidad de arboles de personas en la cola es: 2.
+33>#  creo un árbol de personas, inicialmente vacío.
+34>35>#  creo e inserto 1 persona1 en el árbol.
+36>37>38>#  Encolo el arbol con dos personas.
+39>40>#  imprimo la cantidad de elementos en la cola, debe haber 3 elementos.
+41>La cantidad de arboles de personas en la cola es: 3.
+42>#  Obtengo el frente de la cola, es el árbol con Maria y Raul.
+43>Persona 4:  Raul, 55 años
+Persona 5:  Maria, 11 años
+44>#  Elimino de la Cola el árbol con Maria y Raul.
+45>46>#  libero la memoria asociada al árbol que obtuve.
+47>48>#  imprimo la cantidad de elementos en la cola, debe haber 2 elementos.
+49>La cantidad de arboles de personas en la cola es: 2.
+50>#  Obtengo el frente de la cola, es un árbol con Raul.
+51>Persona 2:  Raul, 55 años
+52>#  Elimino de la Cola el Arbol con Persona Raul.
+53>54>#  libero la memoria asociada al árbol que obtuve.
+55>56>#  imprimo la cantidad de elementos en la cola, debe haber 1 elemento.
+57>La cantidad de arboles de personas en la cola es: 1.
+58>#  Obtengo el frente de la cola, es un árbol con Maria.
+59>Persona 3:  Maria, 11 años
+60>#  Elimino de la Cola el Arbol.
+61>62>#  libero la memoria asociada al árbol que obtuve.
+63>64>#  imprimo la cantidad de elementos en la cola, debe haber 0 elemntos.
+65>La cantidad de arboles de personas en la cola es: 0.
+66>#  libero la memoria asociada a la cola.
+67>68>#  -------------------------------------------.
+69>70>71>72>73>74>75>76>77>78>79>80>81>82>83>84>85>86>87>88>89>90>91>92>93>94>95>96>97>98>99>100>101>102>103>104>105>106>107>108>109>110>111>112>113>114>#  imprimo la cantidad de elementos en la cola, debe haber 22 elemntos.
+115>La cantidad de arboles de personas en la cola es: 22.
+116>Arbol vacio
+117>118>119>Arbol vacio
+120>121>122>Arbol vacio
+123>124>125>Arbol vacio
+126>127>128>Arbol vacio
+129>130>131>Arbol vacio
+132>133>134>Arbol vacio
+135>136>137>Arbol vacio
+138>139>140>Arbol vacio
+141>142>143>Arbol vacio
+144>145>146>Arbol vacio
+147>148>149>Arbol vacio
+150>151>152>Arbol vacio
+153>154>155>Arbol vacio
+156>157>158>Arbol vacio
+159>160>161>Arbol vacio
+162>163>164>Arbol vacio
+165>166>167>Arbol vacio
+168>169>170>Arbol vacio
+171>172>173>Arbol vacio
+174>175>176>Arbol vacio
+177>178>179>Arbol vacio
+180>181>182>183>Fin.

@@ -32,7 +32,7 @@ all: principal
 
 ARCHIVO_ENTREGA=EntregaTarea3.tar.gz
 
-ENTREGAR = fecha evento agendaLS persona personasLDE personasABB pilaPersona colaPersonasABB conjuntoIds aplicaciones debug
+ENTREGAR = fecha evento agendaLS persona personasLDE personasABB pilaPersona colaPersonasABB conjuntoIds aplicaciones
 
 MODULOS = $(ENTREGAR) utils
 
@@ -106,7 +106,10 @@ IDS_PUBLICOS = tarea2-combinado \
 		aplicaciones2-menoresQueElResto-tiempo \
 		aplicaciones3-sumaPares
 
-IDS_PRIVADOS =
+IDS_PRIVADOS = colaPersonasABB3-combinado \
+			personasABB6-deserializar-tiempo \
+			conjuntoIds7-combinado \
+			aplicaciones4-sumaPares-tiempo
 
 CASOS = $(IDS_PUBLICOS) $(IDS_PRIVADOS)
 

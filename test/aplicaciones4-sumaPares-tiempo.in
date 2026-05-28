@@ -1,0 +1,11 @@
+sumaParesTiempo 20 20000 2
+
+sumaParesTiempo 1000 20000 2
+
+sumaParesTiempo 2 20000 2
+
+sumaParesTiempo 20000 20000 2
+
+sumaParesTiempo 1000000 30000 2
+
+Fin

@@ -1,0 +1,35 @@
+1>#  crea un conjunto con rango 1..10.
+2>3>#  imprime el cardinal del conjunto (es 0).
+4>El cardinal del conjunto es: 0.
+5>Comando no reconocido.
+6>7>8>9>10>11>#  imprime el cardinal del conjunto (es 5).
+12>El cardinal del conjunto es: 5.
+13>#  verifica si el conjunto es vacio (no lo es).
+14>El conjunto de ids NO está vacío.
+15>#  imprime el conjunto.
+16>2 5 7 9 10 
+17>#  verifica un elemento que no esta en el conjunto.
+18>El elemento 1 no pertenece al conjunto.
+19>#  verifica un elemento que esta en el conjunto.
+20>El elemento 10 pertenece al conjunto.
+21>#  verifica un elemento que no pertenece al rango .
+22>El elemento 15 no pertenece al conjunto.
+23>#  borra un elemento del conjunto.
+24>25>#  verifica si el elemento borrado pertenece al conjunto .
+26>El elemento 10 no pertenece al conjunto.
+27>#  crea un conjunto auxiliar con rango 1.10.
+28>29>#  inserta 3 elementos (hay un elemento en comun con el conjunto original).
+30>31>32>33>#  imprime el conjunto.
+34>1 4 9 
+35>#  crea la union entre los dos conjuntos, la imprime y la libera.
+36>1 2 4 5 7 9 
+37>#  crea la interseccion entre los dos conjuntos, la imprime y la libera.
+38>9 
+39>#  crea la diferencia entre conjuntos, la imprime y la libera.
+40>2 5 7 
+41>#  libera el conjunto auxiliar.
+42>43>#  borra un elemento del conjunto.
+44>45>#  imprime el conjunto.
+46>2 5 7 
+47>#  libera el conjunto.
+48>49>Fin.

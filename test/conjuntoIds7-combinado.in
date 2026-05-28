@@ -1,0 +1,74 @@
+# crea un conjunto con rango 1..10
+crearConjunto 10
+
+# imprime el cardinal del conjunto (es 0)
+cardinalConjunto
+
+#inserta 5 elementos
+insertarConjunto 2
+insertarConjunto 5
+insertarConjunto 9
+insertarConjunto 10
+insertarConjunto 7
+
+# imprime el cardinal del conjunto (es 5)
+cardinalConjunto
+
+# verifica si el conjunto es vacio (no lo es)
+esVacioConjunto
+
+# imprime el conjunto
+imprimirConjunto
+
+# verifica un elemento que no esta en el conjunto
+perteneceConjunto 1
+
+# verifica un elemento que esta en el conjunto
+perteneceConjunto 10
+
+# verifica un elemento que no pertenece al rango 
+perteneceConjunto 15
+
+# borra un elemento del conjunto
+borrarConjunto 10
+
+# verifica si el elemento borrado pertenece al conjunto 
+perteneceConjunto 10
+
+
+
+# crea un conjunto auxiliar con rango 1.10
+crearConjuntoAux 10
+
+# inserta 3 elementos (hay un elemento en comun con el conjunto original)
+insertarConjuntoAux 1
+insertarConjuntoAux 4
+insertarConjuntoAux 9
+
+# imprime el conjunto
+imprimirConjuntoAux
+
+# crea la union entre los dos conjuntos, la imprime y la libera
+unionConjunto
+
+# crea la interseccion entre los dos conjuntos, la imprime y la libera
+interseccionConjunto
+
+# crea la diferencia entre conjuntos, la imprime y la libera
+diferenciaConjunto
+
+# libera el conjunto auxiliar
+liberarConjuntoAux
+
+# borra un elemento del conjunto
+borrarConjunto 9
+
+# imprime el conjunto
+imprimirConjunto
+
+# libera el conjunto
+liberarConjunto
+
+Fin
+
+
