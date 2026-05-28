@@ -282,19 +282,35 @@ TPilaPersona serializarTPersonasABB(TPersonasABB t) {
 //- Función que deserializa una pila en un árbol binario (BST)
 TPersonasABB deserializarTPersonasABB(TPilaPersona &pila) {
     nat n = cantidadEnTPilaPersona(pila);
-    if (n == 0) {
-        liberarTPilaPersona(pila); // Cumple contrato incluso si está vacía
-        return nullptr;
-    }
-    
-    TPersonasABB resultado = crearTPersonasABB();
-    
-    while (cantidadEnTPilaPersona(pila) > 0) {
-        TPersona persona = copiarTPersona(cimaDeTPilaPersona(pila));
+    if (n == 0) { liberarTPilaPersona(pila); return nullptr; }
+
+    // Volcar pila a array (cima = índice 0 = raíz)
+    TPersona* arr = new TPersona[n];
+    for (nat i = 0; i < n; i++) {
+        arr[i] = copiarTPersona(cimaDeTPilaPersona(pila));
         desapilarDeTPilaPersona(pila);
-        insertarTPersonasABB(resultado, persona);
     }
-    
-    liberarTPilaPersona(pila); // <- LIBERA la estructura de la pila
+    liberarTPilaPersona(pila);
+
+    // Crear nodos
+    TPersonasABB* nodos = new TPersonasABB[n];
+    for (nat i = 0; i < n; i++) {
+        nodos[i] = new rep_personasAbb;
+        nodos[i]->persona = arr[i];
+        nodos[i]->izq = nullptr;
+        nodos[i]->der = nullptr;
+    }
+    delete[] arr;
+
+    // Enlazar por niveles
+    for (nat i = 0; i < n; i++) {
+        nat izq = 2 * i + 1;
+        nat der = 2 * i + 2;
+        if (izq < n) nodos[i]->izq = nodos[izq];
+        if (der < n) nodos[i]->der = nodos[der];
+    }
+
+    TPersonasABB resultado = nodos[0];
+    delete[] nodos;
     return resultado;
 }
