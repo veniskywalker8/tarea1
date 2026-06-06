@@ -1,5 +1,9 @@
 #include "../include/evento.h"
 
+///////////////////////////////////
+////// PEGAR CÓDIGO TAREA 3 //////
+///////////////////////////////////
+
 struct rep_evento {
     /************ Parte 4.1 ************/
     /*Escriba el código a continuación */
@@ -79,3 +83,6 @@ TEvento copiarTEvento(TEvento evento) {
     copia->fecha = copiarTFecha(evento->fecha);
     return copia;
 }
+/////////////////////////////////
+////// FIN CÓDIGO TAREA 3 //////
+/////////////////////////////////

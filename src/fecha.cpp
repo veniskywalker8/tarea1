@@ -1,18 +1,13 @@
 #include "../include/fecha.h"
 
-
+///////////////////////////////////
+////// PEGAR CÓDIGO TAREA 3 //////
+///////////////////////////////////
 nat largoMes[13] = {
     0,  31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31  
 };
-
-//+AUXILIAR
 bool esBisiesto(int anio);
-nat convertirFecha(TFecha fecha);
-
-///////////////////////////////////
-////// PEGAR CÓDIGO TAREA 1 //////
-///////////////////////////////////
-
+nat  convertirFecha(TFecha fecha);
 struct rep_fecha {
     nat dia, mes, anio;
 };
@@ -103,3 +98,6 @@ TFecha copiarTFecha(TFecha fecha) {
     return copia;
 }
 
+/////////////////////////////////
+////// FIN CÓDIGO TAREA 3 //////
+/////////////////////////////////

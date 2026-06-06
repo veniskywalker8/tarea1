@@ -1,9 +1,5 @@
 #include "../include/aplicaciones.h"
 
-TPilaPersona menoresQueElResto(TPersonasLDE lista) {
-    return NULL;
-}
+void listarEnOrden(TTablaPersonas t, char** nombres, nat n){
 
-bool sumaPares(nat k, TConjuntoIds c){
-    return false;
 }
