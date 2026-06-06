@@ -8,6 +8,8 @@ void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact);
 TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 
+bool mismoNombre(const char* a, const char* b);
+
 struct rep_personasLDE {
     TPersona     nodo;
     TPersonasLDE sig;
@@ -195,27 +197,25 @@ TPersona obtenerFinalDeTPersonasLDE(TPersonasLDE personas) {
 ///////////////////////////////////////////////////////////////////////////
 
 void eliminarPersonaConNombreTPersonasLDE(TPersonasLDE &personas, const char nombre[100]){
-    TPersonasLDE p=personas;
-    while (nombreTPersona(p->nodo) != nombre) p=p->sig;
-    TPersonasLDE d = p;
-    if (d == p->inicio) p->inicio = p->inicio->sig;
-    if (d == p->fin) p->fin = p->fin->ant;
-    if (d->ant != NULL) d->ant->sig = d->sig;
-    if (d->sig != NULL) d->sig->ant = d->ant;
+    TPersonasLDE p=personas->inicio;
+    while (!mismoNombre(nombreTPersona(p->nodo), nombre)) p=p->sig;
+    if (p == personas->inicio) personas->inicio = p->sig;
+    if (p == personas->fin)    personas->fin    = p->ant;
+    if (p->ant != nullptr)     p->ant->sig      = p->sig;
+    if (p->sig != nullptr)     p->sig->ant      = p->ant;
     liberarTPersona(p->nodo);
-    p=NULL;
-    d=NULL;
+    delete p;
 }
 
 bool estaPersonaConNombreEnTPersonasLDE(TPersonasLDE personas, const char nombre[100]){
-    TPersonasLDE p = personas;
-    while ((p!=NULL) && (nombreTPersona(p->nodo) != nombre)) p=p->sig;
+    TPersonasLDE p = personas->inicio;
+    while ((p!=NULL) && (!mismoNombre(nombreTPersona(p->nodo), nombre))) p=p->sig;
     return p!=NULL;
 }
 
 TPersona obtenerPersonaConNombreTPersonasLDE(TPersonasLDE personas, const char nombre[100]){
-    TPersonasLDE p = personas;
-    while (nombreTPersona(p->nodo) != nombre) p=p->sig;
+    TPersonasLDE p = personas->inicio;
+    while (!mismoNombre(nombreTPersona(p->nodo), nombre)) p=p->sig;
     return p->nodo;
 }
 
@@ -223,3 +223,11 @@ TPersona obtenerPersonaConNombreTPersonasLDE(TPersonasLDE personas, const char n
 /////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
+bool mismoNombre(const char* a, const char* b) {
+    int i = 0;
+    while (a[i] != '\0' && b[i] != '\0') {
+        if (a[i] != b[i]) return false;
+        i++;
+    }
+    return a[i] == b[i]; // ambos terminan juntos
+}
