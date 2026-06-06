@@ -1,13 +1,9 @@
 #include "../include/personasLDE.h"
 
-<<<<<<< HEAD
-//+ DECLARACIONES AUXILIARES
-=======
 ///////////////////////////////////
 ////// PEGAR CÓDIGO TAREA 3 //////
 ///////////////////////////////////
 
->>>>>>> Veni
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact);
 TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
@@ -190,8 +186,6 @@ TPersona obtenerInicioDeTPersonasLDE(TPersonasLDE personas) {
 TPersona obtenerFinalDeTPersonasLDE(TPersonasLDE personas) {
     if (!personas || !personas->fin) return nullptr;
     return personas->fin->nodo;
-<<<<<<< HEAD
-=======
 }
 
 ///////////////////////////////////
@@ -223,14 +217,10 @@ TPersona obtenerPersonaConNombreTPersonasLDE(TPersonasLDE personas, const char n
     TPersonasLDE p = personas->inicio;
     while (!mismoNombre(nombreTPersona(p->nodo), nombre)) p=p->sig;
     return p->nodo;
->>>>>>> Veni
 }
 
 ///////////////////////////////////////////////////////////////////////////
 /////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
-<<<<<<< HEAD
-///////////////////////////////////////////////////////////////////////////
-=======
 ///////////////////////////////////////////////////////////////////////////
 
 bool mismoNombre(const char* a, const char* b) {
@@ -241,4 +231,3 @@ bool mismoNombre(const char* a, const char* b) {
     }
     return a[i] == b[i]; // ambos terminan juntos
 }
->>>>>>> Veni
