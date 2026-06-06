@@ -1,5 +1,6 @@
 #include "../include/aplicaciones.h"
 
+<<<<<<< HEAD
 TPilaPersona menoresQueElResto(TPersonasLDE lista) {
     TPilaPersona pila = crearTPilaPersona();
     nat n = cantidadTPersonasLDE(lista);
@@ -42,4 +43,8 @@ bool sumaPares(nat k, TConjuntoIds c) {
         }
     }
     return false;
+=======
+void listarEnOrden(TTablaPersonas t, char** nombres, nat n){
+
+>>>>>>> Veni
 }
