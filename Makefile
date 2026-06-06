@@ -228,6 +228,62 @@ check-syntax:
 LIB = tarea.a
 $(LIB):	$(ODIR)/utils.o $(ODIR)/$(PRINCIPAL).o
 	ar -qc $@ $^	
-
+#! Regla propia
+#? VARIABLES
+#* Colores ANSI
+ROJO=\033[31m
+VERDE=\033[32m
+AMARILLO=\033[33m
+AZUL=\033[34m
+MAGENTA=\033[35m
+CIAN=\033[36m
+NC=\033[0m   # Reset (No Color)
+#* borra binarios, resultados de ejecución y comparación, y copias de respaldo
+cc:clean_test clean_bin
+	@rm -f $(ARCHIVO_ENTREGA) $(ARCHIVO_CLAVES) *~ $(HDIR)/*~ $(CPPDIR)/*~ $(INDIR)/*~ $(OUTDIR)/*~
+#* Esta regla ejecuta el binario 
+pp: principal
+	@echo "$(VERDE)COMPILADO$(NC)"
+#*TESTING
+#? Esta regla se invoca con `make test-` y el nombre del modulo.
+#TODO: Llama todos los casos de prueba de un módulo.
+#? Por ejemplo, `make test-fecha` ejecuta los de fecha.
+#? Con `--no-print-directory` se evita que se imprima el nombre del directorio
+test-%: 
+	@: "*Filtra casos por módulo o todos si es asterisco"; \
+	casos="$(filter t-$*%,$(tS))"; \
+	if [ "$*" = "*" ]; then casos="$(tS)"; fi; \
+	ok=0; fail=0; RES=""; PRUEBAS=""; \
+	for c in $$casos; do \
+		: "*Quita prefijo t- para obtener el ID real"; \
+		id="$${c#t-}"; \
+		: "*Define rutas de entrada, salida esperada, generada y diff"; \
+		in="$(INDIR)/$$id.in"; \
+		sal="$(SALIDADIR)/$$id.sal"; \
+		exp="$(OUTDIR)/$$id.out"; \
+		diff="$(SALIDADIR)/$$id.diff"; \
+		tmp=".tmp-salida"; \
+		: "!Tests de tiempo: sin valgrind 10s. Normales: valgrind 4s"; \
+		if echo "$$id" | grep -q "\-tiempo$$"; then \
+			timeout 10 ./$(EJECUTABLE) < "$$in" > "$$tmp" 2>&1; \
+		else \
+			timeout 4 valgrind -q --leak-check=full ./$(EJECUTABLE) < "$$in" > "$$tmp" 2>&1; \
+		fi; \
+		: "*Copia salida generada al archivo .sal para registro"; \
+		cp "$$tmp" "$$sal"; \
+		: "?Compara salida esperada con generada"; \
+		if diff -u "$$exp" "$$sal" > "$$diff"; then \
+			ok=$$((ok + 1)); RES=$${RES}1; rm -f "$$diff"; \
+			printf "$(VERDE)✓ OK: %s$(NC)\n" "$$id"; \
+		else \
+			fail=$$((fail + 1)); RES=$${RES}0; cat "$$diff"; \
+			printf "$(ROJO)✗ FAIL: %s$(NC)\n" "$$id"; \
+		fi; \
+		: "!Borra archivo temporal"; \
+		rm -f "$$tmp"; \
+	done; \
+	total=$$((ok + fail)); \
+	echo "Resumen '$*': $$ok bien, $$fail mal, $$total total"; \
+	echo "$$RES"
 
 
