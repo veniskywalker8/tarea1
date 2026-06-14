@@ -1,9 +1,14 @@
 #include "../include/personasLDE.h"
 
-//+ DECLARACIONES AUXILIARES
+///////////////////////////////////
+////// PEGAR CÓDIGO TAREA 3 //////
+///////////////////////////////////
+
 void auxInsertar(TPersonasLDE &personas, TPersona persona, nat pos, nat posact);
 TPersonasLDE auxCrear(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
 TPersonasLDE auxEnlazar(TPersona nodo, TPersonasLDE sig, TPersonasLDE ant);
+
+bool mismoNombre(const char* a, const char* b);
 
 struct rep_personasLDE {
     TPersona     nodo;
@@ -183,6 +188,46 @@ TPersona obtenerFinalDeTPersonasLDE(TPersonasLDE personas) {
     return personas->fin->nodo;
 }
 
+///////////////////////////////////
+////// FIN CÓDIGO TAREA 3 //////
+///////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////
+/////////////  NUEVAS FUNCIONES  //////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+void eliminarPersonaConNombreTPersonasLDE(TPersonasLDE &personas, const char nombre[100]){
+    TPersonasLDE p=personas->inicio;
+    while (!mismoNombre(nombreTPersona(p->nodo), nombre)) p=p->sig;
+    if (p == personas->inicio) personas->inicio = p->sig;
+    if (p == personas->fin)    personas->fin    = p->ant;
+    if (p->ant != nullptr)     p->ant->sig      = p->sig;
+    if (p->sig != nullptr)     p->sig->ant      = p->ant;
+    liberarTPersona(p->nodo);
+    delete p;
+}
+
+bool estaPersonaConNombreEnTPersonasLDE(TPersonasLDE personas, const char nombre[100]){
+    TPersonasLDE p = personas->inicio;
+    while ((p!=NULL) && (!mismoNombre(nombreTPersona(p->nodo), nombre))) p=p->sig;
+    return p!=NULL;
+}
+
+TPersona obtenerPersonaConNombreTPersonasLDE(TPersonasLDE personas, const char nombre[100]){
+    TPersonasLDE p = personas->inicio;
+    while (!mismoNombre(nombreTPersona(p->nodo), nombre)) p=p->sig;
+    return p->nodo;
+}
+
 ///////////////////////////////////////////////////////////////////////////
 /////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
+
+bool mismoNombre(const char* a, const char* b) {
+    int i = 0;
+    while (a[i] != '\0' && b[i] != '\0') {
+        if (a[i] != b[i]) return false;
+        i++;
+    }
+    return a[i] == b[i]; // ambos terminan juntos
+}

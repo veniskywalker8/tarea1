@@ -66,10 +66,6 @@ TPersona obtenerDeTPersonasLDE(TPersonasLDE personas, nat id);
 // La función es Theta(1) peor caso
 TPersonasLDE concatenarTPersonasLDE(TPersonasLDE personas1, TPersonasLDE personas2);
 
-///////////////////////////////////////////////////////////////////////////
-/////////////  NUEVAS FUNCIONES  //////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////
-
 // Función para insertar una persona al inicio de la lista de personas.
 // La función es Theta(1) peor caso.
 void insertarInicioDeTPersonasLDE(TPersonasLDE &personas, TPersona persona);
@@ -88,8 +84,29 @@ TPersona obtenerInicioDeTPersonasLDE(TPersonasLDE personas);
 // La función es Theta(1) peor caso.
 TPersona obtenerFinalDeTPersonasLDE(TPersonasLDE personas);
 
+
+
 ///////////////////////////////////////////////////////////////////////////
-/////////////  FIN NUEVAS FUNCIONES  //////////////////////////////////////
+/////////////  NUEVAS FUNCIONES TAREA 4 ///////////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+
+// Función que elimina (y liberar la memoria asignada) la PRIMERA ocurrencia (de inicio a fin) de una persona con el nombre "nombre" en la lista "personas".
+// La función es Theta(n+m) peor caso, donde n es la cantidad de personas en la lista y m es la cantidad de eventos de la persona a eliminar.
+// PRE: existe una persona de nombre "nombre" en la lista
+void eliminarPersonaConNombreTPersonasLDE(TPersonasLDE &personas, const char nombre[100]);
+
+// Función para verificar si un elemento de tipo TPersona existe en una lista de personas segun su nombre
+// Devuelve true si existe, false en caso contrario
+// La función es Theta(n) peor caso, siendo n la cantidad de personas en la lista
+bool estaPersonaConNombreEnTPersonasLDE(TPersonasLDE personas, const char nombre[100]);
+
+// Función para obtener la PRIMERA ocurrencia (de inicio a fin) de una persona con el nombre "nombre" en la lista de personas
+// La función es Theta(n) peor caso, siendo n la cantidad de personas en la lista
+// PRE:  existe una persona de nombre "nombre" en la lista
+TPersona obtenerPersonaConNombreTPersonasLDE(TPersonasLDE personas, const char nombre[100]);
+
+///////////////////////////////////////////////////////////////////////////
+/////////////  FIN NUEVAS FUNCIONES TAREA 4 ///////////////////////////////
 ///////////////////////////////////////////////////////////////////////////
 
 #endif  // PERSONASLDE_H

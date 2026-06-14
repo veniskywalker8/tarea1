@@ -1,3 +1,6 @@
+#!/bin/bash
+#Si falla : sed -i 's/\r$//' des_comit.sh
+
 CANTIDAD=${1:-1}
 N=${CANTIDAD#-}   # quita el signo negativo
 TIPO="--hard"
