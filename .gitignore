@@ -1,3 +1,4 @@
 test/salidas/
 principal
 *.o
+.tmp-salida
