@@ -1,6 +1,5 @@
-
 # --------------------------------------------------------------------
-#  Makefile de tarea 3.
+#  Makefile de tarea 4.
 
 #  Laboratorio de Programación 2.
 #  InCo-FIng-UDELAR
@@ -30,9 +29,9 @@ all: principal
 # Objetivos que no son archivos.
 .PHONY: all clean_bin clean_test clean testing entrega claves
 
-ARCHIVO_ENTREGA=EntregaTarea3.tar.gz
+ARCHIVO_ENTREGA=EntregaTarea4.tar.gz
 
-ENTREGAR = fecha evento agendaLS persona personasLDE personasABB pilaPersona colaPersonasABB conjuntoIds aplicaciones
+ENTREGAR = fecha evento agendaLS persona personasLDE aplicaciones tablaPersonas colaDePrioridadPersona
 
 MODULOS = $(ENTREGAR) utils
 
@@ -85,31 +84,21 @@ $(EJECUTABLE):$(ODIR)/$(PRINCIPAL).o $(OS)
 	$(LD) $(CCFLAGS) $^ -o $@
 
 # casos de prueba
-IDS_PUBLICOS = tarea2-combinado \
-		personasLDE-insertar-obtener \
-		pilaPersona1-crear-apilar-cantidad-liberar \
-		pilaPersona2-combinado \
-		colaPersonasABB1-crear-encolar-cantidad-liberar \
-		colaPersonasABB2-combinado \
-		personasABB1-amplitud \
-		personasABB2-serializar \
-		personasABB3-deserializar \
-		personasABB4-combinado \
-		personasABB5-amplitud-tiempo \
-		conjuntoIds1-crear-insertar-imprimir-liberar \
-		conjuntoIds2-esVacio-borrar \
-		conjuntoIds3-pertenece-cardinal-cantMax \
-		conjuntoIds4-union \
-		conjuntoIds5-interseccion \
-		conjuntoIds6-diferencia \
-		aplicaciones1-menoresQueElResto \
-		aplicaciones2-menoresQueElResto-tiempo \
-		aplicaciones3-sumaPares
+IDS_PUBLICOS = tarea3-combinado \
+		persona1-primerEvento \
+		personasLDE1-nuevasFunciones \
+		tabla1-crearLiberar \
+		tabla2-insertarImprimir \
+		tabla3-eliminarPerteneceObtener \
+		tabla4-combinado \
+		CP1-crear-liberar-vacia-esta-insertar \
+		CP2-prioritaria-prioridad-insertar \
+		CP3-eliminar \
+		CP4-invertirPrioridad \
+		CP5-tiempo \
+		aplicaciones1-listarEnOrden \
 
-IDS_PRIVADOS = colaPersonasABB3-combinado \
-			personasABB6-deserializar-tiempo \
-			conjuntoIds7-combinado \
-			aplicaciones4-sumaPares-tiempo
+IDS_PRIVADOS = 
 
 CASOS = $(IDS_PUBLICOS) $(IDS_PRIVADOS)
 
@@ -238,7 +227,6 @@ check-syntax:
 LIB = tarea.a
 $(LIB):	$(ODIR)/utils.o $(ODIR)/$(PRINCIPAL).o
 	ar -qc $@ $^	
-
 #! Regla propia
 #? VARIABLES
 #* Colores ANSI
@@ -294,5 +282,6 @@ test-%:
 		rm -f "$$tmp"; \
 	done; \
 	total=$$((ok + fail)); \
-	echo "Resumen '$*': $$ok bien, $$fail mal, $$total total"; \
-	echo "$$RES"
+	echo "Resumen módulo '$*': $$ok bien, $$fail mal, $$total total"; \
+	echo "$$RES";\
+	echo "$$PRUEBAS"

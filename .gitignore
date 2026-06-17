@@ -1,5 +1,6 @@
 test/salidas/
 principal
-*.tar.gz
-claves.txt
 *.o
+.tmp-salida
+salida.txt
+*.identifer
