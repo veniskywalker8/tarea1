@@ -2,3 +2,5 @@ test/salidas/
 principal
 *.o
 .tmp-salida
+salida.txt
+*.identifer
